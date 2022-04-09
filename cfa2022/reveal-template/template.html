@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Template Présentation Reveal.js</title>
+
+		<meta name="description" content="Description de la présentation">
+		<meta name="author" content="Auteur de la présentation">
+
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/CNAM.css" id="theme">
+		<link rel="stylesheet" href="plugin/simplemenu/simplemenu.css">
+
+
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="plugin/Ionicons/css/ionicons.min.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+
+			<div class="menubar">
+			     <ul class="menu"></ul> <!-- Permet d'avoir le menu simple en haut des slides. Mettre data-state="hide-menubar" pour ne pas afficher ce menu sur un slide -->
+			</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background-image="dist/theme/assets_CNAM/white_stripes_titre_cnam.png" data-state="hide-menubar">
+
+										<h3 class="shadow3"><font color="white">Template de présentation Reveal.js</font></h3>
+										<hr>
+										<p class="shadow3">
+											<font color="white"><small>Thème Cnam  </small></font><br>
+										</p>
+						<!-- </block_important> -->
+						<br>
+
+						<small><b class="shadow2"><font color="gray">Lieu de la présentation ou conférence</font></b></small><br>
+					<small> <font color="gray">sous-titre du lieu  </font> </small>
+					<p><small><b>Thème créé par <u>Éric BAVU</u>,  </b></small><br>
+
+					<small><small>	Laboratoire de Mécanique des Structures et des Systèmes Couplés, <br> Cnam, Paris</small></small><br>
+					<small><small> Date de la présentation </small></small><br>
+										</p>
+
+
+				</section>
+
+				<section name="Première partie">
+
+					<h1 class="hidden">Première partie</h1>
+
+				<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom">
+											<h2 class="shadow3">Titre de la première partie</h2>
+									</section>
+
+				<section>
+					<h2>Généralités</h2>
+
+					<block_important>
+						<small>
+							<h6 class="shadow2"> Un bloc important </h6>
+							<hr>
+					<ul>
+						<p>Plusieurs plugins sont activés:</p>
+						<li class="fragment" data-fragment-index="1">La numérotation des slides en bas à gauche permet, en cliquant dessus, d'accéder rapidement au plan détaillé de la présentation</li>
+						<li class="fragment" data-fragment-index="1">Le menu simple en haut permet d'avoir des liens vers des grandes parties de la présentation</li>
+						<li class="fragment" data-fragment-index="2">Le plugin zoom (activé en faisant CTRL + clic sous Linux ou Alt+Clic sous Mac)</li>
+						<li class="fragment" data-fragment-index="3">Le plugin de coloration syntaxique de code</li>
+						<li class="fragment" data-fragment-index="4">Le plugin de recherche dans les slides (activé en faisant CTRL+Shift+F )</li>
+					</ul>
+
+				</small>
+				</block_important>
+				</section>
+
+					<section>
+						<h2> Slides verticaux</h2>
+						<p>Il suffit d'imbriquer des sections dans des sections.</p>
+						<p>Utiliser la touche <em>Espace</em> pour naviguer entre les slides</p>
+						<br>
+						<a href="#" class="navigate-down">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section>
+
+						<div class="columns2">
+							<block_important>
+						<p>Les diapositives imbriquées sont utiles pour ajouter des détails supplémentaires sous une diapositive horizontale de haut niveau.</p>
+					</block_important>
+
+					</div>
+
+					<div class="columnssep">
+						<p class="hidden">  </p>
+					</div>
+
+
+
+					<div class="columns2">
+						<block_important>
+						<p>Appuyer sur la touche <em> ECHAP </em> pour avoir un overview sur les slides et leur organisation spatiale</p>
+					</block_important>
+					</div>
+
+
+					</section>
+				</section>
+
+
+				<section data-visibility="hidden">
+					<h2>Slides cachés</h2>
+					<p>
+						Cette diapositive est visible dans la source, mais cachée lorsque la présentation est affichée. Vous pouvez afficher toutes les diapositives cachées en mettant l'option de configuration `showHiddenSlides` à `true`.
+					</p>
+				</section>
+
+
+				<section name="Du joli code">
+
+					<h1 class="hidden">Du code</h1>
+
+				<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom" data-state="hide-menubar">
+											<h2 class="shadow3">Coloration syntaxique</h2>
+									</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">Code Python</h2>
+					<pre data-id="code-animation" class="python">
+						<code class="hljs" data-trim data-line-numbers>
+							# Python program to display the Fibonacci sequence
+
+							def recur_fibo(n):
+							   if n <= 1:
+							       return n
+							   else:
+							       return(recur_fibo(n-1) + recur_fibo(n-2))
+
+							nterms = 10
+
+							# check if the number of terms is valid
+							if nterms <= 0:
+							   print("Plese enter a positive integer")
+							else:
+							   print("Fibonacci sequence:")
+							   for i in range(nterms):
+							       print(recur_fibo(i))
+
+						}
+					</code></pre>
+					<p>Grâce à <a href="https://highlightjs.org/usage/">highlight.js</a>.</p>
+				</section>
+
+				<section data-auto-animate>
+					<h2 data-id="code-title">Avec animations</h2>
+					<pre data-id="code-animation" class="python"><code class="hljs" data-trim data-line-numbers="|4,8-11|17|22-24"><script type="text/template">
+					import torch
+					from torch.nn import functional as F
+					from torch import nn
+					from pytorch_lightning.core.lightning import LightningModule
+
+
+					class LitMNIST(LightningModule):
+					    def __init__(self):
+					        super().__init__()
+
+					        # mnist images are (1, 28, 28) (channels, height, width)
+					        self.layer_1 = nn.Linear(28 * 28, 128)
+					        self.layer_2 = nn.Linear(128, 256)
+					        self.layer_3 = nn.Linear(256, 10)
+
+					    def forward(self, x):
+					        batch_size, channels, height, width = x.size()
+
+					        # (b, 1, 28, 28) -> (b, 1*28*28)
+					        x = x.view(batch_size, -1)
+					        x = self.layer_1(x)
+					        x = F.relu(x)
+					        x = self.layer_2(x)
+					        x = F.relu(x)
+					        x = self.layer_3(x)
+
+					        x = F.log_softmax(x, dim=1)
+					        return x
+					</script></code></pre>
+				</section>
+
+			</section>
+
+
+			<section name="Animations et transitions">
+
+				<h1 class="hidden">Animations et transitions</h1>
+
+			<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom" data-state="hide-menubar">
+										<h2 class="shadow3">Animations</h2>
+								</section>
+
+				<section  data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<h2>Auto-Animate</h2>
+					<p>Animer automatiquement les éléments correspondants dans les diapositives avec <a href="https://revealjs.com/auto-animate/">Auto-Animate</a>.</p>
+					<div class="r-hstack justify-center">
+						<div data-id="box1" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+						<div data-id="box2" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+						<div data-id="box3" style="background: #999; width: 50px; height: 50px; margin: 10px; border-radius: 5px;"></div>
+					</div>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-hstack justify-center">
+						<div data-id="box1" data-auto-animate-delay="0" style="background: cyan; width: 150px; height: 100px; margin: 10px;"></div>
+						<div data-id="box2" data-auto-animate-delay="0.1" style="background: magenta; width: 150px; height: 100px; margin: 10px;"></div>
+						<div data-id="box3" data-auto-animate-delay="0.2" style="background: yellow; width: 150px; height: 100px; margin: 10px;"></div>
+					</div>
+					<h2 style="margin-top: 20px;">Auto-Animate</h2>
+				</section>
+				<section data-auto-animate data-auto-animate-easing="cubic-bezier(0.770, 0.000, 0.175, 1.000)">
+					<div class="r-stack">
+						<div data-id="box1" style="background: cyan; width: 300px; height: 300px; border-radius: 200px;"></div>
+						<div data-id="box2" style="background: magenta; width: 200px; height: 200px; border-radius: 200px;"></div>
+						<div data-id="box3" style="background: yellow; width: 100px; height: 100px; border-radius: 200px;"></div>
+					</div>
+					<h2 style="margin-top: 20px;">Auto-Animate</h2>
+				</section>
+
+					<section id="fragments">
+						<h2>Fragments</h2>
+						<p>Hit the next arrow...</p>
+						<p class="fragment">... to step through ...</p>
+						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
+
+						<aside class="notes">
+							This slide has fragments which are also stepped through in the notes window.
+						</aside>
+					</section>
+					<section>
+						<h2>Fragment Styles</h2>
+						<p>There's different types of fragments, like: </p>
+						<p>
+						<span style="display: inline-block;" class="fragment grow">grow</span>
+						<span style="display: inline-block;"  class="fragment shrink">shrink</span>
+						<span style="display: inline-block;"  class="fragment fade-out">fade-out</span>
+					</p>
+						<p>
+							<span style="display: inline-block;" class="fragment fade-right">fade-right, </span>
+							<span style="display: inline-block;" class="fragment fade-up">up, </span>
+							<span style="display: inline-block;" class="fragment fade-down">down, </span>
+							<span style="display: inline-block;" class="fragment fade-left">left</span>
+						</p>
+						<p class="fragment fade-in-then-out">fade-in-then-out</p>
+						<p class="fragment fade-in-then-semi-out">fade-in-then-semi-out</p>
+						<p>Highlight <span class="fragment highlight-red">red</span> <span class="fragment highlight-blue">blue</span> <span class="fragment highlight-green">green</span></p>
+					</section>
+				</section>
+
+
+
+				<section name="Généralités">
+
+					<h1 class="hidden">Généralités</h1>
+
+				<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom" data-state="hide-menubar">
+											<h2 class="shadow3">Généralités</h2>
+									</section>
+
+									<section data-markdown>
+										<script type="text/template">
+											## Markdown support
+
+											Write content using inline or external Markdown.
+											Instructions and more info available in the [docs](https://revealjs.com/markdown/).
+
+											```html []
+											<section data-markdown>
+												## Markdown support
+
+												Write content using inline or external Markdown.
+												Instructions and more info available in the [docs](https://revealjs.com/markdown/).
+											</section>
+											```
+										</script>
+									</section>
+
+									<section>
+										<p>Add the <code>r-fit-text</code> class to auto-size text</p>
+										<h2 class="r-fit-text">FIT TEXT</h2>
+									</section>
+
+				<section>
+					<h2>Intergalactic Interconnections</h2>
+					<p>
+						You can link between slides internally,
+						<a href="#/2/3">like this</a>.
+					</p>
+				</section>
+
+				<section>
+					<h2>Speaker View</h2>
+					<p>There's a <a href="https://revealjs.com/speaker-view/">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
+					<p>Press the <em>S</em> key to try it out.</p>
+
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h2>Export to PDF</h2>
+					<p>Presentations can be <a href="https://revealjs.com/pdf-export/">exported to PDF</a>, here's an example:</p>
+					<iframe data-src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+
+				<section>
+					<h2>Global State</h2>
+					<p>
+						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
+						will be added as a class to the document element when the slide is open. This lets you
+						apply broader style changes, like switching the page background.
+					</p> 
+				</section>
+
+				<section data-state="customevent">
+					<h2>State Events</h2>
+					<p>
+						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
+					</p>
+					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
+Reveal.on( 'customevent', function() {
+	console.log( '"customevent" has fired' );
+} );
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+					<p>
+						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
+					</p>
+				</section>
+
+				<section>
+					<h2>Much more</h2>
+					<ul>
+						<li>Right-to-left support</li>
+						<li><a href="https://revealjs.com/api/">Extensive JavaScript API</a></li>
+						<li><a href="https://revealjs.com/auto-slide/">Auto-progression</a></li>
+						<li><a href="https://revealjs.com/backgrounds/#parallax-background">Parallax backgrounds</a></li>
+						<li><a href="https://revealjs.com/keyboard/">Custom keyboard bindings</a></li>
+					</ul>
+				</section>
+
+			</section>
+
+
+				<section name="Fonds">
+
+					<h1 class="hidden">Fonds de slides</h1>
+
+				<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom" data-state="hide-menubar">
+											<h2 class="shadow3">Fonds de slides</h2>
+									</section>
+
+					<section data-background="#dddddd">
+						<h2>Slide Backgrounds</h2>
+						<p>
+							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
+						</p>
+						<a href="#" class="navigate-down">
+							<img class="r-frame" style="background: rgba(255,255,255,0.1);" width="178" height="238" data-src="https://static.slid.es/reveal/arrow.png" alt="Down arrow">
+						</a>
+					</section>
+					<section data-background="https://static.slid.es/reveal/image-placeholder.png">
+						<h2>Image Backgrounds</h2>
+						<pre><code class="hljs html">&lt;section data-background="image.png"&gt;</code></pre>
+					</section>
+					<section data-background="https://static.slid.es/reveal/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
+						<h2>Tiled Backgrounds</h2>
+						<pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
+					</section>
+					<section data-background-video="https://static.slid.es/site/homepage/v1/homepage-video-editor.mp4" data-background-color="#000000">
+						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
+							<h2>Video Backgrounds</h2>
+							<pre><code class="hljs html" style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
+						</div>
+					</section>
+					<section data-background="http://i.giphy.com/90F8aUepslB84.gif">
+						<h2>... and GIFs!</h2>
+					</section>
+
+					<section data-background-iframe="https://hakim.se" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2>Iframe Backgrounds</h2>
+							<p>Since reveal.js runs on the web, you can easily embed other web content. Try interacting with the page in the background.</p>
+						</div>
+					</section>
+
+				</section>
+
+				<section name="Listes et tables">
+
+					<h1 class="hidden">Listes et tables</h1>
+
+				<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom" data-state="hide-menubar">
+											<h2 class="shadow3">Listes et tables</h2>
+									</section>
+
+
+				<section>
+					<h2>Marvelous List</h2>
+					<ul>
+						<li>No order here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+						<li>Or here</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Fantastic Ordered List</h2>
+					<ol>
+						<li>One is smaller than...</li>
+						<li>Two is smaller than...</li>
+						<li>Three!</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Tabular Tables</h2>
+					<medium_moins_moins>
+					<div align=center>
+					<table class="table-fill">
+					<thead>
+					<tr>
+					<th><medium><b class="shadow3"> Data <b></medium></th>
+					<th><medium><b class="shadow3"> Cardinality <b></medium></th>
+						<th><medium><b class="shadow3"> Accuracy <b></medium></th>
+							<th><medium><b class="shadow3"> Macro-Precision <b></medium></th>
+								<th><medium><b class="shadow3"> Macro-recall <b></medium></th>
+									<th><medium><b class="shadow3"> Macro $F_1$ score <b></medium></th>
+					</tr>
+					</thead>
+					<tbody class="table-hover">
+					<tr>
+					<td>Speech Evaluation Set</td>
+					<td>$4916$</td>
+					<td>${94.87 \pm 0.24 \%}$</td>
+					<td>${94.91 \pm 0.22 \%}$</td>
+					<td>${94.88 \pm 0.26 \%}$</td>
+					<td>${94.9 \pm 0.24 \%}$</td>
+					</tr>
+					<tr>
+					<td>Speech Testing Set</td>
+					<td>$5157$</td>
+					<td>${94.78 \pm 0.26\%}$</td>
+					<td>${94.87 \pm 0.25 \%}$</td>
+					<td>${94.87 \pm 0.25 \%}$</td>
+					<td>${94.87 \pm 0.25 \%}$</td>
+					</tr>
+					</tbody>
+					</table>
+					</div>
+					</medium_moins_moins>
+				</section>
+			</section>
+
+
+			<section name="Maths">
+
+				<h1 class="hidden">Équations</h1>
+
+			<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom" data-state="hide-menubar">
+										<h2 class="shadow3">Équations et mathématiques</h2>
+								</section>
+
+
+								<section>
+									<h2>reveal.js Math Plugin</h2>
+									<p>Render math with KaTeX, MathJax 2 or MathJax 3</p>
+								</section>
+
+								<section>
+									<h3>The Lorenz Equations</h3>
+
+									\[\begin{aligned}
+									\dot{x} &amp; = \sigma(y-x) \\
+									\dot{y} &amp; = \rho x - y - xz \\
+									\dot{z} &amp; = -\beta z + xy
+									\end{aligned} \]
+								</section>
+
+								<section>
+									<h3>The Cauchy-Schwarz Inequality</h3>
+
+									<script type="math/tex; mode=display">
+										\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+									</script>
+								</section>
+
+								<section>
+									<h3>A Cross Product Formula</h3>
+
+									\[\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+									\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+									\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+									\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0
+									\end{vmatrix}  \]
+								</section>
+
+								<section>
+									<h3>The probability of getting \(k\) heads when flipping \(n\) coins is</h3>
+
+									\[P(E)   = {n \choose k} p^k (1-p)^{ n-k} \]
+								</section>
+
+								<section>
+									<h3>An Identity of Ramanujan</h3>
+
+									\[ \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} =
+									1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+									{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]
+								</section>
+
+								<section>
+									<h3>A Rogers-Ramanujan Identity</h3>
+
+<small>
+									\[  1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+									\prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}\]
+
+								</small>
+								</section>
+
+								<section>
+									<h3>Maxwell&#8217;s Equations</h3>
+
+									\[  \begin{aligned}
+									\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = \frac{4\pi}{c}\vec{\mathbf{j}} \\   \nabla \cdot \vec{\mathbf{E}} &amp; = 4 \pi \rho \\
+									\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = \vec{\mathbf{0}} \\
+									\nabla \cdot \vec{\mathbf{B}} &amp; = 0 \end{aligned}
+									\]
+								</section>
+
+								<section>
+									<h3>TeX Macros</h3>
+
+									Here is a common vector space:
+									\[L^2(\R) = \set{u : \R \to \R}{\int_\R |u|^2 &lt; +\infty}\]
+									used in functional analysis.
+								</section>
+
+									<section>
+										<h3>The Lorenz Equations</h3>
+
+										<div class="fragment">
+											\[\begin{aligned}
+											\dot{x} &amp; = \sigma(y-x) \\
+											\dot{y} &amp; = \rho x - y - xz \\
+											\dot{z} &amp; = -\beta z + xy
+											\end{aligned} \]
+										</div>
+									</section>
+
+									<section>
+										<h3>The Cauchy-Schwarz Inequality</h3>
+
+										<div class="fragment">
+											\[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right) \]
+										</div>
+									</section>
+
+									<section>
+										<h3>A Cross Product Formula</h3>
+
+										<div class="fragment">
+											\[\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+											\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+											\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+											\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0
+											\end{vmatrix}  \]
+										</div>
+									</section>
+
+
+								</section>
+
+
+								<section name="Multimedia">
+
+									<h1 class="hidden">Inclusion de médias</h1>
+
+								<section data-background-color="#ededed" data-background-image="dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" data-background-opacity="0.9" data-background-position="bottom" data-state="hide-menubar">
+															<h2 class="shadow3">Inclusion de médias</h2>
+													</section>
+
+
+								<section data-background-iframe="https://www.youtube.com/embed/h1_nyI3z8gI" data-background-interactive>
+									<h2 style="color: #fff;">Iframe Background</h2>
+								</section>
+
+								<section>
+									<h2>Video</h2>
+									<video src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" data-autoplay controls></video>
+								</section>
+
+								<section data-background-video="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4">
+									<h2>Background Video</h2>
+								</section>
+
+								<section>
+									<h2>Auto-playing audio</h2>
+									<audio src="examples/assets/beeping.wav" data-autoplay></audio>
+								</section>
+
+								<section>
+									<h2>Audio inside slide fragments</h2>
+									<div class="fragment">
+										Beep 1
+										<audio src="examples/assets/beeping.wav" data-autoplay></audio>
+									</div>
+									<div class="fragment">
+										Beep 2
+										<audio src="examples/assets/beeping.wav" data-autoplay></audio>
+									</div>
+								</section>
+
+								<section>
+									<h2>Audio with controls</h2>
+									<audio src="examples/assets/beeping.wav" controls></audio>
+								</section>
+
+
+								<section>
+									<h2>Plotly</h2>
+
+									<block_important class="stretch">
+											<iframe data-src="images/plotly/fig_gain_traces_2-4.html" style="width:100%; height: 100%" data-preload></iframe>
+									</block_important>
+
+
+
+								</section>
+
+
+							<section>
+								<h2>Images</h2>
+
+								<div class="columns2">
+
+								<figure>
+								  <img height="60" data-src="images/img/ANR-logo-2021-sigle.png" alt="" class="plain">
+								  <figcaption style:"width=80%">Fig.1 - Logo ANR, sans filtre</figcaption>
+								</figure>
+
+								<figure>
+									<img height="60" data-src="images/img/ANR-logo-2021-sigle.png" alt="" class="filter">
+								  <figcaption>Fig.2 - Logo ANR filtre désaturation blanche</figcaption>
+								</figure>
+
+							</div>
+
+
+							<div class="columns2">
+
+								<figure>
+									<img height="60" data-src="images/img/ANR-logo-2021-sigle.png" alt="" class="filter2">
+									<figcaption>Fig.3 - Logo ANR, filtre désaturation grise</figcaption>
+								</figure>
+
+								<figure>
+									<img height="60" data-src="images/img/ANR-logo-2021-sigle.png" alt="" class="eclairage">
+									<figcaption>Fig.4 - Logo ANR, filtre "éclairage"</figcaption>
+								</figure>
+
+							</div>
+
+
+							</section>
+
+						</section>
+
+
+			</div>
+
+
+
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/search/search.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script src="plugin/revealjs-menu/menu.js"></script>
+		<script src="plugin/simplemenu/simplemenu.js"></script>
+
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				controlsLayout: 'edges',
+        slideNumber: 'c/t' ,
+				navigationMode: 'linear',
+
+				menu: {
+    // Specifies which side of the presentation the menu will
+    // be shown. Use 'left' or 'right'.
+    side: 'left',
+
+    // Specifies the width of the menu.
+    // Can be one of the following:
+    // 'normal', 'wide', 'third', 'half', 'full', or
+    // any valid css length value
+    width: 'half',
+
+    // Add slide numbers to the titles in the slide list.
+    // Use 'true' or format string (same as reveal.js slide numbers)
+    numbers: true,
+
+    // Specifies which slide elements will be used for generating
+    // the slide titles in the menu. The default selects the first
+    // heading element found in the slide, but you can specify any
+    // valid css selector and the text from the first matching
+    // element will be used.
+    // Note: that a section data-menu-title attribute or an element
+    // with a menu-title class will take precedence over this option
+    titleSelector: 'h1, h2, h3, h4, h5, h6',
+
+    // If slides do not have a matching title, attempt to use the
+    // start of the text content as the title instead
+    useTextContentForMissingTitles: false,
+
+    // Hide slides from the menu that do not have a title.
+    // Set to 'true' to only list slides with titles.
+    hideMissingTitles: false,
+
+    // Adds markers to the slide titles to indicate the
+    // progress through the presentation. Set to 'false'
+    // to hide the markers.
+    markers: true,
+
+    // Specify custom panels to be included in the menu, by
+    // providing an array of objects with 'title', 'icon'
+    // properties, and either a 'src' or 'content' property.
+    custom: false,
+
+    // Specifies the themes that will be available in the themes
+    // menu panel. Set to 'true' to show the themes menu panel
+    // with the default themes list. Alternatively, provide an
+    // array to specify the themes to make available in the
+    // themes menu panel, for example...
+    //
+    // [
+    //     { name: 'Black', theme: 'dist/theme/black.css' },
+    //     { name: 'White', theme: 'dist/theme/white.css' },
+    //     { name: 'League', theme: 'dist/theme/league.css' },
+    //     {
+    //       name: 'Dark',
+    //       theme: 'lib/reveal.js/dist/theme/black.css',
+    //       highlightTheme: 'lib/reveal.js/plugin/highlight/monokai.css'
+    //     },
+    //     {
+    //       name: 'Code: Zenburn',
+    //       highlightTheme: 'lib/reveal.js/plugin/highlight/zenburn.css'
+    //     }
+    // ]
+    //
+    // Note: specifying highlightTheme without a theme will
+    // change the code highlight theme while leaving the
+    // presentation theme unchanged.
+    themes: false,
+
+    // Specifies the path to the default theme files. If your
+    // presentation uses a different path to the standard reveal
+    // layout then you need to provide this option, but only
+    // when 'themes' is set to 'true'. If you provide your own
+    // list of themes or 'themes' is set to 'false' the
+    // 'themesPath' option is ignored.
+    themesPath: 'dist/theme/',
+
+    // Specifies if the transitions menu panel will be shown.
+    // Set to 'true' to show the transitions menu panel with
+    // the default transitions list. Alternatively, provide an
+    // array to specify the transitions to make available in
+    // the transitions panel, for example...
+    // ['None', 'Fade', 'Slide']
+    transitions: false,
+
+    // Adds a menu button to the slides to open the menu panel.
+    // Set to 'false' to hide the button.
+    openButton: false,
+
+    // If 'true' allows the slide number in the presentation to
+    // open the menu panel. The reveal.js slideNumber option must
+    // be displayed for this to take effect
+    openSlideNumber: true,
+
+    // If true allows the user to open and navigate the menu using
+    // the keyboard. Standard keyboard interaction with reveal
+    // will be disabled while the menu is open.
+    keyboard: true,
+
+    // Normally the menu will close on user actions such as
+    // selecting a menu item, or clicking the presentation area.
+    // If 'true', the sticky option will leave the menu open
+    // until it is explicitly closed, that is, using the close
+    // button or pressing the ESC or m key (when the keyboard
+    // interaction option is enabled).
+    sticky: false,
+
+    // If 'true' standard menu items will be automatically opened
+    // when navigating using the keyboard. Note: this only takes
+    // effect when both the 'keyboard' and 'sticky' options are enabled.
+    autoOpen: true,
+
+    // If 'true' the menu will not be created until it is explicitly
+    // requested by calling RevealMenu.init(). Note this will delay
+    // the creation of all menu panels, including custom panels, and
+    // the menu button.
+    delayInit: false,
+
+    // If 'true' the menu will be shown when the menu is initialised.
+    openOnInit: false,
+
+    // By default the menu will load it's own font-awesome library
+    // icons. If your presentation needs to load a different
+    // font-awesome library the 'loadIcons' option can be set to false
+    // and the menu will not attempt to load the font-awesome library.
+    loadIcons: true
+  },
+
+				simplemenu: {
+				        menuclass: 'menu',
+				        activeclass: 'active',
+				        activeelement: 'li',
+				        selectby: 'name',
+				        auto: true
+				    },
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.MathJax2, RevealMenu, Simplemenu  ]
+
+
+
+
+			});
+
+		</script>
+
+	</body>
+</html>
