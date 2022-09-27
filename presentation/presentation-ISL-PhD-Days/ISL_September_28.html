@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="fr">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>ISL PhD days</title>
+
+		<meta name="description" content="Speech enhancement">
+		<meta name="author" content="Julien Hauret">
+
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal-template/dist/reset.css">
+		<link rel="stylesheet" href="../reveal-template/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal-template/dist/theme/CNAM.css" id="theme">
+		<link rel="stylesheet" href="../reveal-template/plugin/simplemenu/simplemenu.css">
+
+
+
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../reveal-template/plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="../reveal-template/plugin/Ionicons/css/ionicons.min.css">
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+
+			<div class="menubar">
+			     <ul class="menu"></ul> <!-- Permet d'avoir le menu simple en haut des slides. Mettre data-state="hide-menubar" pour ne pas afficher ce menu sur un slide -->
+			</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<! -----------------------------------------------------------------  Titre  --------------------------------------------------------------->
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_titre_cnam.png" data-state="hide-menubar">
+
+					<br>
+
+					<h4 class="shadow3"><font color="white"> Deep learning for speech enhancement applied to non-conventional sound capture devices </font></h4>
+
+					<!-- <small><b> <br>   11th Budding Science Colloquium </font></b></small> <br> -->
+
+					
+
+					<small><b class="shadow2"><font color="gray"> <br> Starting date: December 1, 2021 (9 months ago) </font></b></small>
+
+					<br>
+
+					<small><font color="gray"> Funding: ANR (50% ISL/50% Cnam) - AHEAD project<br> Artificial Intelligence for Health, Physical Models, Transportation and Defense </font></small>
+
+					<p>
+						<small><b> PhD student: Julien HAURET<sup><small>&star;</small></sup> <br> Director: Éric BAVU<sup><small>&star;</small></sup> <br> Supervisors: Thomas JOUBAUD<sup><small>&dagger;</small></sup>, Véronique ZIMPFER<sup><small>&dagger;</small></sup> </b> </small>
+						<br>
+						<small>
+							<br>
+							<small> &star; : Structural Mechanics and Coupled Systems Laboratory, Conservatoire National des Arts et Metiers <br> &dagger; :Department of Acoustics and Soldier Protection, French-German Research Institute of Saint-Louis </small>
+						</small>
+						<br>
+
+
+						<div class="imgcentered">
+						<img height="60" data-src="images/img/lmssc.png" alt="" class="plain">
+						&#8195;&#8195;
+						<img height="80" data-src="images/img/cotral-logo.png" alt="" class="plain">
+						&#8195;&#8195;
+						<img height="80" data-src="images/img/isl.png" alt="" class="plain">
+						&#8195;&#8195;
+						<img height="60" data-src="images/img/logo-anr.png" alt="" class="plain">
+        				</div>
+
+					</p>
+				</section>
+
+
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<! ----------------------------------------------------------------  Contexte -------------------------------------------------------------->
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<section name="Context">
+
+					<h1 class="hidden">Contexte</h1>
+
+					<!-- Contexte -->
+					<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png">
+												<h2 class="shadow3">Context</h2>
+					</section>
+
+
+				<section>
+					<h3> BANG Prototype  </h3>
+					<figure>
+						<img height="450" data-src="images/img/inear2.jpg" alt="" class="plain">
+						<figcaption>Bouchon Auriculaire de Nouvelle Génération</figcaption>
+					</figure>
+				</section>
+
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3>Temporal representation</h3>
+                	<block_important class="stretch">
+                    	<iframe data-src="images/plotly/real_temporal.html" style="width:100%; height: 95%" data-preload></iframe>
+                	</block_important>
+					<audio src="audios/inear.wav" controls></audio>
+					<audio src="audios/ref.wav" controls></audio>
+				</section>
+
+				<section>
+					<h3>Spectrogram </h3>
+				</section>
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3> In-ear signal </h3>
+                	<block_important class="stretch">
+                    	<iframe data-src="images/plotly/real_spec_inear.html" style="width:100%; height: 100%" data-preload></iframe>
+                	</block_important>
+					<audio src="audios/inear2sec.wav" controls></audio>
+				</section>
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3> Reference signal </h3>
+                	<block_important class="stretch">
+                    	<iframe data-src="images/plotly/real_spec_ref.html" style="width:100%; height: 100%" data-preload></iframe>
+                	</block_important>
+					<audio src="audios/ref2sec.wav" controls></audio>
+				</section>
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3> Source filter model </h3>
+                	<block_important class="stretch">
+                    	<iframe data-src="images/plotly/dégradation_CFA.html" style="width:100%; height: 95%" data-preload></iframe>
+                	</block_important>
+				</section>
+
+				<section>
+					<h2>Summary</h2>
+
+					<block_important>
+					<small>
+							<h6 class="shadow2"> Goal </h6>
+							<hr>
+							Improving speech intelligibility with in-the-ear transducers
+					</small>
+					</block_important>
+
+					<block_important>
+					<small>
+							<h6 class="shadow2"> Constraints </h6>
+							<hr>
+					<ul>
+						<li class="fragment" data-fragment-index="1">Light hardware</li>
+						<li class="fragment" data-fragment-index="2">Real-time processing</li>
+						<li class="fragment" data-fragment-index="3">Robustness to speaker's indentity</li>
+					</ul>
+
+					</small>
+					</block_important>
+				</section>
+
+
+			</section>
+
+
+
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<! ----------------------------------------------------------------État de l'art - SEANet------------------------------------------------------------>
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+			<section name="SEANet">
+
+
+				<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png">
+					<h2 class="shadow3"> <br> SEANet </h2> presented at INTERSPEECH 2020 by Google Research
+				</section>
+
+				<section>
+					<h3> Principle </h3>
+					 <small> \[\mathcal{L}_{gen}=\mathcal{L}_{rec}+\lambda \mathcal{L}_{adv} ~~~~~~~~~~~~~~~ \mathcal{L}_{dis}=\mathcal{L}_{adv~fake}+ \mathcal{L}_{adv~real} \] </small>
+					<figure>
+						<img height="350" data-src="images/img/seanet.png" alt="" class="plain">
+						<figcaption> Model overview  </figcaption>
+					</figure>
+				</section>
+
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3> Results </h3>
+
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:100%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/spec_inear_nice_gan.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/spec_enhanced_nice_gan.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/spec_ref_nice_gan.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	            	</div>
+            	</block_important>
+
+            	<audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/inear_nice_gan.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/enhanced_nice_gan.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/ref_nice_gan.wav" controls></audio>
+				</section>
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3> Reconstructive only: Results </h3>
+
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:100%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/spec_inear_nice_recons.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/spec_enhanced_nice_recons.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/spec_ref_nice_recons.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	            	</div>
+            	</block_important>
+
+            	<audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/inear_nice_recons.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/enhanced_nice_recons.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/ref_nice_recons.wav" controls></audio>
+				</section>
+
+			</section>
+
+
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+					<! ---------------------------------------------------------Avancée thèse--------------------------------------------------------------->
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+			<section name="PhD advances">
+
+				<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png">
+					<h2 class="shadow3">lighten processing</h2>
+				</section>
+
+				<section>
+					<h3>Starting point</h3>
+					<figure>
+						<img height="450" data-src="images/img/seanet-encoder.png" alt="" class="plain">
+						<figcaption> SEANet's generator architecture </figcaption>
+					</figure>
+				</section>
+
+				<section>
+					<figure>
+						<img data-src="images/tikz/pqmf1.png" alt="" class="plain">
+						<figcaption>Pseudo Quadrature Mirror Filter (PQMF) bank</figcaption>
+					</figure>
+				</section>
+
+				<section>
+					<figure>
+						<img data-src="images/tikz/pqmf2.png" alt="" class="plain">
+						<figcaption>PQMF-generator</figcaption>
+					</figure>
+				</section>
+
+
+				<section>
+					<figure>
+						<img data-src="images/tikz/pqmf3.png" alt="" class="plain">
+						<figcaption>Fast PQMF-generator</figcaption>
+					</figure>
+				</section>
+
+
+				<section>
+					<figure>
+						<img data-src="images/tikz/pqmf5.png" alt="" class="plain">
+						<figcaption>Our PQMF-SEANet</figcaption>
+					</figure>
+				</section>
+
+				<section>
+					<h2>SUmmary on PQMF-SEANet</h2>
+
+					<block_important>
+						<small>
+								<h6 class="shadow2"> Avantages </h6>
+								<hr>
+						<ul>
+							<li> <b> Memory gain </b>  thanks to the reduction of features' temporal length </li>
+							<li> <b> Gain in inference speed </b> thanks to the reduced number of layers </li>
+							<li> <b> More flexibility </b> for processing and discriminators inputs </li>
+						</ul>
+						</small>
+					</block_important>
+
+					<block_important>
+					<small>
+							<h6 class="shadow2"> Disadvantages </h6>
+							<hr>
+					<ul>
+						<li> Projection in a non-optimal basis for our problem </li>
+						<li> Convolution with large kernels difficult to parallelize </li>
+					</ul>
+					</small>
+					</block_important>
+				</section>
+
+				<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png">
+					<h2 class="shadow3">Automate the search for hyperparameters</h2>
+				</section>
+
+				<section>
+					<figure>
+						<video src="./videos/pbt.webm" data-autoplay controls></video>
+						<figcaption>Population based training</figcaption>
+					</figure>
+				</section>
+	
+
+			</section>
+
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+					<! ----------------------------------------------------------------Évaluation--------------------------------------------------------------->
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+			<section name="Evaluation">
+
+				<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png">
+					<h2 class="shadow3">Evaluation </h2>
+				</section>
+
+				<section>
+					<center>
+					<table class = 'table-fill'>
+						<thead>
+						<tr>
+							<th> Signals </th>
+							<th> PESQ </th>
+							<th> SI-SDR </th>
+							<th> SI-SNR </th>
+							<th> STOI </th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td> In-ear </td>
+							<td> 1.246 </td>
+							<td> -6.615 </td>
+							<td> -7.538 </td>
+							<td> 0.7178 </td>
+						</tr>
+						<tr>
+							<td> SEANet baseline  </td>
+							<td> 2.321 </td>
+							<td> 10.99 </td>
+							<td> 10.79 </td>
+							<td> 0.8985 </td>
+						</tr>
+
+						<tr>
+							<td> PQMF SEANet  </td>
+							<td> 2.245 </td>
+							<td> 11.52 </td>
+							<td> 11.42 </td>
+							<td> 0.890 </td>
+						</tr>
+
+						<tr>
+							<td> PQMF SEANet + tricks </td>
+							<td> 2.435 </td>
+							<td> 11.94 </td>
+							<td> 11.84 </td>
+							<td> 0.902 </td>
+						</tr>
+
+						</tbody>
+					</table>
+					</center>
+				</section>
+
+			</section>
+
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+					<! ----------------------------------------------------------------À venir--------------------------------------------------------------->
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+			<section name="Conclusion">
+
+				<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png">
+					<h2 class="shadow3"> Timeline </h2>
+					</block_important>
+				</section>
+
+				<section>
+				<figure>
+					<img height="600" data-src="images/img/gantt_chart.png" alt="" class="plain">
+				</figure>
+				</section>
+
+
+				<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_titre_cnam.png" data-state="hide-menubar">
+
+					<br>
+
+					<h2 class="shadow3"><font color="white"> Thank you for your attention</font></h2>
+					<br>
+
+
+
+					<p>	
+						<small><b> Title: Deep learning for speech enhancement applied to non-conventional sound capture </b></small>
+						<small> <b> contact: julien.hauret@lecnam.net </b></small>
+						<br>
+						<small><b> acknowledgments to:  Éric Bavu, Thomas Joubaud, Véronique Zimpfer, Robin Petit </b></small>
+						<br>
+
+
+
+						<div class="imgcentered">
+						<img height="60" data-src="images/img/lmssc.png" alt="" class="plain">
+						&#8195;&#8195;
+						<img height="80" data-src="images/img/cotral-logo.png" alt="" class="plain">
+						&#8195;&#8195;
+						<img height="80" data-src="images/img/isl.png" alt="" class="plain">
+						&#8195;&#8195;
+						<img height="60" data-src="images/img/logo-anr.png" alt="" class="plain">
+        				</div>
+
+					</p>
+				</section>
+
+			</section>
+
+
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+					<! ----------------------------------------------------------------Annexes-------------------------------------------------------------->
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+			<section name="Annexes">
+
+				<h1 class="hidden">Annexes</h1>
+
+				<section>
+					<h3>Signal processing equations</h3>
+					<div class="columns2">
+						<small>
+
+						Source-Filter model
+						\[y(t) = (h*x)(t) \]
+						\[Y(f) = H(f).X(f) \]
+						</small>
+					</div>
+
+					<div class="columnssep">
+						<p class="hidden">  </p>
+					</div>
+
+					<div class="columns2">
+						<small>
+						Transfer function estimation
+						\[H(f)=\frac{P_{xy}(f)}{P_{xx}(f)}  \]
+						\[C_{xy}(f)=\frac{|P_{xy}(f)|^2}{P_{xx}(f) . P_{yy}(f)} \]
+						</small>
+					</div>
+				</section>
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3>Bode diagram</h3>
+                	<block_important class="stretch">
+                    	<iframe data-src="images/plotly/fig_gain_details.html" style="width:100%; height: 100%"></iframe>
+                	</block_important>
+				</section>
+
+				<section>
+					<h3> Loss functions : SeaNET</h3>
+					<small>
+					<span style="display: inline-block;">\[\mathcal{L_D}= E_y\left[ \frac{1}{K} \sum_k \frac{1}{T_k} \sum_t max(0,1-D_{k,t}(y))\right] +
+																		  E_x\left[ \frac{1}{K} \sum_k \frac{1}{T_k} \sum_t max(0,1+D_{k,t}(G(x)))\right]\]     </span>
+				  	</small>
+
+					<small>
+					<span style="display: inline-block;">\[\mathcal{L_G^{adv}}= E_x\left[ \frac{1}{K} \sum_k \frac{1}{T_k} \sum_t max(0,1-D_{k,t}(G(x)))\right]\]     </span>
+				  	</small>
+
+					<small>
+					<span style="display: inline-block;">\[\mathcal{L_G^{rec}}= E_x\left[ \frac{1}{KL} \sum_{k,l} \frac{1}{T_{k,l}} \sum_t \| D_{k,t}^{(l)}(y)-D_{k,t}^{(l)}(G(x))\| _{L_1}  \right]\]     </span>
+				  	</small>
+				</section>
+
+				<section>
+					<h3>Références - 1 </h3>
+					
+					<block_important>
+					<small>
+							<h6 class="shadow2"> PQMF </h6>
+							<hr>
+					<ul>
+						<li> Joseph Rothweiler: Polyphase quadrature filters–a new subband coding technique. In ICASSP 1983. </li>
+						<li> Truong Q Nguyen: Near-perfect-reconstruction pseudo-qmf banks. In 1994 IEEE. </li>
+						<li> Yuan-Pei Lin & al: A kaiser window approach for the design of prototype filters of cosine modulated filterbanks. In 1998 IEEE. </li>
+					</ul>
+					</small>
+					</block_important>
+				</section>
+
+				<section>
+					<h3>Références - 2 </h3>
+
+					<block_important>
+						<small>
+								<h6 class="shadow2"> Deep learning </h6>
+								<hr>
+						<ul>
+							<li> Marco Tagliasacchi & al: Seanet : A multi-modal speech enhancement network. arXiv preprint, 2020.</li>
+							<li> Mescheder, L., Geiger, A., & Nowozin, S. (2018, July). Which training methods for GANs do actually converge?. In International conference on machine learning (pp. 3481-3490). PMLR.</li>
+							<li> Jaderberg, M., Dalibard, V., Osindero, S., Czarnecki, W. M., Donahue, J., Razavi, A., ... & Kavukcuoglu, K. (2017). Population based training of neural networks. arXiv preprint arXiv:1711.09846.</li>
+							<li> Baevski, A., Zhou, Y., Mohamed, A., & Auli, M. (2020). wav2vec 2.0: A framework for self-supervised learning of speech representations. Advances in Neural Information Processing Systems, 33, 12449-12460. </li>
+							<li> Miyato, T., Kataoka, T., Koyama, M., & Yoshida, Y. (2018). Spectral normalization for generative adversarial networks. arXiv preprint arXiv:1802.05957. </li>
+							<li> Salimans, T., & Kingma, D. P. (2016). Weight normalization: A simple reparameterization to accelerate training of deep neural networks. Advances in neural information processing systems, 29. </li>
+						</ul>
+						</small>
+					</block_important>
+				</section>
+
+				<section>
+					<h3>Références - 3 </h3>
+
+					<block_important>
+					<small>
+							<h6 class="shadow2"> Métriques</h6>
+							<hr>
+					<ul>
+						<li> Antony W Rix & al :  Perceptual evaluation of speech quality (PESQ)-a new method for speech quality assessment of telephone networks and codecs. In 2001 IEEE. </li>
+						<li> Cees H Taal & al: A short-time objective intelligibility measure for time-frequency weighted noisy speech. In 2010 IEEE. </li>
+						<li> Jonathan Le Roux & al: Sdr–half-baked or well done ? In ICASSP 2019. </li>
+						<li> Yi Luo & al : time-domain audio separation network for real-time, single-channel speech separation. In 2018 IEEE.</li>
+					</ul>
+					</small>
+					</block_important>
+				</section>
+
+			</section>
+
+
+
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+					<! ------------------------------------------------------------END OF SECTIONS-------------------------------------------------------------->
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+		<script src="../reveal-template/dist/reveal.js"></script>
+		<script src="../reveal-template/plugin/zoom/zoom.js"></script>
+		<script src="../reveal-template/plugin/notes/notes.js"></script>
+		<script src="../reveal-template/plugin/search/search.js"></script>
+		<script src="../reveal-template/plugin/markdown/markdown.js"></script>
+		<script src="../reveal-template/plugin/highlight/highlight.js"></script>
+		<script src="../reveal-template/plugin/math/math.js"></script>
+		<script src="../reveal-template/plugin/revealjs-menu/menu.js"></script>
+		<script src="../reveal-template/plugin/simplemenu/simplemenu.js"></script>
+
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				controlsLayout: 'edges',
+        slideNumber: 'c/t' ,
+				navigationMode: 'linear',
+
+				menu: {
+    // Specifies which side of the presentation the menu will
+    // be shown. Use 'left' or 'right'.
+    side: 'left',
+
+    // Specifies the width of the menu.
+    // Can be one of the following:
+    // 'normal', 'wide', 'third', 'half', 'full', or
+    // any valid css length value
+    width: 'half',
+
+    // Add slide numbers to the titles in the slide list.
+    // Use 'true' or format string (same as reveal.js slide numbers)
+    numbers: true,
+
+    // Specifies which slide elements will be used for generating
+    // the slide titles in the menu. The default selects the first
+    // heading element found in the slide, but you can specify any
+    // valid css selector and the text from the first matching
+    // element will be used.
+    // Note: that a section data-menu-title attribute or an element
+    // with a menu-title class will take precedence over this option
+    titleSelector: 'h1, h2, h3, h4, h5, h6',
+
+    // If slides do not have a matching title, attempt to use the
+    // start of the text content as the title instead
+    useTextContentForMissingTitles: false,
+
+    // Hide slides from the menu that do not have a title.
+    // Set to 'true' to only list slides with titles.
+    hideMissingTitles: false,
+
+    // Adds markers to the slide titles to indicate the
+    // progress through the presentation. Set to 'false'
+    // to hide the markers.
+    markers: true,
+
+    // Specify custom panels to be included in the menu, by
+    // providing an array of objects with 'title', 'icon'
+    // properties, and either a 'src' or 'content' property.
+    custom: false,
+
+    // Specifies the themes that will be available in the themes
+    // menu panel. Set to 'true' to show the themes menu panel
+    // with the default themes list. Alternatively, provide an
+    // array to specify the themes to make available in the
+    // themes menu panel, for example...
+    //
+    // [
+    //     { name: 'Black', theme: 'dist/theme/black.css' },
+    //     { name: 'White', theme: 'dist/theme/white.css' },
+    //     { name: 'League', theme: 'dist/theme/league.css' },
+    //     {
+    //       name: 'Dark',
+    //       theme: 'lib/reveal.js/dist/theme/black.css',
+    //       highlightTheme: 'lib/reveal.js/plugin/highlight/monokai.css'
+    //     },
+    //     {
+    //       name: 'Code: Zenburn',
+    //       highlightTheme: 'lib/reveal.js/plugin/highlight/zenburn.css'
+    //     }
+    // ]
+    //
+    // Note: specifying highlightTheme without a theme will
+    // change the code highlight theme while leaving the
+    // presentation theme unchanged.
+    themes: false,
+
+    // Specifies the path to the default theme files. If your
+    // presentation uses a different path to the standard reveal
+    // layout then you need to provide this option, but only
+    // when 'themes' is set to 'true'. If you provide your own
+    // list of themes or 'themes' is set to 'false' the
+    // 'themesPath' option is ignored.
+    themesPath: 'dist/theme/',
+
+    // Specifies if the transitions menu panel will be shown.
+    // Set to 'true' to show the transitions menu panel with
+    // the default transitions list. Alternatively, provide an
+    // array to specify the transitions to make available in
+    // the transitions panel, for example...
+    // ['None', 'Fade', 'Slide']
+    transitions: false,
+
+    // Adds a menu button to the slides to open the menu panel.
+    // Set to 'false' to hide the button.
+    openButton: false,
+
+    // If 'true' allows the slide number in the presentation to
+    // open the menu panel. The reveal.js slideNumber option must
+    // be displayed for this to take effect
+    openSlideNumber: true,
+
+    // If true allows the user to open and navigate the menu using
+    // the keyboard. Standard keyboard interaction with reveal
+    // will be disabled while the menu is open.
+    keyboard: true,
+
+    // Normally the menu will close on user actions such as
+    // selecting a menu item, or clicking the presentation area.
+    // If 'true', the sticky option will leave the menu open
+    // until it is explicitly closed, that is, using the close
+    // button or pressing the ESC or m key (when the keyboard
+    // interaction option is enabled).
+    sticky: false,
+
+    // If 'true' standard menu items will be automatically opened
+    // when navigating using the keyboard. Note: this only takes
+    // effect when both the 'keyboard' and 'sticky' options are enabled.
+    autoOpen: true,
+
+    // If 'true' the menu will not be created until it is explicitly
+    // requested by calling RevealMenu.init(). Note this will delay
+    // the creation of all menu panels, including custom panels, and
+    // the menu button.
+    delayInit: false,
+
+    // If 'true' the menu will be shown when the menu is initialised.
+    openOnInit: false,
+
+    // By default the menu will load it's own font-awesome library
+    // icons. If your presentation needs to load a different
+    // font-awesome library the 'loadIcons' option can be set to false
+    // and the menu will not attempt to load the font-awesome library.
+    loadIcons: true
+  },
+
+				simplemenu: {
+				        menuclass: 'menu',
+				        activeclass: 'active',
+				        activeelement: 'li',
+				        selectby: 'name',
+				        auto: true
+				    },
+
+                mathjax2: {
+                    mathjax: 'node_modules/mathjax/MathJax.js',
+                    config: 'TeX-AMS_HTML-full',
+                    TeX: {
+                        Macros: {
+                            R: '\\mathbb{R}',
+                            set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+                        }
+                    }
+                },
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.MathJax2, RevealMenu, Simplemenu  ]
+
+
+
+
+			});
+
+		</script>
+
+	</body>
+</html>
