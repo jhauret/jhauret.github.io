@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "install": "^0.13.0",
-    "mathjax": "^2.7.9",
-    "npm": "^8.19.2"
-  }
-}

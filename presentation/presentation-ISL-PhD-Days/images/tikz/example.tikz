@@ -1,4 +1,0 @@
-\begin{tikzcd}
-	G \arrow{r}{\varphi} \arrow[two heads]{d} & H \\
-	\mathlarger{\sfrac{G}{\ker \varphi}} \arrow[dotted]{ru} &
-\end{tikzcd}
