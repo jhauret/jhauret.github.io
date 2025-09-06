@@ -1,0 +1,103 @@
+/* Add this to your custom CSS file or within a <style> tag in the <head> */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 15px;
+  width: 90%; /* Increased width for a wider layout */
+  margin: 0 auto;
+}
+
+.grid-item {
+  position: relative;
+  width: 100%;
+  /* Controls the aspect ratio. 50% = 2:1 (width:height) */
+  padding-bottom: 50%; 
+  overflow: hidden;
+  border-radius: 8px; /* Optional: adds rounded corners */
+}
+
+.image-swap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- NEW styles for the front text --- */
+.front-text {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff7f7f; /* Example background color */
+  color: white;
+  text-align: center;
+  transition: opacity 0.4s ease-in-out;
+  cursor: pointer; /* Changes the mouse cursor to a pointer */
+}
+
+/* --- Updated styles for the back image and hover effect --- */
+.image-swap .back-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0; /* Hidden by default */
+}
+
+.image-swap:hover .front-text {
+  opacity: 0; /* Fade out text on hover */
+}
+
+.image-swap:hover .back-image {
+  opacity: 1; /* Fade in image on hover */
+}
+
+body.no-counter .reveal .slide-number {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Keep the overlay above images and ignore clicks */
+.legend-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Make the line really red and thick, unaffected by scaling */
+.legend-overlay .legend-line {
+  stroke: #e53935 !important;          /* red */
+  stroke-width: 2 !important;           /* thicker line */
+  vector-effect: non-scaling-stroke;    /* keep width constant when scaled */
+  stroke-linecap: round;
+}
+
+/* Bigger, bold text with white outline for readability */
+.legend-overlay .legend-text {
+  fill: #e53935 !important;             /* red */
+  font-weight: 800;
+  font-size: clamp(20px, 2.4vmin, 40px) !important; /* responsive size */
+  paint-order: stroke;
+  stroke: rgba(255,255,255,0.95);       /* white halo */
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+.overlay-img {
+    position: absolute;
+    top: var(--top, 50%);
+    left: var(--left, 50%);
+    width: var(--w, 200px);
+    transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
+    z-index: 5;               /* above slide content */
+    pointer-events: none;     /* don’t block clicks */
+  }

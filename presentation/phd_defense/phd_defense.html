@@ -1,0 +1,3322 @@
+<!doctype html>
+<html lang="fr">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title> PhD Defense </title>
+
+		<meta name="description" content="Speech enhancement">
+		<meta name="author" content="Julien Hauret">
+
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="../reveal-template/dist/reset.css">
+		<link rel="stylesheet" href="../reveal-template/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal-template/dist/theme/CNAM.css" id="theme">
+		<link rel="stylesheet" href="../reveal-template/plugin/simplemenu/simplemenu.css">
+
+
+
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="../reveal-template/plugin/highlight/monokai.css">
+		<link rel="stylesheet" href="../reveal-template/plugin/Ionicons/css/ionicons.min.css">
+
+		<link rel="stylesheet" href="custom.css">
+
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+
+			<div class="menubar">
+			     <ul class="menu"></ul> <!-- Permet d'avoir le menu simple en haut des slides. Mettre data-state="hide-menubar" pour ne pas afficher ce menu sur un slide -->
+			</div>
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<! -----------------------------------------------------------------  Titre  --------------------------------------------------------------->
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+<section data-wave="on"
+         data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_titre_cnam.png"
+         data-state="hide-menubar">
+  <br>
+  <h4 class="shadow3" style="color:white; line-height:1.3; margin-bottom:0.8em;">
+    Deep learning for speech enhancement applied to radio communications using non-conventional sound capture devices
+  </h4>
+
+  <p style="margin-top:0.5em; font-size:0.75em; line-height:1.7; color:black;">
+    PhD defense — Julien Hauret <br>
+    September 12, 2025 - Cnam Paris - Laussédat Amphitheater <br>
+    Supervisor: Éric Bavu &nbsp;&nbsp; - &nbsp;&nbsp; Co-supervisor: Thomas Joubaud
+  </p>
+
+  <hr style="width:40%; margin: 0.8em auto; border:0; height:1px; background:black;">
+
+  <!-- Logos -->
+<!-- Logos -->
+<div style="position:relative; z-index:20000000000000; 
+            display:flex; justify-content:center; gap:2em;">
+  <img height="50" data-src="images/img/genci.png" alt="GENCI" class="plain">
+  <img height="55" data-src="images/img/lmssc.png" alt="LMSSC–Cnam" class="plain">
+  <img height="70" data-src="images/img/isl.png"   alt="ISL" class="plain">
+  <img height="50" data-src="images/img/anr.png"   alt="ANR" class="plain">
+</div>
+
+  <br>
+</section>
+
+
+
+
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<! ----------------------------------------------------------------  Context -------------------------------------------------------------->
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<section name="Context">
+
+					<h1 class="hidden">Context</h1>
+
+					<!-- Contexte -->
+					<section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                   data-background-position="bottom right" 
+                   data-visibility="uncounted" 
+                   data-state="no-counter hide-menubar">
+								<h2 class="shadow3">Context</h2>
+					</section>
+
+
+<section>
+  <!-- Optional: local styling for the legend -->
+  <style>
+    /* Keep it above the images, non-interactive */
+    .legend-overlay {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .legend-line {
+      stroke: currentColor; stroke-width: 3; stroke-linecap: round;
+      fill: none;
+    }
+    .legend-text {
+      font-weight: 700; font-size: 18px; fill: currentColor;
+      /* small shadow for readability on photos */
+      paint-order: stroke; stroke: rgba(255,255,255,0.85); stroke-width: 3; stroke-linejoin: round;
+    }
+  </style>
+
+  <h4>
+    <span style="font-style: italic;">How to extract voice in noisy environments ?</span>
+    <span class="fragment" data-fragment-index="4"
+          style="display:block; font-style: normal; font-weight: 700; margin-top:0.3em;">
+      ⇒ body-conduction microphones (BCM)
+    </span>
+  </h4>
+
+  <div style="display:flex; justify-content:center; align-items:flex-start; gap:20px;">
+
+    <!-- Battlefield -->
+    <figure style="text-align:center; margin:0; position:relative;">
+      <div style="height:45vh; width:auto; position:relative; display:flex; align-items:center; justify-content:center;">
+        <!-- BEFORE (1st) -->
+        <img class="fragment" data-fragment-index="1"
+             src="images/img/soldier.png"
+             style="max-height:45vh; object-fit:contain; display:block;" />
+        <!-- AFTER (5th) -->
+        <img class="fragment" data-fragment-index="5"
+             src="images/img/soldier_seamless.png"
+             style="max-height:45vh; object-fit:contain; position:absolute; inset:0; margin:auto;" />
+
+        <!-- Legend overlay for fragment 5 -->
+        <svg class="legend-overlay" viewBox="500 200 600 700" preserveAspectRatio="none">
+          <g class="fragment" data-fragment-index="5">
+            <!-- Edit coordinates: start -> break1  (gap)  break2 -> end -->
+            <line x1="840" y1="440" x2="600" y2="750" class="legend-line" />
+            <!-- Edit text position/content -->
+            <text x="600" y="790" class="legend-text" fill="red">Bone conduction with helmet integration</text>
+          </g>
+        </svg>
+      </div>
+    </figure>
+
+    <!-- Rave -->
+    <figure style="text-align:center; margin:0; position:relative;">
+      <div style="height:45vh; width:auto; position:relative; display:flex; align-items:center; justify-content:center;">
+        <!-- BEFORE (2nd) -->
+        <img class="fragment" data-fragment-index="2"
+             src="images/img/club.jpg"
+             style="max-height:45vh; object-fit:contain; display:block;" />
+        <!-- AFTER (6th) -->
+        <img class="fragment" data-fragment-index="6"
+             src="images/img/club3_seamless.png"
+             style="max-height:45vh; object-fit:contain; position:absolute; inset:0; margin:auto;" />
+
+        <!-- Legend overlay for fragment 6 -->
+        <svg class="legend-overlay" viewBox="1000 200 600 700" preserveAspectRatio="none">
+          <g class="fragment" data-fragment-index="6">
+            <!-- Edit coordinates: start -> break1  (gap)  break2 -> end -->
+            <line x1="1300" y1="540" x2="1200" y2="750" class="legend-line" />
+            <line x1="1400" y1="580" x2="1200" y2="750" class="legend-line" />
+            <!-- Edit text position/content -->
+            <text x="1200" y="790" class="legend-text" fill="red">Throat microphones</text>
+          </g>
+        </svg>
+      </div>
+    </figure>
+
+    <!-- Engine Room -->
+    <figure style="text-align:center; margin:0; position:relative;">
+      <div style="height:45vh; width:auto; position:relative; display:flex; align-items:center; justify-content:center;">
+        <!-- BEFORE (3rd) -->
+        <img class="fragment" data-fragment-index="3"
+             src="images/img/factory.png"
+             style="max-height:45vh; object-fit:contain; display:block;" />
+        <!-- AFTER (7th) -->
+        <img class="fragment" data-fragment-index="7"
+             src="images/img/factory_seamless.png"
+             style="max-height:45vh; object-fit:contain; position:absolute; inset:0; margin:auto;" />
+
+        <!-- Legend overlay for fragment 7 -->
+        <svg class="legend-overlay" viewBox="1500 200 600 700" preserveAspectRatio="none">
+          <g class="fragment" data-fragment-index="7">
+            <!-- Edit coordinates: start -> break1  (gap)  break2 -> end -->
+            <line x1="1960" y1="480" x2="1700" y2="755" class="legend-line" />
+            <line x1="1660" y1="510" x2="1700" y2="755" class="legend-line" />
+            <text x="1700" y="790" class="legend-text" fill="red">In-ear microphones</text>
+          </g>
+        </svg>
+      </div>
+    </figure>
+
+  </div>
+</section>
+
+
+				<section>
+					<h4> First BCM </h4>
+						<img height="400" data-src="images/img/t-30-pic.png" alt="" class="plain">
+				</section>
+
+
+
+
+				<section>
+					<h4>Current BCM</h4>
+						<img height="400" data-src="images/img/bcm.png" alt="" class="plain">
+				</section>
+
+
+<section>
+  <h5 style="white-space: nowrap;"> Chemical Research on BCM  </h5>
+
+  <div class="r-stack" style="height: 430px;">
+    <!-- Image 1: visible immediately, disappears on step 1 -->
+    <img height="350" data-src="images/img/sensor_attachable.png"
+         alt="Attachable sensor"
+         class="plain fragment fade-out" data-fragment-index="1">
+
+    <!-- Image 2: appears on step 1, disappears on step 2 -->
+    <img height="350" data-src="images/img/skin_acc.png"
+         alt="Skin acceleration sensor"
+         class="plain fragment fade-in-then-out" data-fragment-index="1">
+
+    <!-- Image 3: appears on step 2 and stays -->
+    <img height="350" data-src="images/img/voice_pressure.png"
+         alt="Voice pressure sensor"
+         class="plain fragment fade-in" data-fragment-index="2">
+  </div>
+
+  <figcaption style="font-size:0.65em; margin-top:10px; text-align:center;">
+    Figures from Lee <em>et&nbsp;al.</em>, Nature Communications, 2019
+  </figcaption>
+</section>
+
+
+
+<section>
+  <h4> Mechanics Research on BCM </h4>
+
+  <div class="r-stack" style="height: 490px;">
+    <!-- Image 1: visible immediately, disappears on step 1 -->
+    <img height="470" data-src="images/img/che_2024.png" class="plain">
+  </div>
+
+  <figcaption style="font-size:0.65em; margin-top:10px; text-align:center;">
+    Figures from Che <em>et&nbsp;al.</em>, Nature Communications, 2024
+  </figcaption>
+</section>
+
+
+
+		<section>
+			<h4> Integration in wearables </h4>
+				<img height="450" data-src="images/img/airpods-pro-2.png" alt="" class="plain">
+		</section>
+
+
+				<section>
+					<h4> Source-filter model </h4>
+						<img height="450" data-src="images/img/source-filter-red.png" alt="" class="plain">
+				</section>
+
+
+
+
+
+
+				<section>
+					<br>
+					<h4> In-ear capture </h4>
+					<p style="margin-bottom: 0.8em;"> </p>
+                	<block_important class="stretch">
+                    	<iframe data-src="images/plotly/real_temporal.html" style="width:100%; height: 95%" data-preload></iframe>
+                	</block_important>
+					<audio src="audios/inear.wav" controls></audio>
+					<audio src="audios/ref.wav" controls></audio>
+				</section>
+
+        <!--
+
+				<section>
+					<br>
+					<h4> Spectrogram in silence</h4>
+					<p style="margin-bottom: 0.8em;"> </p>
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:100%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/inear_silence.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/ref_silence.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	            	</div>
+            	</block_important>
+
+            	<audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/inear_silence.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/ref_silence.wav" controls></audio>
+				</section>
+
+-->
+				<section>
+					<br>
+					<h4> Spectrogram in silence</h4>
+					<p style="margin-bottom: 0.8em;"> </p>
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:100%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/inear_silence_woman.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/ref_silence_woman.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	            	</div>
+            	</block_important>
+
+            	<audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/inear_silence_woman.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/ref_silence_woman.wav" controls></audio>
+				</section>
+
+<!--
+				<section>
+					<br>
+					<h4> Spectrogram in silence (throat) </h4>
+					<p style="margin-bottom: 0.8em;"> </p>
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:100%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/audio3_corrupted_vibravox.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/audio3_reference_vibravox.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	            	</div>
+            	</block_important>
+
+            	<audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/se/corrupted/3.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/se/reference/3.wav" controls></audio>
+				</section>
+  -->
+
+				<section>
+					<br>
+					<h4> Spectrogram in 85dB noise</h4>
+					<p style="margin-bottom: 0.8em;"> </p>
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:100%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/ref_85dB.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/inear_85dB.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	            	</div>
+            	</block_important>
+
+            	<audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/ref_85dB.wav" controls></audio>
+            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/inear_85dB.wav" controls></audio>
+				</section>
+
+
+
+<section>
+  <block_important>
+    <small>
+      <h6 class="shadow2">First Takeaway</h6>
+      <p style="font-size:0.9em; margin-top:-5px; color:gray;">
+      </p>
+      <hr style="margin:15px 0;">
+      <ul style="list-style-type: disc; padding-left: 20px; line-height: 2em; font-size:0.85em;">
+        <li class="fragment" data-fragment-index="0">
+          BCMs are not new but sensor design is still evolving
+        </li>
+        <li class="fragment" data-fragment-index="1">
+          Inherently robust to environmental noise
+        </li>
+        <li class="fragment" data-fragment-index="2">
+          Loss of high-frequency components reduces quality and intelligibility
+        </li>
+        <li class="fragment" data-fragment-index="3">
+          Advanced enhancement algorithms are needed
+        </li>
+      </ul>
+    </small>
+  </block_important>
+</section>
+
+
+<!--
+<section>
+  <h3 class="shadow3">Plan of the Defense</h3>
+  <font size="+2">
+  <ul style="text-align:left; line-height:1.6;">
+    <li class="fragment" data-fragment-index="1"><b>1. Path to deep learning </b></li>
+    <li class="fragment" data-fragment-index="2"><b>2. EBEN – Extreme Bandwidth Extension Network </b></li>
+    <li class="fragment" data-fragment-index="3"><b>3. Experiments on simulated data </b></li>
+    <li class="fragment" data-fragment-index="4"><b>4. Dataset: VibraVox</b>  
+    <li class="fragment" data-fragment-index="5"><b>5. Experiments on real data </b></li>
+    <li class="fragment" data-fragment-index="6"><b>6. Codec-based Speech enhancement </b></li>
+    <li class="fragment" data-fragment-index="7"><b>7. Real-time demo</b></li>
+    <li class="fragment" data-fragment-index="8"><b>8. Conclusion & Perspectives</b></li>
+  </ul>
+  </font>
+</section>
+-->
+
+
+			</section>
+
+
+
+
+        <! ----------------------------------------------------------------------------------------------------------------------------------------->
+        <! ---------------------------------------------------------Recap---------------------------------------------------------------------------->
+        <! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+
+      <section name="Path to DL ">
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+          <h2 class="shadow3"> Path to Deep Learning </h2>
+        </section>
+
+
+
+<section>
+  <style>
+    :root{
+      /* ===============================
+         LAYOUT KNOBS (tweak these first)
+         =============================== */
+
+      --splitX: 12vw;        /* Horizontal separation of "Signal proc" vs "Deep learning"
+                               Smaller → closer together, Larger → farther apart */
+
+      --dl-child-y: 30px;    /* Vertical offset (down) of Discriminative/Generative inside DL bubble */
+      --dl-child-dx: 60px;   /* Half of the horizontal spacing between Disc and Gen centers
+                               Smaller → more overlap, Larger → less overlap */
+
+      /* Position adjustments for GAN (from the midpoint of Disc & Gen) */
+      --gan-dx: 0px;         /* Move GAN left/right (negative = left, positive = right) */
+      --gan-dy: 0px;         /* Move GAN up/down (negative = up,   positive = down) */
+
+      /* ===============================
+         SIZES OF THE BUBBLES
+         =============================== */
+      --one-w: 50vw; --one-h: 52vh;  /* Big ellipse (first bubble) */
+      --main: 310px;                 /* "Signal processing–based" bubble diameter */
+      --dl: 310px;                   /* "Deep learning–based" bubble diameter */
+      --small: 145px;                /* Disc & Gen bubble diameters */
+    }
+
+    /* Stage = container for everything on this slide */
+    .stage{ position:relative; height:62vh; width:100%; overflow:visible; }
+
+    /* ========== Generic bubble style ========== */
+    .bubble{
+      position:absolute; display:grid; place-items:center;
+      text-align:center; border-radius:50%;
+      border:3px solid currentColor; background:transparent;
+      font-weight:700; line-height:1.2;
+    }
+
+    /* Helper class for centering in stage */
+    .at-center{ top:50%; left:50%; transform:translate(-50%,-50%); }
+
+    /* Big ellipse (step 0) */
+    .bubble.one{
+      width:var(--one-w); height:var(--one-h);
+      border-radius:60%/60%;  /* elliptical shape */
+      font-size:1.1rem;
+    }
+
+    /* "Signal processing–based" bubble */
+    .bubble.main{ width:var(--main); height:var(--main); font-size:1.05rem; }
+
+    /* "Deep learning–based" bubble */
+    .bubble.dl{ width:var(--dl); height:var(--dl); font-size:1.05rem; }
+
+    /* Discriminative & Generative bubbles */
+    .bubble.small{
+      width:var(--small); height:var(--small);
+      font-size:0.9rem; border-width:2px;
+      background:rgba(255,255,255,0.9); /* keep text visible inside DL */
+    }
+
+    /* Titles pinned to the top inside SP/DL */
+    .inner{ position:relative; width:100%; height:100%; }
+    .label-top{
+      position:absolute; top:12px; left:50%;
+      transform:translateX(-50%); text-align:center;
+      pointer-events:none;
+    }
+
+    /* ========== ANIMATIONS for circles ========== */
+
+    /* SP bubble flies left */
+    @keyframes toLeft  {
+      from{transform:translate(-50%,-50%);}
+      to  {transform:translate(calc(-50% - var(--splitX)),-50%);}
+    }
+    /* DL bubble flies right */
+    @keyframes toRight {
+      from{transform:translate(-50%,-50%);}
+      to  {transform:translate(calc(-50% + var(--splitX)),-50%);}
+    }
+
+    /* Discriminative bubble (inside DL) */
+    @keyframes toDLleft  {
+      from{transform:translate(-50%,-50%);}
+      to  {transform:translate(calc(-50% + var(--splitX) - var(--dl-child-dx)),
+                               calc(-50% + var(--dl-child-y)));}
+    }
+
+    /* Generative bubble (inside DL) */
+    @keyframes toDLright {
+      from{transform:translate(-50%,-50%);}
+      to  {transform:translate(calc(-50% + var(--splitX) + var(--dl-child-dx)),
+                               calc(-50% + var(--dl-child-y)));}
+    }
+
+    /* GAN text label (intersection point + optional dx/dy nudges) */
+    @keyframes toGAN {
+      from{transform:translate(-50%,-50%);}
+      to  {transform:translate(calc(-50% + var(--splitX) + var(--gan-dx)),
+                               calc(-50% + var(--dl-child-y) + var(--gan-dy)));}
+    }
+
+    /* Trigger animations when fragments become visible */
+    .move-left.fragment.visible     { animation: toLeft    650ms ease forwards; }
+    .move-right.fragment.visible    { animation: toRight   650ms ease forwards; }
+    .move-dl-left.fragment.visible  { animation: toDLleft  700ms ease forwards; }
+    .move-dl-right.fragment.visible { animation: toDLright 700ms ease forwards; }
+    .move-gan.fragment.visible      { animation: toGAN     700ms ease forwards; }
+
+    /* ========== Approach labels (regressive, diffusion, GAN) ========== */
+    .approach{
+      position:absolute;   /* positioned absolutely within stage */
+      top:50%; left:50%;   /* start from the stage center */
+      transform:translate(-50%,-50%);
+      font-weight:500; font-size:0.75rem; font-style:italic; opacity:.95;
+      white-space:nowrap; text-align:center;
+    }
+
+    /* Motion for regressive → inside Discriminative */
+    @keyframes toReg {
+      from{transform:translate(-50%,-50%);}
+      to  {transform:translate(calc(-50% + var(--splitX) - var(--dl-child-dx)),
+                               calc(-50% + var(--dl-child-y) - 30px));}
+    }
+
+    /* Motion for diffusion → inside Generative */
+    @keyframes toDiff{
+      from{transform:translate(-50%,-50%);}
+      to  {transform:translate(calc(-50% + var(--splitX) + var(--dl-child-dx)),
+                               calc(-50% + var(--dl-child-y) - 30px));}
+    }
+
+    .move-reg.fragment.visible  { animation: toReg  700ms ease forwards; }
+    .move-diff.fragment.visible { animation: toDiff 700ms ease forwards; }
+
+    h4{ margin-bottom:.6em; font-size:1.2rem; }
+
+    /* Grayed out look */
+.bubble.gray {
+  color: #aaa;                  /* border + text color */
+  border-color: #aaa !important;
+  opacity: 0.5;                 /* make the whole bubble faint */
+}
+
+/* Dimmed/“not the chosen option” look */
+.bubble.dim {
+  color:#555;                     /* text & border color */
+  border-color:#555;
+  border-style:dashed;            /* dashed outline */
+  /* subtle hatch inside the circle */
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(0,0,0,.08) 0 8px,      /* 8px hatch stripe */
+      transparent 8px 16px),
+    rgba(0,0,0,.03);              /* slight gray wash */
+  opacity:.85;                    /* a bit fainter */
+}
+
+/* (optional) smoother appearance/disappearance */
+.fragment.fade-out { transition: opacity .35s ease; }
+
+/* Place the bubble directly at its left position */
+.left-fixed {
+  transform: translate(calc(-50% - var(--splitX)),-50%) !important;
+}
+
+
+
+ 
+
+  </style>
+
+  <h4>Families of Speech Enhancement Algorithms</h4>
+
+  <div class="stage">
+    <!-- STEP 0: Big ellipse only -->
+    <div class="bubble one at-center fragment" data-fragment-index="0">
+      <div>Speech <br> enhancement<br>algorithm</div>
+    </div>
+
+  <div class="bubble main at-center move-left fragment fade-in-then-out" data-fragment-index="1">
+    <div class="inner"><div class="label-top">Signal <br> processing <br> based</div></div>
+  </div>
+
+  <div class="bubble main at-center dim left-fixed fragment" data-fragment-index="2">
+    <div class="inner"><div class="label-top">Signal <br> processing <br> based</div></div>
+  </div>
+
+    <div class="bubble dl at-center move-right fragment" data-fragment-index="1">
+      <div class="inner"><div class="label-top">Deep <br> learning <br> based</div></div>
+    </div>
+
+
+      <div class="bubble dl at-center move-right fragment" data-fragment-index="1">
+      <div class="inner"><div class="label-top">Deep <br> learning <br> based</div></div>
+    </div>
+
+
+
+
+    <!-- STEP 2: Discriminative & Generative inside DL -->
+    <div class="bubble small at-center move-dl-left  fragment" data-fragment-index="3">
+      <div>Discriminative</div>
+    </div>
+    <div class="bubble small at-center move-dl-right fragment" data-fragment-index="3">
+      <div>Generative</div>
+    </div>
+
+    <!-- STEP 3: Approaches fly out from center -->
+    <div class="approach at-center move-reg  fragment" data-fragment-index="4">regressive</div>
+    <div class="approach at-center move-diff fragment" data-fragment-index="4">diffusion</div>
+    <div class="approach at-center move-gan  fragment" data-fragment-index="4">GAN</div>
+  </div>
+</section>
+
+<section>
+  <br>
+  <h5> Difference between discriminative and generative training </h5>
+  <style>
+   @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+    .hand-drawn-text { font-family: 'Caveat', cursive; font-weight: 400; }
+    /* Small helper to draw an "X" cross marker centered at (x,y) via <use> */
+    svg defs path#cross-shape { vector-effect: non-scaling-stroke; }
+  </style>
+
+  <svg viewBox="0 0 800 600" style="width: 70vmin; height: 70vmin; margin-top:-100px;">
+    <defs>
+      <marker id="arrow-green-dark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#2ecc71" />
+      </marker>
+      <marker id="arrow-red-dark" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#e74c3c" />
+      </marker>
+
+  <text id="cross-shape"
+        x="0" y="0"
+        font-size="18"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        fill="black"
+        font-family="'Caveat', cursive"
+        font-weight="400">y</text>
+
+
+
+      <path id="custom-smooth-shape" d="
+        M 150,250
+        C 170,400 210,500 350,400
+        C 150,400 170,150 400,230
+        C 350,100 120,90 150,250
+        Z"
+        stroke="rgba(0,0,0,0.3)"
+        stroke-dasharray="8,8"
+        stroke-width="2"
+        fill="none" />
+    </defs>
+
+    <g class="hand-drawn-text" fill="black">
+      <text x="680" y="160" font-size="48">ℝ</text>
+      <text x="715" y="150" font-size="32">T</text>
+    </g>
+
+    <g class="fragment" data-fragment-index="1">
+      <use href="#custom-smooth-shape" />
+      <text x="250" y="110" fill="black" font-size="24" class="hand-drawn-text">potential clean speech</text>
+    </g>
+
+    <g class="fragment" data-fragment-index="1">
+      <use href="#custom-smooth-shape" />
+      <text x="120" y="130" fill="black" font-size="24" class="hand-drawn-text">Y|x</text>
+    </g>
+
+
+    <g id="x-point" class="fragment hand-drawn-text" data-fragment-index="0">
+      <script type="application/ecmascript"><![CDATA[
+        var X_POS = { cx: 700, cy: 350 }; // position of corrupted datapoint
+      ]]></script>
+
+      <text id="x-label" x="700" y="350" fill="black" font-size="32">x</text>
+      <text x="650" y="300" fill="black" font-size="24" class="hand-drawn-text">corrupted speech</text>
+
+      <script type="application/ecmascript"><![CDATA[
+        (function(){
+          var label = document.getElementById('x-label');
+          label.setAttribute('x', X_POS.cx);
+          label.setAttribute('y', X_POS.cy);
+        })();
+      ]]></script>
+<g class="fragment" data-fragment-index="6" id="extra-loss-labels">
+  <!-- ℒrec (green) — tweak x/y here -->
+  <g id="extra-Lrec" data-note="adjust x/y" transform="translate(80,480)">
+    <text fill="#2ecc71" font-size="48">ℒ</text>
+    <text x="28" y="4" fill="#2ecc71" font-size="32">rec</text>
+  </g>
+
+  <!-- ℒadv (red) — tweak x/y here -->
+  <g id="extra-Ladv" data-note="adjust x/y" transform="translate(0,500)">
+    <text fill="#e74c3c" font-size="48">ℒ</text>
+    <text x="28" y="4" fill="#e74c3c" font-size="32">adv</text>
+  </g>
+
+</g>
+
+    </g>
+
+    <g id="points-layer" class="fragment" data-fragment-index="1"></g>    <g id="mean-layer"    class="fragment hand-drawn-text" data-fragment-index="3"></g>  <g id="rec-layer"     class="fragment hand-drawn-text" data-fragment-index="4"></g>  <g id="adv-layer"     class="fragment hand-drawn-text" data-fragment-index="5"></g>  <script type="application/ecmascript"><![CDATA[
+      /* ============================================================
+         HOW TO POSITION YOUR DATA POINTS
+         ------------------------------------------------------------
+         Edit POINTS ([[x,y], ...]); choose TARGET_A / TARGET_B for red arrows.
+         ============================================================ */
+
+      // ▼▼ Your clean data points ▼▼
+      var POINTS = [
+        [320,200],
+        [230,165],
+        [290,170],
+        [180,170],
+        [230,200],
+        [190,240],
+        [175,300],
+        [190,350],
+        [210,400],
+        [285,425],
+        [260,410],
+        [300,420]
+      ];
+
+      // ▼▼ Red arrows target indices (0-based) ▼▼
+      var TARGET_A = 0;
+      var TARGET_B = 9;
+
+      // --- Layers ---
+      var pointsLayer  = document.getElementById('points-layer');
+      var meanLayer    = document.getElementById('mean-layer');
+      var recLayer     = document.getElementById('rec-layer');
+      var advLayer     = document.getElementById('adv-layer');
+
+      function drawPoints() {
+        pointsLayer.innerHTML = '';
+        POINTS.forEach(function(p){
+          var g = document.createElementNS('http://www.w3.org/2000/svg','g');
+          g.setAttribute('transform', `translate(${p[0]},${p[1]})`);
+          var use = document.createElementNS('http://www.w3.org/2000/svg','use');
+          use.setAttributeNS('http://www.w3.org/1999/xlink','href','#cross-shape');
+          use.setAttribute('stroke','black');
+          use.setAttribute('stroke-width','1');
+          pointsLayer.appendChild(g);
+          g.appendChild(use);
+        });
+      }
+
+      function meanXY(arr){
+        var sx=0, sy=0;
+        for (var i=0;i<arr.length;i++){ sx+=arr[i][0]; sy+=arr[i][1]; }
+        return [sx/arr.length, sy/arr.length];
+      }
+
+      function drawMean() {
+        meanLayer.innerHTML = '';
+        var mu = meanXY(POINTS);
+
+        // === Mean symbol: '°' centered at (mu.x, mu.y) ===
+        var deg = document.createElementNS('http://www.w3.org/2000/svg','text');
+        deg.setAttribute('x', mu[0] - 7);
+        deg.setAttribute('y', mu[1] + 10);
+        deg.setAttribute('fill','black');
+        deg.setAttribute('font-size','30');
+        deg.setAttribute('text-anchor','middle');
+        deg.setAttribute('dominant-baseline','middle');
+        deg.textContent = '°';
+        meanLayer.appendChild(deg);
+
+        // Label E[Y|x] near the mean (reverted to original font behavior)
+        var label = document.createElementNS('http://www.w3.org/2000/svg','text');
+        label.setAttribute('x', mu[0] +23);
+        label.setAttribute('y', mu[1] - 10);
+        label.setAttribute('fill','black');
+        label.setAttribute('font-size','36');
+        label.textContent = 'E[Y|x]';
+        meanLayer.appendChild(label);
+
+        return mu;
+      }
+
+      function drawRec(mu){
+        recLayer.innerHTML = '';
+        // Arrow from ~ to mean (green)
+        var x = (typeof X_POS !== 'undefined') ? X_POS : {cx:650, cy:350};
+        var arr = document.createElementNS('http://www.w3.org/2000/svg','path');
+        arr.setAttribute('d', `M ${x.cx} ${x.cy} L ${mu[0]} ${mu[1]}`);
+        arr.setAttribute('stroke','#2ecc71'); arr.setAttribute('stroke-width','3');
+        arr.setAttribute('fill','none'); arr.setAttribute('marker-end','url(#arrow-green-dark)');
+        recLayer.appendChild(arr);
+
+        // Label L_rec near midpoint
+        var mx = (x.cx + mu[0])/2, my = (x.cy + mu[1])/2;
+        var L  = document.createElementNS('http://www.w3.org/2000/svg','text');
+        L.setAttribute('x', mx - 20); L.setAttribute('y', my - 12);
+        L.setAttribute('fill','#2ecc71'); L.setAttribute('font-size','48'); L.textContent = 'ℒ';
+        var sub= document.createElementNS('http://www.w3.org/2000/svg','text');
+        sub.setAttribute('x', mx + 8); sub.setAttribute('y', my - 8);
+        sub.setAttribute('fill','#2ecc71'); sub.setAttribute('font-size','32'); sub.textContent = 'rec';
+        recLayer.appendChild(L); recLayer.appendChild(sub);
+      }
+
+      function quadPath(x0,y0, xc,yc, x1,y1){
+        return `M ${x0} ${y0} Q ${xc} ${yc} ${x1} ${y1}`;
+      }
+
+      function drawAdv(){
+        advLayer.innerHTML = '';
+        var x = (typeof X_POS !== 'undefined') ? X_POS : {cx:650, cy:350};
+        var pA = POINTS[Math.max(0, Math.min(POINTS.length-1, TARGET_A))];
+        var pB = POINTS[Math.max(0, Math.min(POINTS.length-1, TARGET_B))];
+
+        var top = document.createElementNS('http://www.w3.org/2000/svg','path');
+        var bot = document.createElementNS('http://www.w3.org/2000/svg','path');
+
+        var cAx = (x.cx + pA[0])/2 - 120, cAy = (x.cy + pA[1])/2 - 160;
+        var cBx = (x.cx + pB[0])/2 - 120, cBy = (x.cy + pB[1])/2 + 160;
+
+        top.setAttribute('d', quadPath(x.cx, x.cy, cAx, cAy, pA[0], pA[1]));
+        bot.setAttribute('d', quadPath(x.cx, x.cy, cBx, cBy, pB[0], pB[1]));
+
+        [top,bot].forEach(function(el){
+          el.setAttribute('stroke','#e74c3c'); el.setAttribute('stroke-width','3');
+          el.setAttribute('fill','none'); el.setAttribute('marker-end','url(#arrow-red-dark)');
+          advLayer.appendChild(el);
+        });
+
+        // Label L_adv
+        var L  = document.createElementNS('http://www.w3.org/2000/svg','text');
+        L.setAttribute('x', (x.cx + pB[0])/2 - 40);
+        L.setAttribute('y', (x.cy + pB[1])/2 + 120);
+        L.setAttribute('fill','#e74c3c'); L.setAttribute('font-size','48'); L.textContent = 'ℒ';
+        var sub= document.createElementNS('http://www.w3.org/2000/svg','text');
+        sub.setAttribute('x', (x.cx + pB[0])/2 - 10);
+        sub.setAttribute('y', (x.cy + pB[1])/2 + 125);
+        sub.setAttribute('fill','#e74c3c'); sub.setAttribute('font-size','32'); sub.textContent = 'adv';
+        advLayer.appendChild(L); advLayer.appendChild(sub);
+      }
+
+      // Initial draw
+      drawPoints();
+      var mu = drawMean();
+      drawRec(mu);
+      drawAdv();
+
+      window.addEventListener('resize', function(){  
+        drawPoints(); var mu = drawMean(); drawRec(mu); drawAdv();
+      });
+    ]]></script>
+  </svg>
+
+        <img
+      src="images/img/scale.png"
+      class="overlay-img fragment plain"
+      data-fragment-index="6"
+      style="--top: 70%; --left: 18%; --w: 160px; --rot: -8deg;"
+      alt=""
+    />
+
+</section>
+
+
+<section data-auto-animate>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+    .hand { font-family: "Caveat", cursive; font-weight: 700; }
+    .blk  { stroke:#111; fill:none; stroke-width:3; stroke-linecap:round; stroke-linejoin:round; }
+    .stage{ width: 90vmin; height: calc(90vmin * 9/16); display:block; margin: 0 auto; }
+    .greenS { stroke:#27ae60; fill:none; }
+    .greenT { fill:#27ae60; }
+    .redS { stroke:#e74c3c; fill:none; }
+    .redT { fill:#e74c3c; }
+  </style>
+
+  <h4>Generative Adversarial Networks </h4>
+
+  <svg class="stage" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0 0 L10 5 L0 10 Z" fill="#111"/>
+      </marker>
+      <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 Z" fill="#27ae60"/>
+      </marker>
+      <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 Z" fill="#e74c3c"/>
+      </marker>
+    </defs>
+
+    <!-- ===== Base: x -> [ f ] -> ŷ ===== -->
+    <text x="70" y="170" class="hand" font-size="64" fill="#111">x</text>
+    <path class="blk" d="M 120 160 L 250 160" marker-end="url(#arrow)"/>
+
+    <text x="250" y="30" class="hand" font-size="48">Generator</text>
+
+    <rect x="255" y="85" rx="22" ry="22" width="150" height="150" class="blk"/>
+    <text x="304" y="164" class="hand" font-size="60" fill="#111">g</text>
+    <text x="330" y="190" class="hand" font-size="40" fill="#111">θ</text>
+
+    <path class="blk" d="M 405 160 L 535 160" marker-end="url(#arrow)"/>
+    <text x="565" y="170" class="hand" font-size="64" fill="#111">ŷ</text>
+
+    <!-- ===== Fragment 1: show y ===== -->
+    <g class="fragment" data-fragment-index="1">
+      <text x="565" y="270" class="hand" font-size="64" fill="#111">y</text>
+    </g>
+
+    <!-- ===== Fragment 2: ℒ_rec smooth arrow ===== -->
+    <g class="fragment" data-fragment-index="2">
+      <!-- Incoming smooth curves -->
+      <path class="greenS" stroke-width="3" d="M 600 170 C 740 120 820 120 880 120" />
+      <path class="greenS" stroke-width="3" d="M 600 265 C 740 250 820 120 880 120" />
+
+      <!-- Continuous outgoing line with arrowhead at the extreme right -->
+      <path class="greenS" stroke-width="3" d="M 880 120 L 1050 120" marker-end="url(#arrow-green)"/>
+
+      <!-- ℒ_rec label -->
+      <text x="1070" y="100" class="hand greenT" font-size="64">ℒ</text>
+      <text x="1115" y="105" class="hand greenT" font-size="40">rec</text>
+      <path class="greenS" stroke-width="3" d="M 330 100 L 380 50" marker-end="url(#arrow-green)"/>
+    </g>
+
+    <!-- ===== Fragment 3: Discriminator (black arrows) ===== -->
+    <g class="fragment" data-fragment-index="3">
+      <text x="760" y="330" class="hand" font-size="48">Discriminator</text>
+      <rect x="800" y="380" rx="22" ry="22" width="150" height="150" class="blk"/>
+      <text x="850" y="470" class="hand" font-size="60">d</text>
+      <text x="880" y="480" class="hand" font-size="36">𝜙</text>
+
+      <path class="blk" d="M 950 455 L 1070 455" marker-end="url(#arrow)"/>
+      <text x="1110" y="465" class="hand" font-size="50">[Fake, Real]</text>
+
+      <path d="M 710 410 Q 670 455 710 490" class="blk" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+      <path class="blk" stroke-width="3" d="M 600 170 L 700 170 L 700 390" />
+      <path class="blk" stroke-width="3" d="M 580 300 L 580 520 L 700 520" />
+
+      <circle cx="700" cy="390" r="5" fill="#111"/>
+      <circle cx="730" cy="455" r="5" fill="#111"/>
+      <circle cx="700" cy="520" r="5" fill="#111"/>
+
+      <path class="blk" stroke-width="3" d="M 730 455 L 800 455" marker-end="url(#arrow)"/>
+    </g>
+
+    <!-- ===== Fragment 4: ℒ_adv-dis ===== -->
+    <g class="fragment" data-fragment-index="4">
+      <path class="redS" stroke-width="3" d="M 1215 485 L 1150 570" marker-end="url(#arrow-red)"/>
+      <text x="1080" y="620" class="hand redT" font-size="64">ℒ</text>
+      <text x="1090" y="655" class="hand redT" font-size="40">adv-dis</text>
+      <path class="redS" stroke-width="3" d="M 900 400 L 950 350" marker-end="url(#arrow-red)"/>
+    </g>
+
+    <!-- ===== Fragment 5: ℒ_adv-gen ===== -->
+    <g class="fragment" data-fragment-index="5">
+      <path class="redS" stroke-width="3" d="M 1215 485 L 1280 570" marker-end="url(#arrow-red)"/>
+      <text x="1280" y="620" class="hand redT" font-size="64">ℒ</text>
+      <text x="1290" y="655" class="hand redT" font-size="40">adv-gen</text>
+      <path class="redS" stroke-width="3" d="M 300 100 L 350 50" marker-end="url(#arrow-red)"/>
+    </g>
+  </svg>
+
+</section>
+
+
+<section>
+  <h3 class="shadow3"> <small> Intuition on building $g_{\theta}$ and $d_{\phi}$ for BCM enhancement </small>  </h3>
+  <block_important>
+    <small>
+      <h6 class="shadow2">Building the generator $g_{\theta}$</h6>
+      <p style="font-size:0.9em; margin-top:-5px; color:gray;">
+      </p>
+      <hr style="margin:15px 0;">
+      <ul style="list-style-type: disc; padding-left: 20px; line-height: 2em; font-size:0.85em;">
+        <li class="fragment" data-fragment-index="0">
+          Focus on low-frequency cues
+        </li>
+        <li class="fragment" data-fragment-index="1">
+           Leverage the structure of x to construct ŷ
+        </li>
+        <li class="fragment" data-fragment-index="2">
+          Fast, lightweight and real-time compatible
+        </li>
+        <li class="fragment" data-fragment-index="5">
+          Let the gradient flow
+        </li>
+      </ul>
+    </small>
+  </block_important>
+
+    <block_important>
+    <small>
+      <h6 class="shadow2">Building the discriminator $d_{\phi}$</h6>
+      <p style="font-size:0.9em; margin-top:-5px; color:gray;">
+      </p>
+      <hr style="margin:15px 0;">
+      <ul style="list-style-type: disc; padding-left: 20px; line-height: 2em; font-size:0.85em;">
+        <li class="fragment" data-fragment-index="3">
+          Capture hierarchical patterns in audio
+        </li>
+        <li class="fragment" data-fragment-index="4">
+          Cover all frequency ranges
+        </li>
+        <li class="fragment" data-fragment-index="5">
+          Let the gradient flow
+        </li>
+      </ul>
+    </small>
+  </block_important>
+
+</section>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+      </section>
+
+
+
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<! ---------------------------------------------------------EBEN---------------------------------------------------------------------------->
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+			<section name="EBEN">
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+					<h2 class="shadow3"> EBEN: Extreme Bandwidth Extension Network </h2>
+				</section>
+
+
+				<section>
+					<h4 class="shadow3"> Pseudo Quadrature Mirror Filters pipeline </h4>
+					<figure>
+						<div class="r-stack">
+						  <img class="plain fragment fade-out" data-fragment-index="0" data-src="images/tikz/pqmf00.png">
+						  <img class="plain fragment current-visible" data-fragment-index="0" data-src="images/tikz/pqmf1.png">
+						  <img class="plain fragment" data-src="images/tikz/pqmf2.png">
+						</div>
+						<figcaption> PQMF analysis and synthesis</figcaption>
+					</figure>
+				</section>
+
+				<section>
+					<h4 class="shadow3"> Pseudo Quadrature Mirror Filters bank </h4>
+					<figure>
+						<img data-src="images/tikz/bode.png" alt="" class="plain">
+						<figcaption>Frequency response of a PQMF filter bank</figcaption>
+					</figure>
+				</section>
+
+
+
+				<section>
+					<div style="position:absolute;top:-10%;left:-20%;width:140%; height: 100%" > 
+					<figure>
+						<img data-src="images/tikz/archi-gen.png" alt="" class="plain">
+						<figcaption>EBEN Generator</figcaption>
+					</figure>
+					</div>
+				</section>
+
+
+    <section>
+      <div style="position:absolute;top:-10%;left:-20%;width:140%; height: 100%">
+        <figure class="hover-figure" style="position: relative; display: inline-block;">
+          <!-- Base image -->
+          <img data-src="images/tikz/archi-all.png" alt="" class="plain">
+
+          <!-- ======================= HOVER ZONES ======================= -->
+          <!-- Encoder -->
+          <div class="hover-hotspot enc" style="
+            position: absolute;
+            top: 40%; left: 10%;
+            width: 250px; height: 120px;
+            cursor: pointer;
+            /* DEBUG:
+            outline: 2px dashed rgba(255,0,0,.6);
+            background: rgba(255,0,0,.08);
+             */
+
+          "></div>
+          <img src="images/img/enc_white.png" alt="Encoder" class="hover-image"
+               style="position:absolute; top:18%; left:5%; width:850px; z-index:5; pointer-events:none;">
+
+          <!-- Decoder -->
+          <div class="hover-hotspot dec" style="
+            position: absolute;
+            top: 40%; left: 42%;
+            width: 250px; height: 120px;
+            cursor: pointer;
+            /* DEBUG:
+            outline: 2px dashed rgba(0,255,0,.6);
+            background: rgba(0,255,0,.08);
+             */
+
+          "></div>
+          <img src="images/img/dec_white.png" alt="Decoder" class="hover-image"
+               style="position:absolute; top:18%; left:30%; width:850px; z-index:5; pointer-events:none;">
+
+          <!-- MelGAN -->
+          <div class="hover-hotspot melgan" style="
+            position: absolute;
+            top: 25%; left: 82%;
+            width: 160px; height: 70px;
+            cursor: pointer;
+            /* DEBUG:
+            outline: 2px dashed rgba(0,0,255,.6);
+            background: rgba(0,0,255,.08);
+             */
+
+          "></div>
+          <img src="images/img/melgan_white.png" alt="MelGAN" class="hover-image"
+               style="position:absolute; top:5%; left:60%; width:450px; z-index:5; pointer-events:none;">
+
+          <!-- Discriminator -->
+          <div class="hover-hotspot dis" style="
+            position: absolute;
+            top: 40%; left: 82%;
+            width: 160px; height: 230px;
+            cursor: pointer;
+            /* DEBUG:
+            outline: 2px dashed rgba(255,165,0,.6);
+            background: rgba(255,165,0,.08);
+             */
+            
+          "></div>
+          <img src="images/img/dis_white.png" alt="Discriminator" class="hover-image"
+               style="position:absolute; top:17%; left:60%; width:450px; z-index:5; pointer-events:none;">
+          <!-- =========================================================== -->
+
+          <figcaption>EBEN overview</figcaption>
+        </figure>
+      </div>
+
+      <style>
+        /* Hidden by default, animated fade-in */
+        .hover-image { opacity: 0; transition: opacity .15s ease; }
+
+        /* Show the image when hovering its hotspot */
+        .hover-hotspot.enc:hover   + .hover-image[alt="Encoder"]       { opacity: 1; }
+        .hover-hotspot.dec:hover   + .hover-image[alt="Decoder"]       { opacity: 1; }
+        .hover-hotspot.melgan:hover+ .hover-image[alt="MelGAN"]        { opacity: 1; }
+        .hover-hotspot.dis:hover   + .hover-image[alt="Discriminator"] { opacity: 1; }
+      </style>
+    </section>
+
+      <section>
+        <h4 class="shadow3">Loss Functions</h4>
+
+        <p style="font-size: 40%;">
+          \[
+          \mathcal{L_D}= \mathbb{E}_y\left[ \frac{1}{K} \sum_{k \in [0,3]} \frac{1}{T_{k,L_k}} \sum_t \max(0,1-D_{k,t}(y))\right] 
+          + \mathbb{E}_x\left[ \frac{1}{K} \sum_{k \in [0,3]} \frac{1}{T_{k,L_k}} \sum_t \max(0,1+D_{k,t}(G(x)))\right]
+          \]
+          (1) Discriminator loss
+        </p>
+
+        <p style="font-size: 40%;">
+          \[
+          \mathcal{L}_\mathcal{G}^{adv}= \mathbb{E}_x\left[ \frac{1}{K} \sum_{k \in [0,3]} \frac{1}{T_{k,L_k}} \sum_t \max(0,1-D_{k,t}(G(x)))\right]
+          \]
+          (2) Generator adversarial loss
+        </p>
+
+        <p style="font-size: 40%;">
+          \[
+          \mathcal{L}_\mathcal{G}^{feat}= \mathbb{E}_x \left[ \frac{1}{K} \sum_{\substack{k \in [0,3] \\ l \in [1,L_k [ }} 
+          \frac{1}{T_{k,l}F_{k,l}} \sum_t \frac{\left\| D_{k,t}^{(l)}(y)-D_{k,t}^{(l)}(G(x)) \right\|_{L_1}}{ \mathrm{mean}(D_{k,t}^{(l)}(G(x)))}\right]
+          \]
+          (3) Generator feature loss
+        </p>
+
+        <p style="font-size: 40%;">
+          \[
+          \mathcal{L}_\mathcal{G}^{spec} = \mathbb{E}_{x, y} \left[ \sum_{\substack{f_r \in \{512, 1024, 2048\} \\ h_r \in \{50, 120, 240\} \\ w_r \in \{240, 600, 1200\}}} 
+          \left\| \Psi\left(\mathrm{STFT}_{f_r, h_r, w_r}(y)\right)  -  \Psi\left(\mathrm{STFT}_{f_r, h_r, w_r}(G(x))\right) \right\|_{L_1} \right]
+          \]
+          (4) Generator spectral loss
+        </p>
+      </section>
+
+
+
+
+        <section>
+          <h4 class="shadow3"> What about DATA ? </h4>
+        </section>
+
+  <section>
+
+    <block_important>
+      <h6 class="shadow2">Deep learning triplet</h6>
+
+      <!-- Step 1: show network and loss side by side -->
+      <div style="display: flex; justify-content: center; gap: 100px; margin-top: 20px;">
+        <span>
+          <small>
+          \[
+          \begin{aligned}
+          \textrm{Generator:} \\
+          g_{\theta}: \mathbb{R}^T \times \mathbb{R}^P \rightarrow \mathbb{R}^T \\
+          x,\theta \mapsto \hat{y}
+          \end{aligned}
+          \]
+          </small>
+        </span>
+
+        <span>
+          <small>
+          \[
+          \begin{aligned}
+          \textrm{Loss function:} \\
+          \mathcal{L}(x,y,g_{\theta},d_{\phi})
+          \end{aligned}
+          \]
+          </small>
+        </span>
+      </div>
+
+      <!-- Step 2: show dataset at the bottom -->
+      <div class="fragment" data-fragment-index="1" style="text-align:center; margin-top: 40px;">
+        <small>
+        \[
+        \begin{aligned}
+        \textrm{Dataset:} \\
+        (x, y) \in \mathcal{X} \times \mathcal{Y}
+        \end{aligned}
+        \]
+        </small>
+      </div>
+    </block_important>
+  </section>
+</section>
+
+
+  <section name="Simulation">
+
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+					<h3 class="shadow3">Simulated data</h3>
+				</section>
+
+        <section>
+        <br>
+        <h4>Degradation</h4>
+        <br>
+        <div style="text-align: center; padding-top: 0em;">
+          <div style="display: inline-block; transform: scale(0.75); transform-origin: top center;">
+            <iframe
+              data-src="images/plotly/degradation.html"
+              width="1000"
+              height="600"
+              frameborder="0"
+              style="border: none;"
+              data-preload
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+
+
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h4> Simulation process</h4>
+
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:95%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/spec_eben_ref.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+                  <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/spec_eben_inear.html" 
+                  style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+                 <!--  <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/spec_eben_enhanced.html" 
+                  style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>  -->
+	            	</div>
+            	</block_important>
+
+	            	<audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/eben_ref.wav" controls></audio>
+	            	<audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/eben_inear.wav" controls></audio>
+	           <!-- <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/eben_enhanced.wav" controls></audio>  -->
+				</section>
+					
+        
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h3>Qualitative results: comparison</h3>
+                	<block_important class="stretch">
+                    	<iframe data-src="images/plotly/multi.html" style="width:100%; height: 95%" data-preload></iframe>
+                	</block_important>
+				</section>
+        
+					
+
+				<section>
+					<h4 class="shadow3">Objective metrics <br> models trained and tested on <br> in-ear like Librispeech </h4>
+					<font size="+2">
+					<center>
+					<table class = 'table-fill'>
+						<thead>
+						<tr>
+							<th> Speech </th>
+              <th> Audio </th>
+							<th> eSTOI </th>
+              <th> Noresqa-MOS </th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td> Simulated In-ear </td>
+              <td> <audio src="audios/librispeech/004_inear.wav" controls style="height:24px;"></audio>   </td>
+							<td> 0.83  </td>
+              <td> 2.57  </td>
+						</tr>
+						<tr>
+							<td> Audio U-net  </td>
+              <td> <audio src="audios/librispeech/004_kuleshov.wav" controls style="height:24px;"></audio>   </td>
+							<td> 0.87  </td>
+              <td> 2.59  </td>
+						</tr>
+						<tr>
+							<td> Hifi-GAN v3  </td>
+              <td> <audio src="audios/librispeech/004_hifigan.wav" controls style="height:24px;"></audio>   </td>
+							<td> 0.78  </td>
+              <td> 3.70  </td>
+						</tr>
+
+            <tr>
+              <td> Streaming Seanet </td>
+              <td> <audio src="audios/librispeech/004_streaming.wav" controls style="height:24px;"></audio>   </td>
+              <td><b>  0.89 </b></td>
+              <td> 3.91 </td>
+            </tr>
+
+						<tr>
+							<td> Seanet  </td>
+              <td> <audio src="audios/librispeech/004_seanet.wav" controls style="height:24px;"></audio>   </td>
+							<td><b>  0.89  </b></td>
+              <td><b>  4.25 </b></td>
+						</tr>
+
+						<tr>
+							<td> EBEN (ours) </td>
+              <td> <audio src="audios/librispeech/004_eben.wav" controls style="height:24px;"></audio>   </td>
+							<td><b>  0.89  </b></td>
+              <td> 4.02  </td>
+						</tr>
+
+						</tbody>
+					</table>
+					</center>
+					</font>
+				</section>
+			
+				<section>
+					<p style="margin-bottom: 0.8em;"> </p>
+					<h4> MUSHRA comparative evaluation</h4>
+
+				<block_important class="stretch">
+	            	<div style="position:relative; width:100%; height:95%; margin:0 auto;"> 
+	            		<iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/MUSHRA_U.html" 
+	            		style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	                    <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/MUSHRA_Q.html" 
+	                    style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+	            	</div>
+            	</block_important>
+				</section>
+
+
+				<section>
+					<h4 class="shadow3">Frugality indicators </h4>
+					<font size="+2">
+					<center>
+					<table class = 'table-fill'>
+						<thead>
+						<tr>
+							<th> Speech </th>
+							<th> \[P_{gen}\]</th>
+							<th> \[P_{dis}\]</th>
+							<th> \[\tau~\textrm{(ms)}\] </th>
+							<th> \[\delta~\textrm{(MB)}\]</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td> Audio U-net  </td>
+							<td> 71.0 M </td>
+							<td> \[\emptyset\] </td>
+							<td> 37.5 </td>
+							<td> 1117.3 </td>
+						</tr>
+						<tr>
+							<td> Hifi-GAN v3  </td>
+							<td> 1.5 M  </td>
+							<td> 70.7 M  </td>
+							<td> <b> 3.1 </b></td>
+							<td> 22.2 </td>
+						</tr>
+
+
+            <tr>
+              <td> Streaming Seanet </td>
+              <td> <b>0.7 M</b>   </td>
+              <td> 56.6 M  </td>
+              <td> 7.5 </td>
+              <td> <b>10.9</b> </td>
+            </tr>
+
+						<tr>
+							<td> Seanet  </td>
+							<td> 8.3 M  </td>
+							<td> 56.6 M  </td>
+							<td> 13.1 </td>
+							<td> 89.2 </td>
+						</tr>
+
+						<tr>
+							<td> EBEN (ours) </td>
+							<td> 1.9 M   </td>
+							<td> <b>27.8 M</b>  </td>
+							<td> 4.3 </td>
+							<td> 20 </td>
+						</tr>
+
+						</tbody>
+					</table>
+					</center>
+					</font>
+				</section>
+<!--
+				<section>
+					<h3> Associated publications and communications </h3>
+					
+					<block_important>
+					<small align = left>
+						    <li> 16ème Congrès français d’acoustique de la SFA, 2022 </li>
+						    <li> <a href="https://www.youtube.com/watch?v=cRFCn2JKEsQ&t=2s">MT180 Édition 2023</a> - Finale HESAM Université </li>
+						    <li> <a href="https://github.com/jhauret/eben">EBEN GitHub repository</a> </li>
+						    <li> <a href="https://jhauret.github.io/eben/">Project page of EBEN</a> </li>
+						    <li> <a href="https://ieeexplore.ieee.org/document/10096301/"> Conference paper</a>  at ICASSP 2023 IEEE </li> 
+						    <li> <a href="https://ieeexplore.ieee.org/document/10244161"> Journal paper</a>  in IEEE Transactions on Audio, Speech, and Language Processing </li> 
+					</ul>
+					</small>
+					</block_important>
+				</section>-->
+
+
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+
+          <h2 class="shadow3"><font color="white"> Thank you for your attention </font></h2>
+          <br>
+          
+          <br>
+            <small><b> julien.hauret@lecnam.net  </b></small>
+
+          <br>
+          <br>
+
+            <div class="imgcentered">
+            <img height="60" data-src="images/img/lmssc.png" alt="" class="plain">
+            &#8195;&#8195;&#8195;
+            <img height="60" data-src="images/img/isl.png" alt="" class="plain">
+                </div>
+        </section>
+
+
+        <section>
+          <h4 class="shadow3"> What about REAL DATA ? </h4>
+        </section>
+
+
+          <section>
+            <h4 class="shadow3">Objective metrics <br> models trained on in-ear like Librispeech </h4>
+          <font size="+2">
+          <center>
+          <table class = 'table-fill'>
+            <thead>
+            <tr>
+              <th> Test set </th>
+              <th> eSTOI</th>
+              <th> Noresqa-MOS </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+             <!-- <td> Simulated In-ear </td>
+              <td> 2.42 </td>
+              <td> 8.4   </td>
+              <td> 0.83  </td>
+              <td> 2.57 </td>
+            </tr>
+            <tr>
+              <td> Real In-ear </td>
+              <td> 1.5   </td>
+              <td> -37.0 </td>
+              <td> 0.56  </td>
+              <td> 3.33  </td>
+            </tr> -->
+            <tr>
+              <td> In-domain (simulation)</td>
+              <td> 0.89  </td>
+              <td> 4.02  </td>
+            </tr>
+            <tr>
+              <td> Real signals</td>
+              <td> 0.51 </td>
+              <td> 3.82 </td>
+            </tr>
+
+            </tbody>
+          </table>
+          </center>
+          </font>
+            <br>
+  <ul style="margin-top: 25px; font-size: 0.71em;">
+    <li class="fragment" data-fragment-index="0">Enhance the simulation process</li>
+    <li class="fragment" data-fragment-index="1">Record a body-conducted speech dataset</li>
+  </ul>
+
+        </section>
+
+
+
+
+			</section>
+
+
+
+
+
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+				<! ---------------------------------------------------------Dataset---------------------------------------------------------------------------->
+				<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+		<section name="Vibravox">
+
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+				<h2 class="shadow3"> Vibravox Dataset </h2>
+			</section>
+
+<section>
+  <br>
+  <h4 class="shadow3"> Data </h4>
+
+  <div class="r-stack" style="position:relative;">
+
+    <!-- Images -->
+    <img class="fragment" src="images/img/vibravox/p3.jpg" width="270"
+         style="transform: translate(-130%, 5%) rotate(-8deg);">
+    <img class="fragment" src="images/img/vibravox/p7.jpg" width="250"
+         style="transform: translate(150%, -14%) rotate(5deg);">
+    <img class="fragment" src="images/img/vibravox/p1.jpg" width="190"
+         style="transform: translate(100%, -105%) rotate(-12deg);">
+    <img class="fragment" src="images/img/vibravox/p5.jpg" width="170"
+         style="transform: translate(-145%, -65%) rotate(30deg);">
+    <img class="fragment" src="images/img/vibravox/p2.jpg" width="170"
+         style="transform: translate(-55%, 85%) rotate(7deg);">
+    <img class="fragment" src="images/img/vibravox/p4.jpg" width="190"
+         style="transform: translate(50%, 80%) rotate(-14deg);">
+    <img class="fragment" src="images/img/vibravox/p8.jpeg" width="190"
+         style="transform: translate(140%, 70%) rotate(24deg);">
+    <img class="fragment" src="images/img/vibravox/p9.jpeg" width="150"
+         style="transform: translate(30%, -140%) rotate(3deg);">
+    <img class="fragment" src="images/img/vibravox/p10.jpeg" width="120"
+         style="transform: translate(-75%, -130%) rotate(-9deg);">
+
+    <!-- Centered overlay text -->
+      <div class="fragment"
+           style="position:absolute; top:46%; left:50%; transform:translate(-50%,-50%);
+                  font-size:1.5em; font-weight:700; text-align:center; color:black;">
+        200 participants <br>
+        45 hours
+      </div>
+
+  </div>
+</section>
+
+
+            <section>
+        <h4>Ambisonic sphere</h4>
+        <img src="images/img/sphere.jpg" alt="Example" width="500">
+      </section>
+
+
+      <section>
+      <h4 class="shadow3"> Consent form </h4>
+      <iframe src="docs/formulaire-consentement.pdf"
+              width="700"
+              height="500"
+              style="border:none;">
+      </iframe>
+    </section>
+
+
+      <section>
+        <h4>Vibravox sensors</h4>
+        <video src="videos/vibravox_sensors.mp4"
+               width="300"
+               autoplay
+               muted
+               playsinline
+               controls>
+          Your browser does not support the video tag.
+        </video>
+      </section>
+
+
+        <section>
+        <h4>Recording UI</h4>
+        <video id="myVideo"
+               src="videos/vibravox-protocol.mp4"
+               width="800"
+               autoplay
+               muted
+               playsinline
+               controls>
+          Your browser does not support the video tag.
+        </video>
+
+          <script>
+          const v = document.getElementById("myVideo");
+          v.playbackRate = 2.0;
+        </script>
+      </section>
+
+
+            <section>
+          <style>
+            /*
+              The wrapper defines the final, visible container on your slide.
+            */
+            .iframe-wrapper {
+              position: relative;
+              /* The desired final size. Let's use 750px for "a bit smaller". */
+              height: 820px; 
+              width: 100%;
+              overflow: hidden; /* This is crucial to hide the oversized parts of the iframe */
+            }
+
+            .iframe-wrapper iframe {
+              /* --- This is the key part for perfect centering --- */
+              position: absolute;
+              /* 1. Move the iframe's top-left corner to the center of the wrapper */
+              top: 45%;
+              left: 50%;
+              /* 2. Use transform to pull it back by half its own size AND scale it. */
+              /* This centers it perfectly, regardless of its dimensions. */
+              transform: translate(-50%, -50%) scale(0.79);
+              
+              /* --- Sizing for content --- */
+              /* Use fixed, oversized dimensions to ensure the content inside never needs to scroll. */
+              width: 1200px;
+              height: 1000px;
+            }
+          </style>
+
+          <div class="iframe-wrapper">
+            <iframe
+              src="https://jhauret-vibravox-viewer.hf.space?__theme=light"
+              frameborder="0"
+              loading="lazy"           
+              allow="autoplay"         
+            ></iframe>
+          </div>
+      </section>
+
+
+      <section>
+        <h4>Noise level of <code>speech-noisy</code></h4>
+        <img src="images/img/noise_level.jpg" alt="Example" width="800">
+      </section>
+
+<!--
+      <section>
+        <h4>Indicators</h4>
+        <img height="400" data-src="images/img/indicators.png" alt="" class="plain">
+      </section>
+
+      -->
+
+      <section>
+        <h4>Filtering</h4>
+        <img width="100%" data-src="images/img/filtering.png" alt="" class="plain">
+      </section>
+
+
+<!--
+			<section data-background-iframe="https://vibravox.cnam.fr/" data-background-interactive>
+
+			</section>
+-->
+
+
+			<section>
+				<br>
+			  <h4>Coherence with Airborne Microphone</h4>
+			  <div style="text-align: center; padding-top: 0em;">
+			    <div style="display: inline-block; transform: scale(0.75); transform-origin: top center;">
+			      <iframe
+			        data-src="images/plotly/coherence.en.html"
+			        width="1000"
+			        height="600"
+			        frameborder="0"
+			        style="border: none;"
+			        data-preload
+			      ></iframe>
+			    </div>
+			  </div>
+			</section>
+		</section>
+
+
+
+
+        <! ----------------------------------------------------------------------------------------------------------------------------------------->
+        <! ---------------------------------------------------------Results on Vibravox------------------------------------------------------------->
+        <! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+      <section name="Real data">
+
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+        <h2 class="shadow3"> Results on real data </h2>
+      </section>
+
+<section>
+  <h3 class="shadow3"><small> Testing of EBEN models on <br> <code>speech-clean</code> </small> </h3>
+  <font size="+1">
+  <center>
+    <table class="table-fill" 
+         style="border-collapse: collapse; border-spacing: 0; line-height: 0.8;"> <!-- adjust line-height -->
+    <thead>
+      <tr>
+        <th> Sensor </th>
+        <th> Configuration </th>
+        <th> STOI </th>
+        <th> Noresqa-MOS </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2" style="vertical-align: middle; text-align: center;">Forehead</td>
+        <td> Raw signal </td>
+        <td> 0.731 </td>
+        <td> 3.760 </td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td> EBEN (M=4, P=4, Q=4) </td>
+        <td><b>0.855</b></td>
+        <td><b>4.250</b></td>
+      </tr>
+
+      <tr>
+        <td rowspan="2" style="vertical-align: middle; text-align: center;">Soft In-ear</td>
+        <td> Raw signal </td>
+        <td> 0.752 </td>
+        <td> 3.315 </td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td> EBEN (M=4, P=2, Q=4) </td>
+        <td><b>0.868</b></td>
+        <td><b>4.331</b></td>
+      </tr>
+
+      <tr>
+        <td rowspan="2" style="vertical-align: middle; text-align: center;">Rigid In-ear</td>
+        <td> Raw signal </td>
+        <td> 0.782 </td>
+        <td> 3.392 </td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td> EBEN (M=4, P=2, Q=4) </td>
+        <td><b>0.877</b></td>
+        <td><b>4.285</b></td>
+      </tr>
+
+      <tr>
+        <td rowspan="2" style="vertical-align: middle; text-align: center;">Throat</td>
+        <td> Raw signal </td>
+        <td> 0.677 </td>
+        <td> 3.097 </td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td> EBEN (M=4, P=2, Q=4) </td>
+        <td><b>0.834</b></td>
+        <td><b>3.862</b></td>
+      </tr>
+
+      <tr>
+        <td rowspan="2" style="vertical-align: middle; text-align: center;">Temple</td>
+        <td> Raw signal </td>
+        <td> 0.602 </td>
+        <td> 2.905 </td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td> EBEN (M=4, P=1, Q=4) </td>
+        <td><b>0.763</b></td>
+        <td><b>3.632</b></td>
+      </tr>
+    </tbody>
+  </table>
+  </center>
+  </font>
+</section>
+
+
+
+
+<section>
+  <h3 class="shadow3"><small> Testing of EBEN models on <br> <code>speech-noisy</code> </small></h3>
+  <font size="-0">
+  <center>
+    <table class="table-fill" 
+         style="border-collapse: collapse; border-spacing: 0; line-height: 0.8;"> <!-- adjust line-height -->
+    <thead>
+      <tr>
+        <th style="text-align:center;">Sensor</th>
+        <th>Initialization</th>
+        <th>Squim-STOI</th>
+        <th>Noresqa-MOS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Forehead -->
+      <tr>
+        <td rowspan="4" style="vertical-align: middle; text-align: center;">Forehead</td>
+        <td>Raw signal</td>
+        <td>0.901</td>
+        <td>3.85</td>
+      </tr>
+      <tr>
+        <td>Tested from pretrained<sup>*</sup></td>
+        <td>0.949</td>
+        <td>4.08</td>
+      </tr>
+      <tr>
+        <td>Trained<sup>†</sup> from scratch</td>
+        <td>0.949</td>
+        <td>4.14</td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td>Trained<sup>†</sup> from pretrained<sup>*</sup></td>
+        <td><b>0.971</b></td>
+        <td><b>4.20</b></td>
+      </tr>
+
+      <!-- Rigid In-ear -->
+      <tr>
+        <td rowspan="4" style="vertical-align: middle; text-align: center;">Rigid In-ear</td>
+        <td>Raw signal</td>
+        <td>0.751</td>
+        <td>3.47</td>
+      </tr>
+      <tr>
+        <td>Tested from pretrained<sup>*</sup></td>
+        <td>0.812</td>
+        <td>3.73</td>
+      </tr>
+      <tr>
+        <td>Trained<sup>†</sup> from scratch</td>
+        <td><b>0.876</b></td>
+        <td>3.51</td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td>Trained<sup>†</sup> from pretrained<sup>*</sup></td>
+        <td>0.873</td>
+        <td><b>3.80</b></td>
+      </tr>
+
+      <!-- Throat -->
+      <tr>
+        <td rowspan="4" style="vertical-align: middle; text-align: center;">Throat</td>
+        <td>Raw signal</td>
+        <td>0.942</td>
+        <td>3.71</td>
+      </tr>
+      <tr>
+        <td>Tested from pretrained<sup>*</sup></td>
+        <td>0.969</td>
+        <td><b>4.05</b></td>
+      </tr>
+      <tr>
+        <td>Trained<sup>†</sup> from scratch</td>
+        <td><b>0.978</b></td>
+        <td>3.87</td>
+      </tr>
+      <tr style="border-bottom: 3px double black;">
+        <td>Trained<sup>†</sup> from pretrained<sup>*</sup></td>
+        <td>0.971</td>
+        <td>3.98</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-size: 80%; margin-top: 8px; line-height: 1.2;">
+    <em><sup>*</sup> pretrained on <code>speech-clean</code></em><br>
+    <em><sup>†</sup> trained on synthetically mixed <code>speech-clean</code> + <code>speechless-noisy</code></em>
+  </div>
+  </center>
+  </font>
+</section>
+
+
+
+
+    <section>
+      <p style="margin-bottom: 0.8em;"> </p>
+      <h4> <code> speech-noisy </code> samples</h4>
+
+    <block_important class="stretch">
+            <div style="position:relative; width:100%; height:95%; margin:0 auto;"> 
+              <iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/02_noisy_ref.html" 
+              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+              <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/02_noisy_throat.html" 
+              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+              <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/02_throat_enhanced.html" 
+              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>  
+            </div>
+          </block_important>
+
+            <audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/02_noisy_ref.wav" controls></audio>
+            <audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/02_noisy_throat.wav" controls></audio>
+            <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/02_throat_enhanced.wav" controls></audio>
+    </section>
+
+<!--
+  <section>
+      <p style="margin-bottom: 0.8em;"> </p>
+      <h4> <code> speech-noisy </code> samples  2/2 </h4>
+
+    <block_important class="stretch">
+            <div style="position:relative; width:100%; height:95%; margin:0 auto;"> 
+              <iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/03_noisy_ref.html" 
+              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+              <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/03_noisy_throat.html" 
+              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+              <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/03_throat_enhanced.html" 
+              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>  
+            </div>
+          </block_important>
+
+            <audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/03_noisy_ref.wav" controls></audio>
+            <audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/03_noisy_throat.wav" controls></audio>
+            <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/03_throat_enhanced.wav" controls></audio>
+    </section>
+-->
+
+
+
+      
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter">
+        <h2 class="shadow3"> Listening tests for EBEN </h2>
+      </section>
+
+      <section>
+        <h4 class="shadow3"> Quality </h4>
+        <figure>
+          <img data-src="figures/MUSHRA-1.png" alt="" class="plain" style="width: 60%;">
+          <figcaption>Distribution of MUSHRA quality rating</figcaption>
+        </figure>
+      </section>
+
+
+      <section>
+        <h4 class="shadow3"> Intelligibility </h4>
+        <figure>
+          <img data-src="figures/MRT-1.png" alt="" class="plain" style="width: 60%;">
+          <figcaption>Distribution of MRT intelligibility score</figcaption>
+        </figure>
+      </section>
+<!--
+    <section>
+      <iframe
+        src="https://huggingface.co/datasets/Cnam-LMSSC/french-mrt/embed/viewer/female_speaker/train?theme=light"
+        frameborder="0"
+        width="100%"
+        height="560px"
+      ></iframe>
+    </section>
+-->         
+      <section>
+        <h4 class="shadow3"> Speaker identity </h4>
+        <figure>
+          <img data-src="figures/AB-1.png" alt="" class="plain" style="width: 60%;">
+          <figcaption>Distribution of A/B identification score</figcaption>
+        </figure>
+      </section>
+
+
+<section>
+  <h4 class="shadow3">Comparison with Objective Metrics</h4>
+  <div style="font-size: 0.45em; text-align: center; padding-top: 1em;">
+    <table class="table-fill" style="margin: auto; width: 60%; border-collapse: collapse; border-radius: 10px; overflow: hidden;">
+      <thead>
+        <tr style="background-color: #333; color: white;">
+          <th style="padding: 10px;">Metric</th>
+          <th style="padding: 10px;">Pearson Correlation Coefficient</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="2" style="background-color: #555; color: white; font-weight: bold; padding: 8px;">Intelligibility</td>
+        </tr>
+        <tr style="background-color: #f9f9f9;"><td>STOI</td><td>0.52</td></tr>
+        <tr style="background-color: #ffffff;"><td>ABC-MRT</td><td>0.57</td></tr>
+        <tr style="background-color: #f9f9f9;"><td>1 - PER</td><td>0.45</td></tr>
+
+        <tr>
+          <td colspan="2" style="background-color: #555; color: white; font-weight: bold; padding: 8px;">Quality</td>
+        </tr>
+        <tr style="background-color: #f9f9f9;"><td>STOI</td><td>0.87</td></tr>
+        <tr style="background-color: #ffffff;"><td>PESQ</td><td>0.81</td></tr>
+        <tr style="background-color: #f9f9f9;"><td>N-MOS</td><td>0.76</td></tr>
+
+        <tr>
+          <td colspan="2" style="background-color: #555; color: white; font-weight: bold; padding: 8px;">Identity</td>
+        </tr>
+        <tr style="background-color: #f9f9f9;"><td>ECAPA2</td><td>0.90</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+    <section>
+    <!--  <h4> First body-conduction microphone </h4>  -->
+        <img height="400" data-src="images/img/steve.jpg" alt="" class="plain">
+    </section>
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+        <! ----------------------------------------------------------------------------------------------------------------------------------------->
+        <! --------------------------------------------------------Mimi---------------------------------------------------------------------------->
+        <! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+      <section name="Mimi">
+
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+          <h2 class="shadow3"> Codec-based Speech enhancement </h2>
+        </section>
+
+        <section>
+          <h3> Neural Audio Codecs Timeline </h3>
+            <img height="450" data-src="images/img/nacTimeline2.png" alt="" class="plain">
+        </section>
+
+
+
+<!-- 
+
+        <section>
+          <h3> Mimi </h3>
+          <br>~<br>
+          <div style="position:absolute;top:50%;left:0%;width:100%; height: 100%" > 
+          <figure>
+            <img data-src="images/img/archi-mimi.png" alt="" class="plain">
+            <figcaption>Kyutai's Mimi architecture</figcaption>
+          </figure>
+
+          <p style="font-size: 0.4em; margin-top: 10px;">
+      <br>
+      Défossez, A., Mazaré, L., Orsini, M., Royer, A., Pérez, P., Jégou, H., Grave, E. & Zeghidour, N. (2024). <i> Moshi: a speech-text foundation model for real-time dialogue</i>. arXiv preprint arXiv:2410.00037. 
+    </p>
+          </div>
+        </section>
+-->
+
+<section>
+  <h3>Mimi</h3>
+  <div style="position:absolute;top:50%;left:0%;width:100%; height:100%;"> 
+    <figure>
+      <img data-src="images/img/archi-mimi.png" alt="" class="plain">
+      <figcaption style="font-size:0.65em; margin-top:10px; text-align:center;">
+        Défossez <em>et al.</em>, arXiv, 2024
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+
+<section>
+  <br>
+  <h5> My view on Bandwidth extension </h5>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+    .uniform-text { font-family: 'Caveat', cursive; font-weight: 700; fill: black; }
+    .pt { font-size: 18px; text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+  </style>
+
+  <svg id="codec-anim" viewBox="0 0 800 600" style="width:70vmin;height:70vmin;margin-top:-100px;">
+
+    <!-- Reference paths (hidden) -->
+    <path id="moonGeom"
+          d="M150,250 C170,400 210,500 350,400 C150,400 170,150 400,230 C350,100 120,90 150,250 Z"
+          fill="none" stroke="none"></path>
+
+    <!-- Narrower convex blob (token space) -->
+    <path id="convexGeom"
+          d="M300,290
+             C300,260 350,255 370,285
+             C390,315 390,345 365,360
+             C340,375 310,360 300,335
+             C295,320 295,305 300,290 Z"
+          fill="none" stroke="none"></path>
+
+    <!-- Space label cross-fade ℝ^T -> ℕ^{T′} -->
+    <g id="space-speech" class="uniform-text" style="opacity:1">
+      <text x="680" y="160" font-size="48">ℝ</text>
+      <text x="715" y="150" font-size="32">T</text>
+    </g>
+    <g id="space-tokens" class="uniform-text" style="opacity:0">
+      <text x="680" y="160" font-size="48">ℕ</text>
+      <text x="715" y="150" font-size="32">T′</text>
+    </g>
+
+    <!-- x and corrupted label (cross-fade) -->
+    <g class="uniform-text">
+      <text x="700" y="350" font-size="32">x</text>
+      <text id="corr-speech" x="640" y="300" font-size="24">corrupted speech</text>
+      <text id="corr-tokens" x="640" y="300" font-size="24" style="opacity:0">corrupted tokens</text>
+    </g>
+
+    <!-- Manifold (morphed via JS) -->
+    <polyline id="manifoldLine"
+              stroke="rgba(0,0,0,0.3)"
+              stroke-width="2"
+              stroke-dasharray="8,8"
+              fill="none"></polyline>
+
+    <!-- Clean labels (cross-fade) -->
+    <text id="clean-speech" class="uniform-text" x="250" y="110" font-size="24">potential clean speech</text>
+    <text id="clean-tokens" class="uniform-text" x="250" y="110" font-size="24" style="opacity:0">potential clean tokens</text>
+    <text class="uniform-text" x="120" y="130" font-size="24">Y|x</text>
+
+    <!-- ℒrec layer (step 3): draw UNDER the points so it never hides them -->
+    <g id="lrec-layer" class="uniform-text" style="opacity:0">
+      <path id="lrec-line"
+            stroke="#2ecc71" stroke-width="2.2"
+            stroke-linecap="round"
+            vector-effect="non-scaling-stroke"
+            fill="none"></path>
+      <!-- Triangle arrowhead (no marker) -->
+      <polygon id="lrec-head" fill="#2ecc71"></polygon>
+      <text id="lrec-L"   font-size="48" fill="#2ecc71">ℒ</text>
+      <text id="lrec-sub" font-size="32" fill="#2ecc71">rec</text>
+    </g>
+
+    <!-- Points (drawn AFTER the arrow so they appear on top) -->
+    <g id="points-layer" class="uniform-text">
+      <text class="pt" data-i="0">y</text><text class="pt" data-i="1">y</text><text class="pt" data-i="2">y</text>
+      <text class="pt" data-i="3">y</text><text class="pt" data-i="4">y</text><text class="pt" data-i="5">y</text>
+      <text class="pt" data-i="6">y</text><text class="pt" data-i="7">y</text><text class="pt" data-i="8">y</text>
+      <text class="pt" data-i="9">y</text><text class="pt" data-i="10">y</text><text class="pt" data-i="11">y</text>
+    </g>
+  </svg>
+
+  <!-- Fragment triggers -->
+  <div id="codec-frag" class="fragment" data-fragment-index="0" style="width:1px;height:1px;opacity:0;"></div>
+  <div id="lrec-frag"  class="fragment" data-fragment-index="1" style="width:1px;height:1px;opacity:0;"></div>
+
+  <script>
+  (function(){
+    const lerp = (a,b,t)=> a + (b-a)*t;
+    const ease = t => (t<0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2,3)/2);
+    const toPointsAttr = pts => pts.map(p=>p[0].toFixed(2)+','+p[1].toFixed(2)).join(' ');
+    function samplePath(pathEl, n){
+      const L = pathEl.getTotalLength(), pts=[];
+      for (let i=0;i<n;i++){
+        const p = pathEl.getPointAtLength((i/(n-1))*L);
+        pts.push([p.x, p.y]);
+      }
+      return pts;
+    }
+
+    const line   = document.getElementById('manifoldLine');
+    const moon   = document.getElementById('moonGeom');
+    const convex = document.getElementById('convexGeom');
+
+    const cleanSpeech = document.getElementById('clean-speech');
+    const cleanTokens = document.getElementById('clean-tokens');
+    const corrSpeech  = document.getElementById('corr-speech');
+    const corrTokens  = document.getElementById('corr-tokens');
+    const spaceSpeech = document.getElementById('space-speech');
+    const spaceTokens = document.getElementById('space-tokens');
+
+    const pts = Array.from(document.querySelectorAll('#points-layer .pt'));
+
+    // ℒrec elements (no marker)
+    const lrecLayer = document.getElementById('lrec-layer');
+    const lrecLine  = document.getElementById('lrec-line');
+    const lrecHead  = document.getElementById('lrec-head');
+    const lrecL     = document.getElementById('lrec-L');
+    const lrecSub   = document.getElementById('lrec-sub');
+
+    const codecFrag = document.getElementById('codec-frag');
+    const lrecFrag  = document.getElementById('lrec-frag');
+
+    const N = 160;
+    const moonPts   = samplePath(moon,   N);
+    const convexPts = samplePath(convex, N);
+    line.setAttribute('points', toPointsAttr(moonPts));
+
+    const startPts = [
+      [320,200],[230,165],[290,170],[180,170],[230,200],[190,240],
+      [175,300],[190,350],[210,400],[285,425],[260,410],[300,420]
+    ];
+
+    // --- Token cluster in a "C" shape with rightmost point on TOP ---
+    const cx = 340, cy = 322; // cluster center; arrow tip will land here (open side to the right)
+    const targets3 = [
+      [cx - 20, cy - 16], // top-left
+      [cx - 20, cy + 12], // bottom-left
+      [cx + 12, cy - 20]  // rightmost & on top
+    ];
+    const targetPts = startPts.map((_,i)=> targets3[i % 3]);
+    const keepIdx = new Set([0,1,2]); // only 3 visible at end
+
+    // Init points at start
+    pts.forEach((el,i)=>{
+      el.setAttribute('x', startPts[i][0]);
+      el.setAttribute('y', startPts[i][1]);
+      el.style.opacity = '1'; el.setAttribute('opacity','1'); el.style.display = '';
+    });
+
+    let t=0, target=0, rafId=null;
+    const DURATION = 1300;
+
+    function render(){
+      const e = ease(t);
+      const cur = new Array(N);
+      for (let i=0;i<N;i++){
+        cur[i] = [ lerp(moonPts[i][0], convexPts[i][0], e),
+                   lerp(moonPts[i][1], convexPts[i][1], e) ];
+      }
+      line.setAttribute('points', toPointsAttr(cur));
+
+      for (let i=0;i<pts.length;i++){
+        const [sx,sy] = startPts[i], [tx,ty] = targetPts[i];
+        const x = lerp(sx, tx, e), y = lerp(sy, ty, e);
+        pts[i].setAttribute('x', x.toFixed(2));
+        pts[i].setAttribute('y', y.toFixed(2));
+        const keep = keepIdx.has(i);
+        const alpha = keep ? 1 : (1 - e);
+        pts[i].style.opacity = alpha; pts[i].setAttribute('opacity', alpha);
+        if (!keep && e >= 0.999) pts[i].style.display = 'none';
+        if (!keep && e < 0.999)  pts[i].style.display = '';
+      }
+
+      const a0 = (1-e), a1 = e;
+      cleanSpeech.style.opacity = a0; cleanTokens.style.opacity = a1;
+      corrSpeech .style.opacity = a0; corrTokens .style.opacity = a1;
+      spaceSpeech.style.opacity = a0; spaceTokens.style.opacity = a1;
+    }
+
+    function step(){
+      const dt = 1 / (DURATION / 16.666);
+      if (target > t) t = Math.min(1, t + dt);
+      else if (target < t) t = Math.max(0, t - dt);
+      render();
+      if ((target > t && t < 1) || (target < t && t > 0)) rafId = requestAnimationFrame(step);
+      else rafId = null;
+    }
+    function animateTo(newTarget){
+      target = newTarget;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(step);
+    }
+
+    // --- Static ℒrec geometry (line + triangle head) ---
+    const xPos = { x:700, y:350 };
+    const muEnd = { x: cx, y: cy }; // arrow lands in the open side of the "C"
+
+    function positionLrec(){
+      // Line
+      lrecLine.setAttribute('d', `M ${xPos.x} ${xPos.y} L ${muEnd.x} ${muEnd.y}`);
+
+      // Arrowhead as a triangle oriented along the line direction
+      const dx = muEnd.x - xPos.x, dy = muEnd.y - xPos.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const ux = dx / len, uy = dy / len;  // unit direction
+      const px = -uy, py = ux;             // perpendicular
+
+      const headLen = 14;   // shorter head to match thinner line
+      const headWid = 9;    // narrower head
+
+      const tipX = muEnd.x, tipY = muEnd.y;
+      const baseX = tipX - ux * headLen;
+      const baseY = tipY - uy * headLen;
+
+      const leftX  = baseX + px * (headWid/2);
+      const leftY  = baseY + py * (headWid/2);
+      const rightX = baseX - px * (headWid/2);
+      const rightY = baseY - py * (headWid/2);
+
+      lrecHead.setAttribute('points',
+        `${tipX.toFixed(2)},${tipY.toFixed(2)} ` +
+        `${leftX.toFixed(2)},${leftY.toFixed(2)} ` +
+        `${rightX.toFixed(2)},${rightY.toFixed(2)}`
+      );
+
+      // Label near midpoint
+      const mx = (xPos.x + muEnd.x)/2, my = (xPos.y + muEnd.y)/2;
+      lrecL .setAttribute('x', mx-20); lrecL .setAttribute('y', my-12);
+      lrecSub.setAttribute('x', mx+8); lrecSub.setAttribute('y', my-8);
+    }
+    positionLrec();
+
+    // Reveal hooks
+    document.addEventListener('fragmentshown', ev => {
+      if (ev.fragment === codecFrag) animateTo(1);
+      if (ev.fragment === lrecFrag)  {
+        lrecLayer.style.opacity = 1;   // reveal step 3
+        positionLrec();                // ensure placement
+      }
+    });
+    document.addEventListener('fragmenthidden', ev => {
+      if (ev.fragment === lrecFrag)  lrecLayer.style.opacity = 0;
+      if (ev.fragment === codecFrag) animateTo(0);
+    });
+
+    render();
+  })();
+  </script>
+</section>
+
+
+
+
+        <section>
+          <div style="position:absolute;top:0%;left:0%;width:100%; height: 100%" > 
+          <figure>
+            <img data-src="images/img/finetuning.png" alt="" class="plain">
+            <figcaption>Finetuning strategy</figcaption>
+          </figure>
+          </div>
+        </section>
+
+
+
+
+
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter">
+        <h2 class="shadow3"> Results on <code> speech-clean </code> for the throat microphone </h2>
+      </section>
+
+
+        <section class="center" data-menu-title="Audio Examples">
+  <h6>Qualitative results</h6>
+  <hr width="90%">
+  <div style="width: 100%; display: flex; justify-content: center;">
+    <table class="table-fill" style="font-size: 0.45em; width: 100%; text-align: center; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Signal 1</th>
+          <th>Signal 2</th>
+          <th>Signal 3</th>
+          <th>Signal 4</th>
+        </tr>
+      </thead>
+      <tbody class="table-hover">
+
+        <tr>
+          <td>Corrupted</td>
+          <td><audio data-src="audios/corrupted_2.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/corrupted_3.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/corrupted_7.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/corrupted_13.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+        </tr>
+        <tr>
+          <td>Reference</td>
+          <td><audio data-src="audios/reference_2.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/reference_3.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/reference_7.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/reference_13.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+        </tr>
+        <tr><td>EBEN</td>
+          <td><audio data-src="audios/EBEN_2.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/EBEN_3.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/EBEN_7.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/EBEN_13.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+        </tr>
+
+        </tr>
+        <tr><td>Mimi finetuning</td>
+          <td><audio data-src="audios/RegresssiveMimi_2.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/RegresssiveMimi_3.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/RegresssiveMimi_7.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/RegresssiveMimi_13.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+        </tr>
+        </tr>
+        <tr><td>NeMo FlowMatching <br>(Ku <em>et al.</em>, ICASSP 2025)</td>
+          <td><audio data-src="audios/NemoFromPretrained_2.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/NemoFromPretrained_3.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/NemoFromPretrained_7.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+          <td><audio data-src="audios/NemoFromPretrained_13.wav" controls style="height:30px; width:160px;" data-preload></audio></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section>
+  <h4 class="shadow3">Quantitative results</h4>
+  <hr width="90%">
+  <div style="width: 100%; display: flex; justify-content: center;">
+    <table class="table-fill" style="font-size: 0.45em; width: 100%; text-align: center; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Parameters</th>
+          <th>eSTOI</th>
+          <th>Noresqa-MOS</th>
+          <th>PER</th>
+          <th>SI-SDR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Raw Throat</td>
+          <td>–</td>
+          <td>0.67</td>
+          <td>3.10</td>
+          <td>50.8%</td>
+          <td>–8.0</td>
+        </tr>
+        <tr>
+          <td>EBEN</td>
+          <td><b>1.9M</b></td>
+          <td>0.834</td>
+          <td>3.86</td>
+          <td>18.6%</td>
+          <td>3.2</td>
+        </tr>
+        <tr>
+          <td>Mimi finetuning</td>
+          <td>96.2M</td>
+          <td><b>0.841</b></td>
+          <td>4.11</td>
+          <td>15.1%</td>
+          <td>1.37</td>
+        </tr>
+        <tr>
+          <td>NeMo FlowMatching <br>(Ku <em>et al.</em>, ICASSP 2025)</td>
+          <td>430M</td>
+          <td>0.822</td>
+          <td><b>4.39</b></td>
+          <td><b>7.6%</b></td>
+          <td><b>7.3</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+
+
+
+      </section>
+
+
+          <! ----------------------------------------------------------------------------------------------------------------------------------------->
+          <! ----------------------------------------------------------------Demo-------------------------------------------------------------->
+          <! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+			<section name="Demo">
+
+      <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+               data-background-position="bottom right"
+               data-state="hide-menubar">
+        <h2 class="shadow3"> Real-time demo </h2>
+      </section>
+
+
+			<section>
+			<h4 class="shadow3"> Real-time demo backup </h4>
+			<iframe width="672" height="378" src="https://www.youtube-nocookie.com/embed/zxy-il5Hshc?si=0nzJ11eBMnnSBw4v&amp;start=85" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			</section>
+
+    </section>
+
+
+
+
+          <! ----------------------------------------------------------------------------------------------------------------------------------------->
+          <! ----------------------------------------------------------------Conclusion-------------------------------------------------------------->
+          <! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+      <section name="Conclusion">
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-background-position="bottom right" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+          <h2 class="shadow3"> Conclusion </h2>
+          <h4 class="shadow3"> <small> Deep learning for speech enhancement applied to radio communications using non-conventional sound capture devices </small> </h4>
+        </section>
+
+
+
+<section>
+  <h4>Conclusion</h4>
+
+  <style>
+    /* === TUNABLES (adjust these numbers) === */
+    block_important.conclusion {
+      --main-size: 0.70em;     /* overall list size */
+      --sub-size: 0.60em;      /* sublist size */
+      --li-gap-top: 12px;      /* space above each main item */
+      --li-gap-bottom: 12px;   /* space below each main item */
+    }
+
+    /* === LAYOUT === */
+    block_important.conclusion {
+      display: inline-block;   /* shrink to content, avoids extra bottom space */
+      margin: 0;
+      padding: 0;
+    }
+
+    block_important.conclusion > ul {
+      text-align: left;
+      font-size: var(--main-size);
+      line-height: 1.2;
+      margin: 0;
+      padding: 0;
+      list-style-position: inside;
+    }
+
+    /* main list items (EBEN, Vibravox, Codec) */
+    block_important.conclusion > ul > li {
+      margin: var(--li-gap-top) 0 var(--li-gap-bottom) 0;
+    }
+
+    block_important.conclusion > ul > li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* sublists */
+    block_important.conclusion .sublist {
+      font-size: var(--sub-size);
+      line-height: 1.1;
+      margin: 3px 0 0 1.2em;   /* indent sub-items to the right */
+      padding: 0;
+      list-style-type: disc;
+      list-style-position: outside; /* normal indentation */
+    }
+
+    /* sublist items (no extra gaps) */
+    block_important.conclusion .sublist li {
+      margin: 0;
+    }
+  </style>
+
+  <block_important class="conclusion">
+    <ul>
+      <!-- EBEN -->
+      <li class="fragment" data-fragment-index="1">
+        <b>EBEN</b><br>
+        <small>Extreme Bandwidth Extension Network</small>
+        <ul class="sublist">
+          <li class="fragment" data-fragment-index="2">Performs joint bandwidth extension and denoising</li>
+          <li class="fragment" data-fragment-index="3">Fast inference</li>
+          <li class="fragment" data-fragment-index="4">Low memory</li>
+        </ul>
+      </li>
+
+      <!-- Vibravox -->
+      <li class="fragment" data-fragment-index="5">
+        <b>Vibravox</b><br>
+        <small>Dataset of body-conducted speech</small>
+        <ul class="sublist">
+          <li class="fragment" data-fragment-index="6">200 participants</li>
+          <li class="fragment" data-fragment-index="7">5 body-conducted microphones</li>
+          <li class="fragment" data-fragment-index="8">Diverse noise conditions</li>
+          <li class="fragment" data-fragment-index="9">First BCM dataset open source on Hugging Face</li>
+        </ul>
+      </li>
+
+      <!-- Codec-based speech enhancement -->
+      <li class="fragment" data-fragment-index="10">
+        <b>Codec-based speech enhancement</b><br>
+        <small>Foundation models for robust processing</small>
+        <ul class="sublist">
+          <li class="fragment" data-fragment-index="11">Lightweight alternative to LLM-based speech enhancement</li>
+          <li class="fragment" data-fragment-index="12">Demo user interface</li>
+        </ul>
+      </li>
+    </ul>
+  </block_important>
+</section>
+
+<section>
+  <h4>Contributions</h4>
+
+  <style>
+    block_important.contributions {
+      /* === TUNABLES === */
+      --main-size: 0.40em;      /* overall font size for entries */
+      --sub-size: 0.8em;        /* size for details line */
+      --section-gap: 14px;      /* space before Journals/Conferences/Demos */
+      --item-gap: 8px;          /* space between items inside a list */
+
+      /* block margins relative to slide */
+      margin-top: 20px;         /* 👈 adjust top margin of the whole block */
+      margin-bottom: 220px;      /* 👈 adjust bottom margin of the whole block */
+      padding-left: 2em;        /* 👈 left indentation for all content */
+    }
+
+    block_important.contributions {
+      display: block;
+      text-align: left;
+      margin: 0;
+      padding: 0 0 0 2em;       /* keep indentation */
+    }
+
+    /* Section titles */
+    block_important.contributions .sectitle {
+      font-size: calc(var(--main-size) * 1.05);
+      font-weight: 700;
+      margin: var(--section-gap) 0 4px 0; /* 👈 controls vertical gap above section titles */
+      padding: 0;
+      text-align: left;
+      text-decoration: underline;
+    }
+
+    /* Lists */
+    block_important.contributions ul {
+      list-style: disc;
+      margin: 0 0 0 1.2em;
+      padding: 0;
+      text-align: left;
+      font-size: var(--main-size);
+      line-height: 1.25;
+    }
+
+    /* One publication entry */
+    block_important.contributions li.pub {
+      margin: var(--item-gap) 0 0 0; /* 👈 controls gap between items */
+    }
+
+    /* Title + Details */
+    block_important.contributions .pubtitle {
+      font-weight: 700;
+      display: block;
+    }
+
+    block_important.contributions .pubdetails {
+      font-size: var(--sub-size);
+      line-height: 1.2;
+      display: block;
+    }
+  </style>
+
+  <block_important class="contributions">
+    <!-- Journals -->
+    <div class="sectitle">Journals</div>
+    <ul>
+      <li class="pub">
+        <span class="pubtitle">Vibravox: A Dataset of French Speech Captured with Body-conduction Audio Sensors</span>
+        <span class="pubdetails">Hauret J., Olivier M., Joubaud T., Langrenne C., Poirée S., Zimpfer V., Bavu É. — <i>Speech Communication</i>, 2025, p. 103238</span>
+      </li>
+      <li class="pub">
+        <span class="pubtitle">Configurable EBEN: Extreme Bandwidth Extension Network to enhance body-conduction speech capture</span>
+        <span class="pubdetails">Hauret J., Bavu É., Joubaud T., Zimpfer V. — <i>IEEE/ACM Transactions on Audio, Speech, and Language Processing</i>, 2023, 31:3499–3512</span>
+      </li>
+    </ul>
+
+    <!-- Conferences -->
+    <div class="sectitle">Conferences</div>
+    <ul>
+      <li class="pub">
+        <span class="pubtitle">Bringing Interpretability to Neural Audio Codecs</span>
+        <span class="pubdetails">Sadok S., Hauret J. (equal contribution), Bavu É. — <i>Interspeech 2025</i> </span>
+      </li>
+      <li class="pub">
+        <span class="pubtitle">French Listening Tests for the Assessment of Intelligibility, Quality, and Identity of Body-Conducted Speech Enhancement</span>
+        <span class="pubdetails">Joubaud T., Hauret J., Zimpfer V., Bavu É. — <i>Interspeech 2025</i> </span>
+      </li>
+      <li class="pub">
+        <span class="pubtitle">EBEN: Extreme bandwidth extension network applied to speech signals captured with noise-resilient microphones</span>
+        <span class="pubdetails">Hauret J., Joubaud T., Zimpfer V., Bavu É. — <i>IEEE ICASSP 2023</i></span>
+      </li>
+    </ul>
+
+    <!-- Demos -->
+    <div class="sectitle">Demos</div>
+    <ul>
+      <li class="pub">
+        <span class="pubtitle">Real-time speech enhancement in noise for throat microphone using neural audio codec as foundation model</span>
+        <span class="pubdetails">Hauret J., Bavu É. — <i>WASPAA 2025</i>, Demo track</span>
+      </li>
+    </ul>
+  </block_important>
+</section>
+
+
+
+<section>
+  <h4>Future Work</h4>
+
+  <style>
+    block_important.futurework {
+      --main-size: 0.55em;   /* font size for main list */
+      --item-gap: 10px;      /* vertical spacing between items */
+    }
+
+    block_important.futurework {
+      display: inline-block;
+      text-align: left;
+      margin: 0;
+      padding-left: 2em;
+    }
+
+    block_important.futurework ul {
+      list-style: disc;
+      margin: 0;
+      padding: 0 0 0 1.2em;
+      font-size: var(--main-size);
+      line-height: 1.3;
+      text-align: left;
+    }
+
+    block_important.futurework li {
+      margin: var(--item-gap) 0 0 0;
+    }
+  </style>
+
+  <block_important class="futurework">
+    <ul>
+      <li class="fragment">Deploy real-time <b>EBEN</b> on ASICs</li>
+      <li class="fragment">Launch a <b>BCM challenge</b> with Vibravox</li>
+      <li class="fragment">Explore <b>pre-training</b> tasks (e.g., ref→ref with EBEN)</li>
+      <li class="fragment">Combine <b>Vibravox</b> with SOTA simulation methods</li>
+      <li class="fragment">Develop <b>multimodal enhancement</b> (in-ear + out-of-ear mics)</li>
+      <li class="fragment">Align <b>objective metrics</b> with listening tests</li>
+    </ul>
+  </block_important>
+</section>
+
+
+
+
+
+         <section data-background-image="../reveal-template/dist/theme/assets_CNAM/white_stripes_section_logo_cnam.png" 
+                  data-visibility="uncounted" 
+                  data-state="no-counter hide-menubar">
+
+          <h2 class="shadow3"><font color="white"> Thank you for your attention </font></h2>
+          <br>
+          
+          <br>
+            <small><b> julien.hauret@lecnam.net  </b></small>
+
+          <br>
+          <br>
+
+            <div class="imgcentered">
+            <img height="60" data-src="images/img/lmssc.png" alt="" class="plain">
+            &#8195;&#8195;&#8195;
+            <img height="60" data-src="images/img/isl.png" alt="" class="plain">
+                </div>
+        </section>
+
+
+
+     <section data-state="no-counter hide-menubar" data-visibility="uncounted">
+          <h2 class="shadow3"> Questions ? </h2>
+          <br>
+
+            <div class="imgcentered">
+            <img height="60" data-src="images/img/lmssc.png" alt="" class="plain">
+            &#8195;&#8195;&#8195;
+            <img height="60" data-src="images/img/isl.png" alt="" class="plain">
+                </div>
+        </section>
+
+
+
+			</section>
+
+
+
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+					<! ----------------------------------------------------------------Appendices-------------------------------------------------------------->
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+
+			<section name="Appendices">
+
+
+
+         <section data-visibility="uncounted" data-state="no-counter">
+          <h4 class="shadow3">Objective metrics <br> Models trained on in-ear like Librispeech </h4>
+          <font size="+2">
+          <center>
+          <table class = 'table-fill'>
+            <thead>
+            <tr>
+              <th> Speech </th>
+              <th> PESQ </th>
+              <th> SI-SDR </th>
+              <th> eSTOI </th>
+              <th> Noresqa-MOS </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td> Simulated In-ear </td>
+              <td><b> 2.42  </b></td>
+              <td> 8.4   </td>
+              <td> 0.83  </td>
+              <td> 2.57  </td>
+            </tr>
+            <tr>
+              <td> Audio U-net  </td>
+              <td> 2.24  </td>
+              <td><b>  11.9 </b></td>
+              <td> 0.87  </td>
+              <td> 2.59  </td>
+            </tr>
+            <tr>
+              <td> Hifi-GAN v3  </td>
+              <td> 1.32  </td>
+              <td> -25.1 </td>
+              <td> 0.78  </td>
+              <td> 3.70  </td>
+            </tr>
+
+                        <tr>
+              <td> Streaming Seanet </td>
+              <td> 2.01   </td>
+              <td> 11.2  </td>
+              <td><b>  0.89 </b></td>
+              <td> 3.91 </td>
+            </tr>
+
+            <tr>
+              <td> Seanet  </td>
+              <td> 1.92 </td>
+              <td> 11.1  </td>
+              <td><b>  0.89  </b></td>
+              <td><b>  4.25 </b></td>
+            </tr>
+
+            <tr>
+              <td> EBEN (ours) </td>
+              <td> 2.08  </td>
+              <td> 10.9  </td>
+              <td><b>  0.89  </b></td>
+              <td> 4.02  </td>
+            </tr>
+
+            </tbody>
+          </table>
+          </center>
+          </font>
+        </section>
+
+
+
+       <section data-visibility="uncounted" data-state="no-counter">
+			  <h4 class="shadow3"> Quality </h4>
+			  <figure>
+			    <img data-src="figures/MUSHRA_improvement-1.png" alt="" class="plain" style="width: 60%;">
+			    <figcaption>Distribution of EBEN-induced quality improvement</figcaption>
+			  </figure>
+			</section>
+
+
+			<section data-visibility="uncounted" data-state="no-counter">
+			  <h4 class="shadow3"> Intelligibility </h4>
+			  <figure>
+			    <img data-src="figures/MRT_improvement-1.png" alt="" class="plain" style="width: 60%;">
+			    <figcaption>Distribution of EBEN-induced intelligibility improvement</figcaption>
+			  </figure>
+			</section>
+<!--
+		<section>
+		  <iframe
+		    src="https://huggingface.co/datasets/Cnam-LMSSC/french-mrt/embed/viewer/female_speaker/train?theme=light"
+		    frameborder="0"
+		    width="100%"
+		    height="560px"
+		  ></iframe>
+		</section>
+-->					
+			<section data-visibility="uncounted" data-state="no-counter">
+			  <h4 class="shadow3"> Speaker identity </h4>
+			  <figure>
+			    <img data-src="figures/AB_improvement-1.png" alt="" class="plain" style="width: 60%;">
+			    <figcaption>Distribution of EBEN-induced identification improvement</figcaption>
+			  </figure>
+			</section>
+
+
+
+<section data-visibility="uncounted" data-state="no-counter" style="display: flex; flex-direction: column; height: 100%; justify-content: center; align-items: center;">
+  <br>
+  <h6 style="margin: 10px 0 10px 0; text-align: center;">Mutual Information (MI) between tokens and speech attributes</h6>
+
+  <figure style="text-align: center; margin: 10;">
+    <iframe 
+      data-src="images/plotly/mi_plot.html" 
+      style="width: 100%; height: 40vh; border: none; margin-left: 13%;" 
+      data-preload>
+    </iframe>
+    <figcaption style="font-size: 0.7em; margin-top: 5px;">
+      <small>MI estimate with Contrastive Log-ratio Upper Bound (CLUB) between SpeechTokenizer and speech attributes on <code>librispeech-test-clean</code></small>
+    </figcaption>
+  </figure>
+</section>
+
+
+        <section data-visibility="uncounted" data-state="no-counter" data-state="hide-menubar" >
+          <h2 class="shadow3">jury deliberation in progress </h2>
+          <br>
+
+            <div class="imgcentered">
+            <img height="60" data-src="images/img/lmssc.png" alt="" class="plain">
+            &#8195;&#8195;&#8195;
+            <img height="60" data-src="images/img/isl.png" alt="" class="plain">
+                </div>
+        </section>
+
+
+			</section>
+
+
+
+
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+					<! ------------------------------------------------------------END OF SECTIONS-------------------------------------------------------------->
+					<! ----------------------------------------------------------------------------------------------------------------------------------------->
+
+		<script src="../reveal-template/dist/reveal.js"></script>
+		<script src="../reveal-template/plugin/zoom/zoom.js"></script>
+		<script src="../reveal-template/plugin/notes/notes.js"></script>
+		<script src="../reveal-template/plugin/search/search.js"></script>
+		<script src="../reveal-template/plugin/markdown/markdown.js"></script>
+		<script src="../reveal-template/plugin/highlight/highlight.js"></script>
+		<script src="../reveal-template/plugin/math/math.js"></script>
+		<script src="../reveal-template/plugin/revealjs-menu/menu.js"></script>
+		<script src="../reveal-template/plugin/simplemenu/simplemenu.js"></script>
+
+		<script>
+
+			// Also available as an ES module, see:
+			// https://revealjs.com/initialization/
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				controlsLayout: 'edges',
+        slideNumber: 'c/t' ,
+				navigationMode: 'linear',
+
+				menu: {
+    // Specifies which side of the presentation the menu will
+    // be shown. Use 'left' or 'right'.
+    side: 'left',
+
+    // Specifies the width of the menu.
+    // Can be one of the following:
+    // 'normal', 'wide', 'third', 'half', 'full', or
+    // any valid css length value
+    width: 'half',
+
+    // Add slide numbers to the titles in the slide list.
+    // Use 'true' or format string (same as reveal.js slide numbers)
+    numbers: true,
+
+    // Specifies which slide elements will be used for generating
+    // the slide titles in the menu. The default selects the first
+    // heading element found in the slide, but you can specify any
+    // valid css selector and the text from the first matching
+    // element will be used.
+    // Note: that a section data-menu-title attribute or an element
+    // with a menu-title class will take precedence over this option
+    titleSelector: 'h1, h2, h3, h4, h5, h6',
+
+    // If slides do not have a matching title, attempt to use the
+    // start of the text content as the title instead
+    useTextContentForMissingTitles: false,
+
+    // Hide slides from the menu that do not have a title.
+    // Set to 'true' to only list slides with titles.
+    hideMissingTitles: false,
+
+    // Adds markers to the slide titles to indicate the
+    // progress through the presentation. Set to 'false'
+    // to hide the markers.
+    markers: true,
+
+    // Specify custom panels to be included in the menu, by
+    // providing an array of objects with 'title', 'icon'
+    // properties, and either a 'src' or 'content' property.
+    custom: false,
+
+    // Specifies the themes that will be available in the themes
+    // menu panel. Set to 'true' to show the themes menu panel
+    // with the default themes list. Alternatively, provide an
+    // array to specify the themes to make available in the
+    // themes menu panel, for example...
+    //
+    // [
+    //     { name: 'Black', theme: 'dist/theme/black.css' },
+    //     { name: 'White', theme: 'dist/theme/white.css' },
+    //     { name: 'League', theme: 'dist/theme/league.css' },
+    //     {
+    //       name: 'Dark',
+    //       theme: 'lib/reveal.js/dist/theme/black.css',
+    //       highlightTheme: 'lib/reveal.js/plugin/highlight/monokai.css'
+    //     },
+    //     {
+    //       name: 'Code: Zenburn',
+    //       highlightTheme: 'lib/reveal.js/plugin/highlight/zenburn.css'
+    //     }
+    // ]
+    //
+    // Note: specifying highlightTheme without a theme will
+    // change the code highlight theme while leaving the
+    // presentation theme unchanged.
+    themes: false,
+
+    // Specifies the path to the default theme files. If your
+    // presentation uses a different path to the standard reveal
+    // layout then you need to provide this option, but only
+    // when 'themes' is set to 'true'. If you provide your own
+    // list of themes or 'themes' is set to 'false' the
+    // 'themesPath' option is ignored.
+    themesPath: 'dist/theme/',
+
+    // Specifies if the transitions menu panel will be shown.
+    // Set to 'true' to show the transitions menu panel with
+    // the default transitions list. Alternatively, provide an
+    // array to specify the transitions to make available in
+    // the transitions panel, for example...
+    // ['None', 'Fade', 'Slide']
+    transitions: false,
+
+    // Adds a menu button to the slides to open the menu panel.
+    // Set to 'false' to hide the button.
+    openButton: false,
+
+    // If 'true' allows the slide number in the presentation to
+    // open the menu panel. The reveal.js slideNumber option must
+    // be displayed for this to take effect
+    openSlideNumber: true,
+
+    // If true allows the user to open and navigate the menu using
+    // the keyboard. Standard keyboard interaction with reveal
+    // will be disabled while the menu is open.
+    keyboard: true,
+
+    // Normally the menu will close on user actions such as
+    // selecting a menu item, or clicking the presentation area.
+    // If 'true', the sticky option will leave the menu open
+    // until it is explicitly closed, that is, using the close
+    // button or pressing the ESC or m key (when the keyboard
+    // interaction option is enabled).
+    sticky: false,
+
+    // If 'true' standard menu items will be automatically opened
+    // when navigating using the keyboard. Note: this only takes
+    // effect when both the 'keyboard' and 'sticky' options are enabled.
+    autoOpen: true,
+
+    // If 'true' the menu will not be created until it is explicitly
+    // requested by calling RevealMenu.init(). Note this will delay
+    // the creation of all menu panels, including custom panels, and
+    // the menu button.
+    delayInit: false,
+
+    // If 'true' the menu will be shown when the menu is initialised.
+    openOnInit: false,
+
+    // By default the menu will load it's own font-awesome library
+    // icons. If your presentation needs to load a different
+    // font-awesome library the 'loadIcons' option can be set to false
+    // and the menu will not attempt to load the font-awesome library.
+    loadIcons: true
+  },
+
+				simplemenu: {
+				        menuclass: 'menu',
+				        activeclass: 'active',
+				        activeelement: 'li',
+				        selectby: 'name',
+				        auto: true
+				    },
+
+				mathjax2: {
+					config: 'TeX-AMS_HTML-full',
+					TeX: {
+						Macros: {
+							R: '\\mathbb{R}',
+							set: [ '\\left\\{#1 \\; ; \\; #2\\right\\}', 2 ]
+						}
+					}
+				},
+
+				// There are three typesetters available
+				// RevealMath.MathJax2 (default)
+				// RevealMath.MathJax3
+				// RevealMath.KaTeX
+				//
+				// More info at https://revealjs.com/math/
+
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath.MathJax2, RevealMenu, Simplemenu  ]
+
+
+
+
+			});
+
+		</script>
+
+<!-- Three.js (once) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.min.js"></script>
+
+<script>
+(() => {
+  /* ---------- host overlay ---------- */
+  const host = document.createElement('div');
+  host.id = 'red-sea-overlay';
+  host.style.cssText = `
+    position: fixed; left: 0; right: 0; bottom: 0;
+    width: 100vw; height: 170px;
+    z-index: 9;                 /* below slide content */
+    pointer-events: none;
+    display: none;              /* hidden by default */
+  `;
+  document.body.appendChild(host);
+
+  /* Keep slide content above the sea */
+  const elevate = document.createElement('style');
+  elevate.textContent = `.reveal .slides{ position:relative; z-index:10 }`;
+  document.head.appendChild(elevate);
+
+  /* ---------- three.js scene ---------- */
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  Object.assign(renderer.domElement.style, { position:'absolute', inset:'0', width:'100%', height:'100%' });
+  host.appendChild(renderer.domElement);
+
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 5000);
+  camera.position.set(0, 22, 120);
+  camera.lookAt(0, -14, 0);
+
+  const W = 8000, S = 4650, ROWS = 7, DEPTH = 500, BASE = 0xff5a5a;
+  const group = new THREE.Group(); group.position.y = -14; scene.add(group);
+
+  const ampSeq = [36, 31, 27, 23, 19, 15, 10];
+  const f1Seq  = [0.120, 0.115, 0.110, 0.105, 0.100, 0.092, 0.085];
+  const f2Seq  = [0.220, 0.205, 0.190, 0.175, 0.160, 0.145, 0.130];
+  const opSeq  = [0.95, 0.88, 0.80, 0.72, 0.64, 0.52, 0.40];
+
+  const lines = [];
+  for (let r = 0; r < ROWS; r++) {
+    const pos = new Float32Array(S * 3);
+    const z = - (r / (ROWS - 1)) * DEPTH;
+    for (let i = 0; i < S; i++) {
+      const t = i / (S - 1);
+      pos[3*i+0] = -W/2 + t * W;
+      pos[3*i+1] = 0;
+      pos[3*i+2] = z;
+    }
+    const g  = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const m  = new THREE.LineBasicMaterial({ color: BASE, transparent:true, opacity: opSeq[r] });
+    const ln = new THREE.Line(g, m);
+    group.add(ln);
+    lines.push({ pos, geom: g, amp: ampSeq[r], f1: f1Seq[r], f2: f2Seq[r] });
+  }
+
+  scene.add(new THREE.AmbientLight(0xff6666, 0.80));
+  const dir = new THREE.DirectionalLight(0xffffff, 0.25);
+  dir.position.set(5, 0, 80); scene.add(dir);
+
+  let rafId = null;
+  function animate(ms) {
+    const t = ms * 0.001, speed = 1.35;
+    for (const L of lines) {
+      const drift = t * speed;
+      for (let i = 0; i < S; i++) {
+        const x = L.pos[3*i+0];
+        L.pos[3*i+1] =
+          L.amp * Math.sin(x * L.f1 + drift) +
+          0.55 * L.amp * Math.cos(x * L.f2 - drift * 1.35) +
+          0.12 * L.amp * Math.sin(x * (L.f1*2.3) + drift * 0.5);
+      }
+      L.geom.attributes.position.needsUpdate = true;
+    }
+    renderer.render(scene, camera);
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function resize() {
+    const w = host.getBoundingClientRect().width;
+    const h = host.getBoundingClientRect().height;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize, { passive: true });
+
+  /* ---------- attribute-driven toggle ---------- */
+  function isWaveOn(section) {
+    return section && section.getAttribute && section.getAttribute('data-wave') === 'on';
+  }
+  function show() {
+    if (host.style.display !== 'block') {
+      host.style.display = 'block';
+      resize();
+      rafId = requestAnimationFrame(animate);
+    }
+  }
+  function hide() {
+    host.style.display = 'none';
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+  }
+  function syncToSlide(section) {
+    if (isWaveOn(section)) show(); else hide();
+  }
+
+  if (window.Reveal && typeof Reveal.on === 'function') {
+    Reveal.on('ready', e => syncToSlide(e.currentSlide));
+    Reveal.on('slidechanged', e => syncToSlide(e.currentSlide));
+  } else {
+    // Fallback if Reveal isn’t ready yet
+    syncToSlide(document.querySelector('section.present') || document.querySelector('section[data-wave="on"]'));
+  }
+})();
+</script>
+
+
+	</body>
+</html>
