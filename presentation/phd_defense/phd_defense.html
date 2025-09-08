@@ -1964,16 +1964,19 @@
             <div style="position:relative; width:100%; height:95%; margin:0 auto;"> 
               <iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/02_noisy_ref.html" 
               style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
-              <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/02_noisy_throat.html" 
+              <iframe class="fragment fade-in-then-out" data-fragment-index="0"  data-src="images/plotly/02_noisy_ref_sepformer.html" 
               style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
-              <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/02_throat_enhanced.html" 
+              <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/02_noisy_throat.html" 
+              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
+              <iframe class="fragment fade-in-then-out" data-fragment-index="2" data-src="images/plotly/02_throat_enhanced.html" 
               style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>  
             </div>
           </block_important>
 
             <audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/02_noisy_ref.wav" controls></audio>
-            <audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/02_noisy_throat.wav" controls></audio>
-            <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/02_throat_enhanced.wav" controls></audio>
+            <audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/02_noisy_ref_sepformer.wav" controls></audio>
+            <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/02_noisy_throat.wav" controls></audio>
+            <audio class="fragment fade-in-then-semi-out" data-fragment-index="2" src="audios/02_throat_enhanced.wav" controls></audio>
     </section>
 
 <!--
@@ -2886,6 +2889,65 @@
       </section>
 
 
+      <section>
+  <h4 class="shadow3">Filterbank Comparison</h4>
+  <table class="table-fill" style="font-size:0.45em; width:100%; text-align:center; border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>Filterbank</th>
+        <th>Real-valued</th>
+        <th>Short filter length</th>
+        <th>No redundancy</th>
+        <th>No perceptual bias</th>
+        <th>Easy manipulation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PQMF <br>(critically sampled)</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td>Paraunitary FIR</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Oversampled FB</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Non-uniform FB</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>DFT-modulated</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
 
 
          <section data-visibility="uncounted" data-state="no-counter">
@@ -2954,6 +3016,236 @@
           </center>
           </font>
         </section>
+
+
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h6 style="margin-bottom:15px; font-size:0.7em;">
+    Median coherences and 25–75% IQR on <code>speech-clean</code>
+  </h6>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:40px; justify-items:center; align-items:start;">
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Forehead</b></p>
+      <img data-src="images/pdf/fig_coherence_Forehead.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Soft in-ear</b></p>
+      <img data-src="images/pdf/fig_coherence_Soft_in_ear.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Rigid in-ear</b></p>
+      <img data-src="images/pdf/fig_coherence_Rigid_in_ear.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Throat</b></p>
+      <img data-src="images/pdf/fig_coherence_Throat.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Temple</b></p>
+      <img data-src="images/pdf/fig_coherence_Temple.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+  </div>
+</section>
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h6 style="margin-bottom:8px; font-size:0.65em;">
+    Mean PSD on all subsets
+  </h6>
+  <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:15px; justify-items:center; align-items:start;">
+
+    <div>
+      <p style="font-size:0.4em; margin:1px 0;"><code>speechless-clean</code></p>
+      <img data-src="images/pdf/psd_all.svg" alt="Vector figure" style="width:75%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.4em; margin:1px 0;"><code>speech-clean</code></p>
+      <img data-src="images/pdf/psd_all_speech_clean.svg" alt="Vector figure" style="width:75%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.4em; margin:1px 0;"><code>speech-noisy</code></p>
+      <img data-src="images/pdf/psd_all_speech_noisy.svg" alt="Vector figure" style="width:75%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.4em; margin:1px 0;"><code>speechless-noisy</code></p>
+      <img data-src="images/pdf/psd_all_speechless_noisy.svg" alt="Vector figure" style="width:75%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h6 style="margin-bottom:15px; font-size:0.7em;">
+    Median PSD and 25–75% IQR on <code>speechless-clean</code>
+  </h6>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:40px; justify-items:center; align-items:start;">
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Headset</b></p>
+      <img data-src="images/pdf/psd_audio.headset_microphone.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Forehead</b></p>
+      <img data-src="images/pdf/psd_audio.forehead_accelerometer.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Soft in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.soft_in_ear_microphone.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Rigid in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.rigid_in_ear_microphone.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Throat</b></p>
+      <img data-src="images/pdf/psd_audio.throat_microphone.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Temple</b></p>
+      <img data-src="images/pdf/psd_audio.temple_vibration_pickup.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+  </div>
+</section>
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h6 style="margin-bottom:15px; font-size:0.7em;">
+    Median PSD and 25–75% IQR on <code>speech-clean</code>
+  </h6>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:40px; justify-items:center; align-items:start;">
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Headset</b></p>
+      <img data-src="images/pdf/psd_audio.headset_microphone_speech_clean.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Forehead</b></p>
+      <img data-src="images/pdf/psd_audio.forehead_accelerometer_speech_clean.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Soft in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.soft_in_ear_microphone_speech_clean.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Rigid in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.rigid_in_ear_microphone_speech_clean.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Throat</b></p>
+      <img data-src="images/pdf/psd_audio.throat_microphone_speech_clean.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Temple</b></p>
+      <img data-src="images/pdf/psd_audio.temple_vibration_pickup_speech_clean.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+  </div>
+</section>
+
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h6 style="margin-bottom:15px; font-size:0.7em;">
+    Median PSD and 25–75% IQR on <code>speech-noisy</code>
+  </h6>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:40px; justify-items:center; align-items:start;">
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Headset</b></p>
+      <img data-src="images/pdf/psd_audio.headset_microphone_speech_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Forehead</b></p>
+      <img data-src="images/pdf/psd_audio.forehead_accelerometer_speech_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Soft in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.soft_in_ear_microphone_speech_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Rigid in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.rigid_in_ear_microphone_speech_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Throat</b></p>
+      <img data-src="images/pdf/psd_audio.throat_microphone_speech_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Temple</b></p>
+      <img data-src="images/pdf/psd_audio.temple_vibration_pickup_speech_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+  </div>
+</section>
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h6 style="margin-bottom:15px; font-size:0.7em;">
+    Median PSD and 25–75% IQR on <code>speechless-noisy</code>
+  </h6>
+  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:40px; justify-items:center; align-items:start;">
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Headset</b></p>
+      <img data-src="images/pdf/psd_audio.headset_microphone_speechless_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Forehead</b></p>
+      <img data-src="images/pdf/psd_audio.forehead_accelerometer_speechless_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Soft in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.soft_in_ear_microphone_speechless_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Rigid in-ear</b></p>
+      <img data-src="images/pdf/psd_audio.rigid_in_ear_microphone_speechless_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Throat</b></p>
+      <img data-src="images/pdf/psd_audio.throat_microphone_speechless_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+    <div>
+      <p style="font-size:0.45em; margin:2px 0;"><b>Temple</b></p>
+      <img data-src="images/pdf/psd_audio.temple_vibration_pickup_speechless_noisy.svg" alt="Vector figure" style="width:95%; max-height:30vh; object-fit:contain;" />
+    </div>
+
+  </div>
+</section>
+
 
 
 
