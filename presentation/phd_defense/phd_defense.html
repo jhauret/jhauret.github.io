@@ -258,7 +258,7 @@
 
 		<section>
 			<h4> Integration in wearables </h4>
-				<img height="450" data-src="images/img/airpods-pro-2.png" alt="" class="plain">
+				<img height="450" data-src="images/img/airpods-pro-3-case.png" alt="" class="plain">
 		</section>
 
 
@@ -1077,7 +1077,7 @@
 					<h4 class="shadow3"> Pseudo Quadrature Mirror Filters pipeline </h4>
 					<figure>
 						<div class="r-stack">
-						  <img class="plain fragment fade-out" data-fragment-index="0" data-src="images/tikz/pqmf00.png">
+						  <img class="plain fragment fade-out" data-fragment-index="0" data-src="images/tikz/pqmf000.png">
 						  <img class="plain fragment current-visible" data-fragment-index="0" data-src="images/tikz/pqmf1.png">
 						  <img class="plain fragment" data-src="images/tikz/pqmf2.png">
 						</div>
@@ -1634,6 +1634,50 @@
 
 
       <section>
+  <h4 class="shadow3">Noise Level Summary</h4>
+  <table class="table-fill" style="font-size:0.55em; width:100%; text-align:center; border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>Subset</th>
+        <th>Weighting</th>
+        <th>Leq [dB]</th>
+        <th>Lmin [dB]</th>
+        <th>Lmax [dB]</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2"><code> speech-noisy </code> <br> (3 hours)</td>
+        <td>Linear</td>
+        <td>94.1</td>
+        <td>63.3</td>
+        <td>108.7</td>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>90.8</td>
+        <td>57.7</td>
+        <td>106.6</td>
+      </tr>
+      <tr>
+        <td rowspan="2"><code> speechless-noisy </code> <br> (8 hours) </td>
+        <td>Linear</td>
+        <td>89.6</td>
+        <td>31.9</td>
+        <td>103.2</td>
+      </tr>
+      <tr>
+        <td>A</td>
+        <td>88.0</td>
+        <td>17.9</td>
+        <td>104.4</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+      <section>
       <h4 class="shadow3"> Consent form </h4>
       <iframe src="docs/formulaire-consentement.pdf"
               width="700"
@@ -1716,10 +1760,7 @@
       </section>
 
 
-      <section>
-        <h4>Noise level of <code>speech-noisy</code></h4>
-        <img src="images/img/noise_level.jpg" alt="Example" width="800">
-      </section>
+
 
 <!--
       <section>
@@ -1786,7 +1827,7 @@
       <tr>
         <th> Sensor </th>
         <th> Configuration </th>
-        <th> STOI </th>
+        <th> eSTOI </th>
         <th> Noresqa-MOS </th>
       </tr>
     </thead>
@@ -1869,7 +1910,7 @@
       <tr>
         <th style="text-align:center;">Sensor</th>
         <th>Initialization</th>
-        <th>Squim-STOI</th>
+        <th>Squim-eSTOI</th>
         <th>Noresqa-MOS</th>
       </tr>
     </thead>
@@ -1954,30 +1995,45 @@
 </section>
 
 
+<section>
+  <h4 style="margin:0 0 6px 0;"><code>speech-noisy</code> samples</h4>
+
+  <!-- Spectrograms: reserve tall space explicitly -->
+    <block_important class="stretch" style="display:block; height:calc(100% - 115px); min-height:45vh; margin:0; padding:0;">
+    <div style="position:relative; width:100%; height:100%; margin:0; padding:0; line-height:0; overflow:hidden;">
+      <iframe class="fragment fade-out" data-fragment-index="0" data-src="images/plotly/02_noisy_ref.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+      <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/02_noisy_ref_sepformer.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+      <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/02_noisy_throat.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+      <iframe class="fragment fade-in-then-out" data-fragment-index="2" data-src="images/plotly/02_throat_enhanced.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+    </div>
+  </block_important>
+
+  <!-- Audio players row (kept outside block_important) -->
+  <div style="display:flex; justify-content:center; gap:20px; margin-top:6px; padding:0;">
+    <div style="text-align:center;">
+      <audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/02_noisy_ref.wav" controls style="width:230px;"></audio>
+      <p class="fragment semi-fade-out" data-fragment-index="0" style="font-size:0.4em; margin-top:2px;">Noisy headset</p>
+    </div>
+    <div style="text-align:center;">
+      <audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/02_noisy_ref_sepformer.wav" controls style="width:230px;"></audio>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="0" style="font-size:0.4em; margin-top:2px;">Headset enhanced (Sepformer)</p>
+    </div>
+    <div style="text-align:center;">
+      <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/02_noisy_throat.wav" controls style="width:230px;"></audio>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="1" style="font-size:0.4em; margin-top:2px;">Noisy Throat</p>
+    </div>
+    <div style="text-align:center;">
+      <audio class="fragment fade-in-then-semi-out" data-fragment-index="2" src="audios/02_throat_enhanced.wav" controls style="width:230px;"></audio>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="2" style="font-size:0.4em; margin-top:2px;">Throat enhanced (EBEN)</p>
+    </div>
+  </div>
+</section>
 
 
-    <section>
-      <p style="margin-bottom: 0.8em;"> </p>
-      <h4> <code> speech-noisy </code> samples</h4>
-
-    <block_important class="stretch">
-            <div style="position:relative; width:100%; height:95%; margin:0 auto;"> 
-              <iframe class="fragment fade-out" data-fragment-index="0"  data-src="images/plotly/02_noisy_ref.html" 
-              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
-              <iframe class="fragment fade-in-then-out" data-fragment-index="0"  data-src="images/plotly/02_noisy_ref_sepformer.html" 
-              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
-              <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/02_noisy_throat.html" 
-              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>
-              <iframe class="fragment fade-in-then-out" data-fragment-index="2" data-src="images/plotly/02_throat_enhanced.html" 
-              style="position:absolute;top:0;left:0;width:100%; height: 100%" data-preload></iframe>  
-            </div>
-          </block_important>
-
-            <audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/02_noisy_ref.wav" controls></audio>
-            <audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/02_noisy_ref_sepformer.wav" controls></audio>
-            <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/02_noisy_throat.wav" controls></audio>
-            <audio class="fragment fade-in-then-semi-out" data-fragment-index="2" src="audios/02_throat_enhanced.wav" controls></audio>
-    </section>
 
 <!--
   <section>
@@ -2010,6 +2066,7 @@
                   data-state="no-counter">
         <h2 class="shadow3"> Listening tests for EBEN </h2>
       </section>
+
 
       <section>
         <h4 class="shadow3"> Quality </h4>
@@ -2871,7 +2928,7 @@
 			<section name="Appendices">
 
 
-      <section>
+      <section data-visibility="uncounted" data-state="no-counter">
         <br>
         <h4>PQMF TUTO</h4>
         <div style="text-align: center; padding-top: 0em;">
@@ -2889,7 +2946,44 @@
       </section>
 
 
-      <section>
+<section data-visibility="uncounted" data-state="no-counter">
+  <h4 class="shadow3">Why Coherence?</h4>
+  <table class="table-fill" style="font-size:0.45em; width:100%; text-align:center; border-collapse:collapse;">
+    <thead>
+      <tr>
+        <th>Measure</th>
+        <th>Frequency resolution</th>
+        <th>No Linear assumption</th>
+        <th>Formula</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Coherence</b></td>
+        <td>✅</td>
+        <td>✅</td>
+        <td>\(\displaystyle \gamma^2_{xy}(f) = \frac{|S_{xy}(f)|^2}{S_{xx}(f)S_{yy}(f)}\)</td>
+      </tr>
+      <tr>
+        <td>Transfer function</td>
+        <td>✅</td>
+        <td>❌</td>
+        <td>\(\displaystyle H(f) = \frac{Y(f)}{X(f)}\)</td>
+      </tr>
+      <tr>
+        <td>Concordance coefficient</td>
+        <td>❌</td>
+        <td>✅</td>
+        <td>\(\displaystyle \rho_c = \frac{2\rho\sigma_x\sigma_y}{\sigma_x^2+\sigma_y^2+(\mu_x-\mu_y)^2}\)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+
+
+      <section data-visibility="uncounted" data-state="no-counter">
   <h4 class="shadow3">Filterbank Comparison</h4>
   <table class="table-fill" style="font-size:0.45em; width:100%; text-align:center; border-collapse:collapse;">
     <thead>
@@ -3016,6 +3110,92 @@
           </center>
           </font>
         </section>
+
+
+
+      <section data-visibility="uncounted" data-state="no-counter">
+        <h4 class="shadow3"> <small> Correlation coefficients of objective and subjective metrics <br> for simulated in-ear enhancement </small> </h4>
+          <img data-src="images/img/corrcoef6.png" alt="" class="plain" style="width: 40%;">
+      </section>
+
+
+
+
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h5 style="white-space: nowrap;"> <code> silence </code> noise level </h5>
+
+  <div class="r-stack" style="height: 430px;">
+    <!-- Image 1: visible immediately, disappears on step 1 -->
+    <img height="350" data-src="images/img/silence-mean.JPG"
+         alt="Attachable sensor">
+  </div>
+
+  <!-- Legend synced with fragments -->
+  <div style="margin-top: 0.4em; font-size: 0.5em;">
+    <span><code>silence-mean.JPG</code></span>
+  </div>
+</section>
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h5 style="white-space: nowrap;"> <code> speech-noisy </code> noise level </h5>
+
+  <div class="r-stack" style="height: 430px;">
+    <!-- Image 1: visible immediately, disappears on step 1 -->
+    <img height="350" data-src="images/img/speech-noisy-mean.JPG"
+         alt="Attachable sensor"
+         class="plain fragment fade-out" data-fragment-index="1">
+
+    <!-- Image 2: appears on step 1, disappears on step 2 -->
+    <img height="350" data-src="images/img/speech-noisy-min.JPG"
+         alt="Skin acceleration sensor"
+         class="plain fragment fade-in-then-out" data-fragment-index="1">
+
+    <!-- Image 3: appears on step 2 and stays -->
+    <img height="350" data-src="images/img/speech-noisy-max.JPG"
+         alt="Voice pressure sensor"
+         class="plain fragment fade-in" data-fragment-index="2">
+  </div>
+
+  <!-- Legend synced with fragments -->
+  <div style="margin-top: 0.5em; font-size: 0.6em;">
+    <span class="fragment fade-out" data-fragment-index="1"><code>speech-noisy-mean.JPG</code></span>
+    <span class="fragment fade-in-then-out" data-fragment-index="1"><code>speech-noisy-min.JPG</code></span>
+    <span class="fragment fade-in" data-fragment-index="2"><code>speech-noisy-max.JPG</code></span>
+  </div>
+</section>
+
+
+
+<section data-visibility="uncounted" data-state="no-counter">
+  <h5 style="white-space: nowrap;"> <code> speechless-noisy </code> noise level </h5>
+
+  <div class="r-stack" style="height: 430px;">
+    <!-- Image 1: visible immediately, disappears on step 1 -->
+    <img height="350" data-src="images/img/speechless-noisy-mean.JPG"
+         alt="Attachable sensor"
+         class="plain fragment fade-out" data-fragment-index="1">
+
+    <!-- Image 2: appears on step 1, disappears on step 2 -->
+    <img height="350" data-src="images/img/speechless-noisy-min.JPG"
+         alt="Skin acceleration sensor"
+         class="plain fragment fade-in-then-out" data-fragment-index="1">
+
+    <!-- Image 3: appears on step 2 and stays -->
+    <img height="350" data-src="images/img/speechless-noisy-max.JPG"
+         alt="Voice pressure sensor"
+         class="plain fragment fade-in" data-fragment-index="2">
+  </div>
+
+  <!-- Legend synced with fragments -->
+  <div style="margin-top: 0.4em; font-size: 0.5em;">
+    <span class="fragment fade-out" data-fragment-index="1"><code>speechless-noisy-mean.JPG</code></span>
+    <span class="fragment fade-in-then-out" data-fragment-index="1"><code>speechless-noisy-min.JPG</code></span>
+    <span class="fragment fade-in" data-fragment-index="2"><code>speechless-noisy-max.JPG</code></span>
+  </div>
+</section>
 
 
 
@@ -3247,6 +3427,53 @@
 </section>
 
 
+<section data-visibility="uncounted" data-state="no-counter">
+  <h4 style="margin:0 0 6px 0;"><code>speech-noisy</code> samples</h4>
+
+  <!-- Spectrograms: reserve tall space explicitly -->
+    <block_important class="stretch" style="display:block; height:calc(100% - 115px); min-height:45vh; margin:0; padding:0;">
+    <div style="position:relative; width:100%; height:100%; margin:0; padding:0; line-height:0; overflow:hidden;">
+      <iframe class="fragment fade-out" data-fragment-index="0" data-src="images/plotly/03_noisy_ref.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+      <iframe class="fragment fade-in-then-out" data-fragment-index="0" data-src="images/plotly/03_noisy_ref_sepformer.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+      <iframe class="fragment fade-in-then-out" data-fragment-index="1" data-src="images/plotly/03_noisy_throat.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+      <iframe class="fragment fade-in-then-out" data-fragment-index="2" data-src="images/plotly/03_throat_enhanced.html"
+        style="position:absolute; inset:0; width:100%; height:100%; display:block;" data-preload></iframe>
+    </div>
+  </block_important>
+
+  <!-- Audio players row (kept outside block_important) -->
+  <div style="display:flex; justify-content:center; gap:20px; margin-top:6px; padding:0;">
+    <div style="text-align:center;">
+      <audio class="fragment semi-fade-out" data-fragment-index="0" src="audios/03_noisy_ref.wav" controls style="width:230px;"></audio>
+      <p class="fragment semi-fade-out" data-fragment-index="0" style="font-size:0.4em; margin-top:2px;">Noisy headset</p>
+    </div>
+    <div style="text-align:center;">
+      <audio class="fragment fade-in-then-semi-out" data-fragment-index="0" src="audios/03_noisy_ref_sepformer.wav" controls style="width:230px;"></audio>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="0" style="font-size:0.4em; margin-top:2px;">Headset enhanced (Sepformer)</p>
+    </div>
+    <div style="text-align:center;">
+      <audio class="fragment fade-in-then-semi-out" data-fragment-index="1" src="audios/03_noisy_throat.wav" controls style="width:230px;"></audio>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="1" style="font-size:0.4em; margin-top:2px;">Noisy Throat</p>
+    </div>
+    <div style="text-align:center;">
+      <audio class="fragment fade-in-then-semi-out" data-fragment-index="2" src="audios/03_throat_enhanced.wav" controls style="width:230px;"></audio>
+      <p class="fragment fade-in-then-semi-out" data-fragment-index="2" style="font-size:0.4em; margin-top:2px;">Throat enhanced (EBEN)</p>
+    </div>
+  </div>
+
+
+</section>
+
+      <section data-visibility="uncounted" data-state="no-counter">
+        <h4 class="shadow3"> Noresqa-MOS pipeline </h4>
+        <figure>
+          <img data-src="images/img/nmos.png" alt="" class="plain" style="width: 60%;">
+          <figcaption>Figure from Manocha <em>et&nbsp;al.</em>, Interspeech, 2022</figcaption>
+        </figure>
+      </section>
 
 
        <section data-visibility="uncounted" data-state="no-counter">
