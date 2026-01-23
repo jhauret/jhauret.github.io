@@ -432,7 +432,7 @@
          LAYOUT KNOBS (tweak these first)
          =============================== */
 
-      --splitX: 12vw;        /* Horizontal separation of "Signal proc" vs "Deep learning"
+      --splitX: 14vw;        /* Horizontal separation of "Signal proc" vs "Deep learning"
                                Smaller → closer together, Larger → farther apart */
 
       --dl-child-y: 30px;    /* Vertical offset (down) of Discriminative/Generative inside DL bubble */
@@ -885,7 +885,7 @@
       src="images/img/scale.png"
       class="overlay-img fragment plain"
       data-fragment-index="6"
-      style="--top: 70%; --left: 18%; --w: 160px; --rot: -8deg;"
+      style="--top: 70%; --left: 21%; --w: 160px; --rot: -8deg;"
       alt=""
     />
 
@@ -3741,27 +3741,42 @@
 
 <script>
 (() => {
-  /* ---------- host overlay ---------- */
+  /* ---------- 1. Target the Reveal container instead of Body ---------- */
+  const revealElement = document.querySelector('.reveal');
+  if (!revealElement) {
+    console.error("Reveal.js container not found.");
+    return;
+  }
+
   const host = document.createElement('div');
   host.id = 'red-sea-overlay';
+  // Use position: absolute relative to .reveal, width 100% (not 100vw)
   host.style.cssText = `
-    position: fixed; left: 0; right: 0; bottom: 0;
-    width: 100vw; height: 170px;
-    z-index: 9;                 /* below slide content */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 170px;
+    z-index: 1;                 /* Lower than .slides */
     pointer-events: none;
-    display: none;              /* hidden by default */
+    display: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
   `;
-  document.body.appendChild(host);
+  revealElement.appendChild(host);
 
-  /* Keep slide content above the sea */
+  /* ---------- 2. Ensure Slide stack is above overlay ---------- */
   const elevate = document.createElement('style');
-  elevate.textContent = `.reveal .slides{ position:relative; z-index:10 }`;
+  elevate.textContent = `
+    .reveal .slides { z-index: 2 !important; }
+    #red-sea-overlay canvas { display: block; width: 100% !important; height: 100% !important; }
+  `;
   document.head.appendChild(elevate);
 
-  /* ---------- three.js scene ---------- */
+  /* ---------- 3. Three.js scene setup ---------- */
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
-  Object.assign(renderer.domElement.style, { position:'absolute', inset:'0', width:'100%', height:'100%' });
   host.appendChild(renderer.domElement);
 
   const scene  = new THREE.Scene();
@@ -3770,7 +3785,9 @@
   camera.lookAt(0, -14, 0);
 
   const W = 8000, S = 4650, ROWS = 7, DEPTH = 500, BASE = 0xff5a5a;
-  const group = new THREE.Group(); group.position.y = -14; scene.add(group);
+  const group = new THREE.Group();
+  group.position.y = -14;
+  scene.add(group);
 
   const ampSeq = [36, 31, 27, 23, 19, 15, 10];
   const f1Seq  = [0.120, 0.115, 0.110, 0.105, 0.100, 0.092, 0.085];
@@ -3797,7 +3814,8 @@
 
   scene.add(new THREE.AmbientLight(0xff6666, 0.80));
   const dir = new THREE.DirectionalLight(0xffffff, 0.25);
-  dir.position.set(5, 0, 80); scene.add(dir);
+  dir.position.set(5, 0, 80);
+  scene.add(dir);
 
   let rafId = null;
   function animate(ms) {
@@ -3818,43 +3836,46 @@
   }
 
   function resize() {
-    const w = host.getBoundingClientRect().width;
-    const h = host.getBoundingClientRect().height;
+    const w = host.clientWidth;
+    const h = host.clientHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
   }
   window.addEventListener('resize', resize, { passive: true });
 
-  /* ---------- attribute-driven toggle ---------- */
+  /* ---------- 4. Logic Toggles ---------- */
   function isWaveOn(section) {
-    return section && section.getAttribute && section.getAttribute('data-wave') === 'on';
+    return section && section.hasAttribute('data-wave') && section.getAttribute('data-wave') === 'on';
   }
+
   function show() {
     if (host.style.display !== 'block') {
       host.style.display = 'block';
       resize();
-      rafId = requestAnimationFrame(animate);
+      if (!rafId) rafId = requestAnimationFrame(animate);
     }
   }
+
   function hide() {
     host.style.display = 'none';
-    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
   }
+
   function syncToSlide(section) {
     if (isWaveOn(section)) show(); else hide();
   }
 
-  if (window.Reveal && typeof Reveal.on === 'function') {
+  // Hook into Reveal events
+  if (window.Reveal) {
     Reveal.on('ready', e => syncToSlide(e.currentSlide));
     Reveal.on('slidechanged', e => syncToSlide(e.currentSlide));
-  } else {
-    // Fallback if Reveal isn’t ready yet
-    syncToSlide(document.querySelector('section.present') || document.querySelector('section[data-wave="on"]'));
   }
 })();
 </script>
-
 
 	</body>
 </html>
