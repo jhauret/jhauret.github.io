@@ -121,82 +121,8 @@
     </span>
   </h4>
 
-  <div style="display:flex; justify-content:center; align-items:flex-start; gap:20px;">
+  <img src="images/img/db-no-bg.png" style="max-height:45vh; object-fit:contain;" class="plain" />
 
-    <!-- Battlefield -->
-    <figure style="text-align:center; margin:0; position:relative;">
-      <div style="height:45vh; width:auto; position:relative; display:flex; align-items:center; justify-content:center;">
-        <!-- BEFORE (1st) -->
-        <img class="fragment" data-fragment-index="1"
-             src="images/img/soldier.png"
-             style="max-height:45vh; object-fit:contain; display:block;" />
-        <!-- AFTER (5th) -->
-        <img class="fragment" data-fragment-index="5"
-             src="images/img/soldier_seamless.png"
-             style="max-height:45vh; object-fit:contain; position:absolute; inset:0; margin:auto;" />
-
-        <!-- Legend overlay for fragment 5 -->
-        <svg class="legend-overlay" viewBox="500 200 600 700" preserveAspectRatio="none">
-          <g class="fragment" data-fragment-index="5">
-            <!-- Edit coordinates: start -> break1  (gap)  break2 -> end -->
-            <line x1="840" y1="440" x2="600" y2="750" class="legend-line" />
-            <!-- Edit text position/content -->
-            <text x="600" y="790" class="legend-text" fill="red">Bone conduction with helmet integration</text>
-          </g>
-        </svg>
-      </div>
-    </figure>
-
-    <!-- Rave -->
-    <figure style="text-align:center; margin:0; position:relative;">
-      <div style="height:45vh; width:auto; position:relative; display:flex; align-items:center; justify-content:center;">
-        <!-- BEFORE (2nd) -->
-        <img class="fragment" data-fragment-index="2"
-             src="images/img/club.jpg"
-             style="max-height:45vh; object-fit:contain; display:block;" />
-        <!-- AFTER (6th) -->
-        <img class="fragment" data-fragment-index="6"
-             src="images/img/club3_seamless.png"
-             style="max-height:45vh; object-fit:contain; position:absolute; inset:0; margin:auto;" />
-
-        <!-- Legend overlay for fragment 6 -->
-        <svg class="legend-overlay" viewBox="1000 200 600 700" preserveAspectRatio="none">
-          <g class="fragment" data-fragment-index="6">
-            <!-- Edit coordinates: start -> break1  (gap)  break2 -> end -->
-            <line x1="1300" y1="540" x2="1200" y2="750" class="legend-line" />
-            <line x1="1400" y1="580" x2="1200" y2="750" class="legend-line" />
-            <!-- Edit text position/content -->
-            <text x="1200" y="790" class="legend-text" fill="red">Throat microphones</text>
-          </g>
-        </svg>
-      </div>
-    </figure>
-
-    <!-- Engine Room -->
-    <figure style="text-align:center; margin:0; position:relative;">
-      <div style="height:45vh; width:auto; position:relative; display:flex; align-items:center; justify-content:center;">
-        <!-- BEFORE (3rd) -->
-        <img class="fragment" data-fragment-index="3"
-             src="images/img/factory.png"
-             style="max-height:45vh; object-fit:contain; display:block;" />
-        <!-- AFTER (7th) -->
-        <img class="fragment" data-fragment-index="7"
-             src="images/img/factory_seamless.png"
-             style="max-height:45vh; object-fit:contain; position:absolute; inset:0; margin:auto;" />
-
-        <!-- Legend overlay for fragment 7 -->
-        <svg class="legend-overlay" viewBox="1500 200 600 700" preserveAspectRatio="none">
-          <g class="fragment" data-fragment-index="7">
-            <!-- Edit coordinates: start -> break1  (gap)  break2 -> end -->
-            <line x1="1960" y1="480" x2="1700" y2="755" class="legend-line" />
-            <line x1="1660" y1="510" x2="1700" y2="755" class="legend-line" />
-            <text x="1700" y="790" class="legend-text" fill="red">In-ear microphones</text>
-          </g>
-        </svg>
-      </div>
-    </figure>
-
-  </div>
 </section>
 
 
@@ -714,20 +640,8 @@
           label.setAttribute('y', X_POS.cy);
         })();
       ]]></script>
-<g class="fragment" data-fragment-index="6" id="extra-loss-labels">
-  <!-- ℒrec (green) — tweak x/y here -->
-  <g id="extra-Lrec" data-note="adjust x/y" transform="translate(80,480)">
-    <text fill="#2ecc71" font-size="48">ℒ</text>
-    <text x="28" y="4" fill="#2ecc71" font-size="32">rec</text>
-  </g>
 
-  <!-- ℒadv (red) — tweak x/y here -->
-  <g id="extra-Ladv" data-note="adjust x/y" transform="translate(0,500)">
-    <text fill="#e74c3c" font-size="48">ℒ</text>
-    <text x="28" y="4" fill="#e74c3c" font-size="32">adv</text>
-  </g>
-
-</g>
+    </g>
 
     </g>
 
@@ -888,6 +802,15 @@
       style="--top: 70%; --left: 21%; --w: 160px; --rot: -8deg;"
       alt=""
     />
+
+    <span class="fragment hand-drawn-text" data-fragment-index="6"
+          style="position:absolute; top:68%; left:12%; font-size:48px; color:#e74c3c; transform:rotate(-8deg); z-index:10;">
+      ℒ<sub style="font-size:32px;">adv</sub>
+    </span>
+    <span class="fragment hand-drawn-text" data-fragment-index="6"
+          style="position:absolute; top:68%; left:25%; font-size:48px; color:#2ecc71; transform:rotate(-8deg); z-index:10;">
+      ℒ<sub style="font-size:32px;">rec</sub>
+    </span>
 
 </section>
 
@@ -1096,7 +1019,7 @@
 
 
 				<section>
-					<div style="position:absolute;top:-10%;left:-20%;width:140%; height: 100%" > 
+					<div style="position:absolute;top:0%;left:-6%;width:112%; height: 80%" >
 					<figure>
 						<img data-src="images/tikz/archi-gen.png" alt="" class="plain">
 						<figcaption>EBEN Generator</figcaption>
@@ -1106,7 +1029,7 @@
 
 
     <section data-visibility="uncounted">
-      <div style="position:absolute;top:-10%;left:-20%;width:140%; height: 100%">
+      <div style="position:absolute;top:0%;left:-6%;width:112%; height: 80%">
         <figure class="hover-figure" style="position: relative; display: inline-block;">
           <!-- Base image -->
           <img data-src="images/tikz/archi-all.png" alt="" class="plain">
@@ -1116,7 +1039,7 @@
           <div class="hover-hotspot enc" style="
             position: absolute;
             top: 40%; left: 10%;
-            width: 250px; height: 120px;
+            width: 200px; height: 96px;
             cursor: pointer;
             /* DEBUG:
             outline: 2px dashed rgba(255,0,0,.6);
@@ -1125,13 +1048,13 @@
 
           "></div>
           <img src="images/img/enc_white.png" alt="Encoder" class="hover-image"
-               style="position:absolute; top:18%; left:5%; width:850px; z-index:5; pointer-events:none;">
+               style="position:absolute; top:18%; left:5%; width:680px; z-index:5; pointer-events:none;">
 
           <!-- Decoder -->
           <div class="hover-hotspot dec" style="
             position: absolute;
             top: 40%; left: 42%;
-            width: 250px; height: 120px;
+            width: 200px; height: 96px;
             cursor: pointer;
             /* DEBUG:
             outline: 2px dashed rgba(0,255,0,.6);
@@ -1140,13 +1063,13 @@
 
           "></div>
           <img src="images/img/dec_white.png" alt="Decoder" class="hover-image"
-               style="position:absolute; top:18%; left:30%; width:850px; z-index:5; pointer-events:none;">
+               style="position:absolute; top:18%; left:30%; width:680px; z-index:5; pointer-events:none;">
 
           <!-- MelGAN -->
           <div class="hover-hotspot melgan" style="
             position: absolute;
             top: 25%; left: 82%;
-            width: 160px; height: 70px;
+            width: 128px; height: 56px;
             cursor: pointer;
             /* DEBUG:
             outline: 2px dashed rgba(0,0,255,.6);
@@ -1155,22 +1078,22 @@
 
           "></div>
           <img src="images/img/melgan_white.png" alt="MelGAN" class="hover-image"
-               style="position:absolute; top:5%; left:60%; width:450px; z-index:5; pointer-events:none;">
+               style="position:absolute; top:5%; left:60%; width:360px; z-index:5; pointer-events:none;">
 
           <!-- Discriminator -->
           <div class="hover-hotspot dis" style="
             position: absolute;
             top: 40%; left: 82%;
-            width: 160px; height: 230px;
+            width: 128px; height: 184px;
             cursor: pointer;
             /* DEBUG:
             outline: 2px dashed rgba(255,165,0,.6);
             background: rgba(255,165,0,.08);
              */
-            
+
           "></div>
           <img src="images/img/dis_white.png" alt="Discriminator" class="hover-image"
-               style="position:absolute; top:17%; left:60%; width:450px; z-index:5; pointer-events:none;">
+               style="position:absolute; top:17%; left:60%; width:360px; z-index:5; pointer-events:none;">
           <!-- =========================================================== -->
 
           <figcaption>EBEN overview</figcaption>
@@ -1618,7 +1541,7 @@
     <!-- Centered overlay text -->
       <div class="fragment"
            style="position:absolute; top:46%; left:50%; transform:translate(-50%,-50%);
-                  font-size:1.5em; font-weight:700; text-align:center; color:black;">
+                  font-size:1.2em; font-weight:700; text-align:center; color:black;">
         200 participants <br>
         45 hours
       </div>
@@ -1680,8 +1603,8 @@
       <section>
       <h4 class="shadow3"> Consent form </h4>
       <iframe src="docs/formulaire-consentement.pdf"
-              width="700"
-              height="500"
+              width="900"
+              height="550"
               style="border:none;">
       </iframe>
     </section>
@@ -1720,43 +1643,12 @@
 
 
             <section>
-          <style>
-            /*
-              The wrapper defines the final, visible container on your slide.
-            */
-            .iframe-wrapper {
-              position: relative;
-              /* The desired final size. Let's use 750px for "a bit smaller". */
-              height: 820px; 
-              width: 100%;
-              overflow: hidden; /* This is crucial to hide the oversized parts of the iframe */
-            }
-
-            .iframe-wrapper iframe {
-              /* --- This is the key part for perfect centering --- */
-              position: absolute;
-              /* 1. Move the iframe's top-left corner to the center of the wrapper */
-              top: 45%;
-              left: 50%;
-              /* 2. Use transform to pull it back by half its own size AND scale it. */
-              /* This centers it perfectly, regardless of its dimensions. */
-              transform: translate(-50%, -50%) scale(0.79);
-              
-              /* --- Sizing for content --- */
-              /* Use fixed, oversized dimensions to ensure the content inside never needs to scroll. */
-              width: 1200px;
-              height: 1000px;
-            }
-          </style>
-
-          <div class="iframe-wrapper">
-            <iframe
-              src="https://jhauret-vibravox-viewer.hf.space?__theme=light"
-              frameborder="0"
-              loading="lazy"           
-              allow="autoplay"         
-            ></iframe>
-          </div>
+          <iframe
+            src="https://huggingface.co/datasets/Cnam-LMSSC/vibravox/embed/viewer/speech_clean/train"
+            frameborder="0"
+            width="100%"
+            height="560px"
+          ></iframe>
       </section>
 
 
